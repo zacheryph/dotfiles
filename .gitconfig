@@ -1,0 +1,51 @@
+[alias]
+  co = checkout
+  st = status
+  ci = commit
+  b = branch -v -a
+  mb = merge-base
+  cp = cherry-pick
+  l = log --graph --decorate
+  ru = remote update
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+
+[color]
+  branch = true
+  diff = true
+  status = true
+
+[credential]
+  helper = osxkeychain
+
+[diff]
+  renames = copies
+
+[user]
+  email = zacheryph@gmail.com
+  name = Zachery Hostens
+  signingkey = 0x37CDFB272575E480
+  username = zacheryph
+
+[core]
+  packedGitLimit = 50m
+  quotepath = false
+  excludesfile = ~/.gitignore
+  #autocrlf = input
+
+[url "https://github.com/"]
+  insteadOf = hub:
+
+[url "https://gist.github.com/"]
+  insteadOf = gist:
+
+[url "https://zro.net/"]
+  insteadOf = zro:
+
+[merge]
+  log = true
+
+[mergetool]
+  keepBackup = true
+
+[push]
+  default = current

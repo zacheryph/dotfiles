@@ -1,0 +1,12 @@
+# == OS X Specific
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# Thumbnails
+._*
+
+# Files on external disks
+.Spotlight-V100
+.Trashes
