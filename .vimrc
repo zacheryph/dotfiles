@@ -17,6 +17,7 @@ Plug 'konfekt/fastfold'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'raimondi/delimitmate'
 Plug 'shougo/neocomplete.vim'
+Plug 'tacahiroy/ctrlp-funky'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
@@ -71,6 +72,8 @@ let mapleader = ","
 " Key Bindings {{{
 nnoremap <C-H> :bp<CR>
 nnoremap <C-L> :bn<CR>
+
+nnoremap <C-R> :CtrlPFunky
 " }}}
 " Spaces and Tabs {{{
 set expandtab
