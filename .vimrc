@@ -11,6 +11,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'dag/vim-fish'
 Plug 'danro/rename.vim'
 Plug 'konfekt/fastfold'
 Plug 'ntpeters/vim-better-whitespace'
