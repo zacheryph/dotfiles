@@ -1,3 +1,10 @@
+# Bootstrap {{{
+if not test -f $HOME/.config/fish/functions/fisher.fish
+  echo "==> Installing fisherman"
+  curl -sLo ~/.config/fish/functions/fisher.fish --create-dirs git.io/fisher
+  fisher
+end
+# }}}
 # Defaults {{{
 set -gx EDITOR vim
 set -gx LSCOLORS Gxfxcxdxbxegedabagacad
