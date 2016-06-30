@@ -14,11 +14,13 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dag/vim-fish'
 Plug 'danro/rename.vim'
 Plug 'konfekt/fastfold'
+Plug 'majutsushi/tagbar'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'raimondi/delimitmate'
 Plug 'shougo/neocomplete.vim'
 Plug 'tacahiroy/ctrlp-funky'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -68,6 +70,8 @@ colorscheme bubblegum-256-dark
 " }}}
 " Leader {{{
 let mapleader = ","
+
+nnoremap <leader>gs :Gstatus<CR>
 " }}}
 " Key Bindings {{{
 nnoremap <C-H> :bp<CR>
@@ -131,6 +135,18 @@ let g:airline#extensions#tabline#enabled = 1
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
+" }}}
+" Vim Go {{{
+let g:go_highlight_functions = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+let g:go_fmt_command = 'goimports'
+let g:go_fmt_autosave = 1
 " }}}
 " File Handling {{{
 set modelines=1
