@@ -31,6 +31,7 @@ Plug 'tpope/vim-rails'
 Plug 'fatih/vim-go'
 
 " colorschemes
+Plug 'altercation/vim-colors-solarized'
 Plug 'baskerville/bubblegum'
 Plug 'chriskempson/base16-vim'
 Plug 'fatih/molokai'
@@ -65,8 +66,14 @@ syntax on
 " }}}
 " Colors {{{
 set background=dark
-let g:airline_theme = 'bubblegum'
-colorscheme bubblegum-256-dark
+
+"let g:airline_theme = 'bubblegum'
+"colorscheme bubblegum-256-dark
+
+let g:airline_theme = 'solarized'
+let g:solarized_bold= 0
+let g:solarized_underline = 0
+colorscheme solarized
 " }}}
 " Leader {{{
 let mapleader = ","
