@@ -35,12 +35,7 @@ Plug 'fatih/vim-go'
 " colorschemes
 Plug 'altercation/vim-colors-solarized'
 Plug 'baskerville/bubblegum'
-Plug 'chriskempson/base16-vim'
 Plug 'fatih/molokai'
-Plug 'gummesson/stereokai.vim'
-Plug 'hhsnopek/vim-firewatch'
-Plug 'joshdick/onedark.vim'
-Plug 'nanotech/jellybeans.vim'
 Plug 'nlknguyen/papercolor-theme'
 Plug 'notpratheek/vim-luna'
 
