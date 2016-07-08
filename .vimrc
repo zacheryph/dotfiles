@@ -18,6 +18,7 @@ Plug 'konfekt/fastfold'
 Plug 'majutsushi/tagbar'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'raimondi/delimitmate'
+Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'shougo/neocomplete.vim'
 Plug 'tacahiroy/ctrlp-funky'
@@ -141,6 +142,11 @@ let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
+" }}}
+" NERDCommenter {{{
+let g:NERDSpaceDelims = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
 " }}}
 " Vim Go {{{
 let g:go_highlight_functions = 1
