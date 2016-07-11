@@ -13,6 +13,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dag/vim-fish'
 Plug 'danro/rename.vim'
+Plug 'edkolev/tmuxline.vim'
 Plug 'irrationalistic/vim-tasks'
 Plug 'konfekt/fastfold'
 Plug 'majutsushi/tagbar'
@@ -21,6 +22,7 @@ Plug 'raimondi/delimitmate'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tacahiroy/ctrlp-funky'
+Plug 'tmux-plugins/vim-tmux'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
@@ -148,6 +150,7 @@ let g:ctrlp_abbrev = {
 " Airline {{{
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tmuxline#enabled = 1
 " }}}
 " Autocomplete {{{
 if has('nvim')
