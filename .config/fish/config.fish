@@ -8,6 +8,9 @@ end
 # Defaults {{{
 set -gx EDITOR vim
 set -gx LSCOLORS Gxfxcxdxbxegedabagacad
+
+# Fix TMUX (https://github.com/tmux/tmux/issues/475)
+set -gx EVENT_NOKQUEUE 1
 # }}}
 # Paths {{{
 set -gx ANDROID_HOME /usr/local/opt/android-sdk
