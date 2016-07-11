@@ -20,13 +20,23 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'raimondi/delimitmate'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
-Plug 'shougo/neocomplete.vim'
 Plug 'tacahiroy/ctrlp-funky'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+if has('nvim')
+  function! DeopleteDoRemote(arg)
+    UpdateRemotePlugins
+  endfunction
+
+  Plug 'shougo/deoplete.nvim', { 'do': function('DeopleteDoRemote') }
+  Plug 'zchee/deoplete-go', { 'do': 'make' }
+else
+  Plug 'shougo/neocomplete.vim'
+endif
 
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
@@ -46,13 +56,16 @@ call plug#end()
 set t_ti= t_te=
 set t_Co=256
 
+if !has('nvim')
+  set encoding=utf-8
+  set ttymouse=xterm
+endif
+
 set nocompatible
-set encoding=utf8
 set number
 set wildmenu
 set lazyredraw
 set ttyfast
-set ttymouse=xterm
 set showmatch
 set scrolloff=5
 set ls=2 " status bar
@@ -136,10 +149,14 @@ let g:ctrlp_abbrev = {
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 " }}}
-" Neocomplete {{{
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
+" Autocomplete {{{
+if has('nvim')
+  let g:deoplete#enable_at_startup = 1
+else
+  let g:neocomplete#enable_at_startup = 1
+  let g:neocomplete#enable_smart_case = 1
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
+endif
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
 " }}}
@@ -157,6 +174,10 @@ let g:go_highlight_build_constraints = 1
 
 let g:go_fmt_command = 'goimports'
 let g:go_fmt_autosave = 1
+
+if has('nvim')
+  let g:deoplete#sources#go#cgo = 1
+endif
 " }}}
 " File Handling {{{
 set modelines=1
