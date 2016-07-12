@@ -5,6 +5,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
+
+" Other Dependencies:
+"   NVIM: pip3 install neovim
 " }}}
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
@@ -180,6 +183,7 @@ let g:go_fmt_autosave = 1
 
 if has('nvim')
   let g:deoplete#sources#go#cgo = 1
+  let g:deoplete#sources#go#cgo#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 endif
 " }}}
 " File Handling {{{
