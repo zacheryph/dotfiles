@@ -52,13 +52,17 @@ Plug 'fatih/vim-go'
 Plug 'altercation/vim-colors-solarized'
 Plug 'baskerville/bubblegum'
 Plug 'fatih/molokai'
+Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'nlknguyen/papercolor-theme'
 Plug 'notpratheek/vim-luna'
+Plug 'tyrannicaltoucan/vim-deep-space'
 
 call plug#end()
 " }}}
 " Terminal {{{
-set t_ti= t_te=
+set shell=/bin/bash
+
+set t_te= t_ti= t_ut=
 set t_Co=256
 
 if !has('nvim')
@@ -83,24 +87,42 @@ syntax on
 " Colors {{{
 set background=dark
 
-"let g:airline_theme = 'bubblegum'
-"colorscheme bubblegum-256-dark
+" use truecolor
+if empty($TMUX_SET_STATUSLINE)
+  if has('termguicolors')
+    set termguicolors
+  endif
+endif
 
-let g:airline_theme = 'solarized'
-let g:solarized_bold= 0
-let g:solarized_underline = 0
-colorscheme solarized
+" let g:airline_theme = 'bubblegum'
+" colorscheme bubblegum-256-dark
+
+" let g:airline_theme = 'solarized'
+" let g:solarized_bold= 0
+" let g:solarized_underline = 0
+" colorscheme solarized
+
+" let g:airline_theme = 'deep_space'
+" colorscheme deep-space
+
+let g:airline_theme = "hybrid"
+colorscheme hybrid_material
 " }}}
 " Leader {{{
 let mapleader = ","
 
 nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gd :Gvdiff<CR>
 " }}}
 " Key Bindings {{{
 nnoremap <C-H> :bp<CR>
 nnoremap <C-L> :bn<CR>
 
 nnoremap <C-R> :CtrlPFunky
+
+if has('osx')
+  set clipboard=unnamed
+endif
 " }}}
 " Spaces and Tabs {{{
 set expandtab
@@ -153,16 +175,21 @@ let g:ctrlp_abbrev = {
 " Airline {{{
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tmuxline#enabled = 1
+
+if empty($TMUX_SET_STATUSLINE)
+  let g:airline#extensions#tmuxline#enabled = 0
+else
+  let g:airline#extensions#tmuxline#enabled = 1
+endif
 " }}}
 " Autocomplete {{{
-if has('nvim')
-  let g:deoplete#enable_at_startup = 1
-else
+" if has('nvim')
+"   let g:deoplete#enable_at_startup = 1
+" else
   let g:neocomplete#enable_at_startup = 1
   let g:neocomplete#enable_smart_case = 1
   let g:neocomplete#sources#syntax#min_keyword_length = 3
-endif
+" endif
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
 " }}}
@@ -189,6 +216,7 @@ endif
 " File Handling {{{
 set modelines=1
 
+set autowrite
 set nobackup
 set nowritebackup
 set noswapfile
@@ -197,6 +225,9 @@ au BufWritePre * StripWhitespace
 " }}}
 " Type Specifics {{{
 au filetype go setlocal noexpandtab
+
+au filetype go nmap <leader>b <Plug>(go-build)
+au filetype go nmap <leader>r <Plug>(go-run)
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
