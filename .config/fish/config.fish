@@ -17,6 +17,9 @@ set -gx ANDROID_HOME /usr/local/opt/android-sdk
 set -gx GOPATH $HOME/.go
 set -gx PATH $GOPATH/bin /usr/local/opt/go/libexec/bin /usr/local/sbin /usr/local/bin $PATH
 # }}}
+# Vim / NeoVim {{{
+set -gx NVIM_TUI_ENABLE_TRUE_COLOR 1
+# }}}
 # Ruby {{{
 set -gx RBENV_ROOT /usr/local/var/rbenv
 
