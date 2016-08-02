@@ -48,6 +48,9 @@ Plug 'tpope/vim-rails'
 
 Plug 'fatih/vim-go'
 
+Plug 'elixir-lang/vim-elixir'
+Plug 'slashmili/alchemist.vim'
+
 " colorschemes
 Plug 'altercation/vim-colors-solarized'
 Plug 'baskerville/bubblegum'
