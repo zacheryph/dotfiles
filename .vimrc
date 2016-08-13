@@ -118,6 +118,10 @@ let mapleader = ","
 
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gd :Gvdiff<CR>
+
+" macro faster
+nnoremap <leader>m qW0
+vnoremap <leader>m :'<,'> norm @W<CR>
 " }}}
 " Key Bindings {{{
 nnoremap <C-H> :bp<CR>
