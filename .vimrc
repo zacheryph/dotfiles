@@ -11,7 +11,6 @@ endif
 " }}}
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
-
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dag/vim-fish'
@@ -43,6 +42,8 @@ if has('nvim')
 else
   Plug 'shougo/neocomplete.vim'
 endif
+
+Plug 'tmhedberg/SimpylFold'
 
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
