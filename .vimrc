@@ -76,6 +76,7 @@ endif
 
 set nocompatible
 set number
+set rnu
 set wildmenu
 set lazyredraw
 set ttyfast
