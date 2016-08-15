@@ -19,6 +19,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'irrationalistic/vim-tasks'
 Plug 'konfekt/fastfold'
 Plug 'majutsushi/tagbar'
+Plug 'mileszs/ack.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'raimondi/delimitmate'
 Plug 'scrooloose/nerdcommenter'
@@ -159,6 +160,8 @@ set updatetime=2000
 set gdefault
 
 nnoremap <leader><space> :nohlsearch<CR>
+
+let g:ackprg = 'ag --vimgrep'
 " }}}
 " Folding {{{
 set foldenable
