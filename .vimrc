@@ -44,15 +44,15 @@ else
   Plug 'shougo/neocomplete.vim'
 endif
 
-Plug 'tmhedberg/SimpylFold'
+Plug 'fatih/vim-go'
 
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 
-Plug 'fatih/vim-go'
-
 Plug 'elixir-lang/vim-elixir'
 Plug 'slashmili/alchemist.vim'
+
+Plug 'tmhedberg/SimpylFold'
 
 " colorschemes
 Plug 'altercation/vim-colors-solarized'
