@@ -68,8 +68,8 @@ call plug#end()
 " Terminal {{{
 set shell=/bin/bash
 
-set t_te= t_ti= t_ut=
-set t_Co=256
+" set t_ut=
+" set t_Co=256
 
 if !has('nvim')
   set encoding=utf-8
@@ -112,8 +112,15 @@ endif
 " let g:airline_theme = 'deep_space'
 " colorscheme deep-space
 
-let g:airline_theme = "hybrid"
-colorscheme hybrid_material
+" let g:airline_theme = "hybrid"
+" colorscheme hybrid_material
+
+let g:airline_theme = 'luna'
+colorscheme luna
+
+" let g:airline_theme = 'papercolor'
+" colorscheme papercolor
+
 " }}}
 " Leader {{{
 let mapleader = ","
@@ -122,17 +129,28 @@ nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gd :Gvdiff<CR>
 
 " macro faster
-nnoremap <leader>m qW0
-vnoremap <leader>m :'<,'> norm @W<CR>
+nnoremap <leader>m qt0
+vnoremap <leader>m :'<,'> norm @t<CR>
+
+nnoremap <leader>t :e ~/src/TASKS.todo<CR>
+
+" Faster ag
+nnoremap <leader>f <C-r><C-w><CR>
 " }}}
 " Key Bindings {{{
 nnoremap <C-H> :bp<CR>
 nnoremap <C-L> :bn<CR>
 
-nnoremap <C-R> :CtrlPFunky
+" nnoremap <C-R> :CtrlPFunky
 
 if has('osx')
   set clipboard=unnamed
+endif
+
+if has('nvim')
+  " ensure mouse does nothing
+  set mouse=
+  " set clipboard=unnamedplus
 endif
 " }}}
 " Spaces and Tabs {{{
@@ -161,6 +179,7 @@ set gdefault
 
 nnoremap <leader><space> :nohlsearch<CR>
 
+cnoreabbrev ag Ack
 let g:ackprg = 'ag --vimgrep'
 " }}}
 " Folding {{{
@@ -172,6 +191,7 @@ set foldmethod=syntax
 nnoremap <space> za
 " }}}
 " CtrlP {{{
+let g:ctrlp_line_prefix = '> '
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 let g:ctrlp_abbrev = {
