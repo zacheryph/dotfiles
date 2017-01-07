@@ -15,11 +15,13 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dag/vim-fish'
 Plug 'danro/rename.vim'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'irrationalistic/vim-tasks'
 Plug 'konfekt/fastfold'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
+Plug 'mxw/vim-jsx'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'raimondi/delimitmate'
 Plug 'scrooloose/nerdcommenter'
@@ -116,8 +118,11 @@ endif
 " let g:airline_theme = "hybrid"
 " colorscheme hybrid_material
 
-let g:airline_theme = 'luna'
-colorscheme luna
+let g:airline_theme = "gruvbox"
+colorscheme gruvbox
+
+" let g:airline_theme = 'luna'
+" colorscheme luna
 
 " let g:airline_theme = 'papercolor'
 " colorscheme papercolor
@@ -144,9 +149,9 @@ nnoremap <C-L> :bn<CR>
 
 " nnoremap <C-R> :CtrlPFunky<CR>
 
-if has('osx')
+" if has('osx')
   set clipboard=unnamedplus
-endif
+" endif
 
 if has('nvim')
   " ensure mouse does nothing
@@ -262,6 +267,8 @@ au filetype go setlocal noexpandtab
 
 au filetype go nmap <leader>b <Plug>(go-build)
 au filetype go nmap <leader>r <Plug>(go-run)
+
+let g:jsx_ext_required = 0
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
