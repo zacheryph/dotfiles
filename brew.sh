@@ -7,16 +7,16 @@ brew tap neovim/neovim
 
 # Casks
 brew cask install \
-	atom \
-	rowanj-gitx \
-	google-chrome \
-	keybase \
-	mocksmtp \
-	monolingual \
-	transmission \
-	transmit \
-	vmware-fusion \
-	iterm2
+  atom \
+  rowanj-gitx \
+  google-chrome \
+  keybase \
+  mocksmtp \
+  monolingual \
+  transmission \
+  transmit \
+  vmware-fusion \
+  iterm2
 
 # General
 brew install \
@@ -36,18 +36,18 @@ brew install \
 # Development
 brew install \
   elixir \
-	git \
-	git-extras \
-	git-flow \
+  git \
+  git-extras \
+  git-flow \
   glide \
   go \
   grpc \
   google-protobuf \
   neovim \
-	python3 \
-	rbenv \
-	ruby-build \
-	the_silver_searcher
+  python3 \
+  rbenv \
+  ruby-build \
+  the_silver_searcher
 
 brew install vim \
   --with-lua \

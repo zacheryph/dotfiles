@@ -62,6 +62,7 @@ Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'nlknguyen/papercolor-theme'
 Plug 'notpratheek/vim-luna'
 Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'morhetz/gruvbox'
 
 call plug#end()
 " }}}
@@ -141,10 +142,10 @@ nnoremap <leader>f <C-r><C-w><CR>
 nnoremap <C-H> :bp<CR>
 nnoremap <C-L> :bn<CR>
 
-" nnoremap <C-R> :CtrlPFunky
+" nnoremap <C-R> :CtrlPFunky<CR>
 
 if has('osx')
-  set clipboard=unnamed
+  set clipboard=unnamedplus
 endif
 
 if has('nvim')

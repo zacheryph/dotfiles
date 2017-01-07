@@ -14,6 +14,11 @@
   diff = true
   status = true
 
+[credential "https://git-codecommit.us-east-1.amazonaws.com"]
+  helper = ""
+  helper = !aws codecommit credential-helper $@
+  UseHttpPath = true
+
 [credential]
   helper = osxkeychain
 
