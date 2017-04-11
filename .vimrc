@@ -6,8 +6,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
-" Other Dependencies:
-"   NVIM: pip3 install neovim
+" NVIM Specific Dependencies:
+"   pip3 install neovim
+"   gem install neovim
 " }}}
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
@@ -17,6 +18,7 @@ Plug 'dag/vim-fish'
 Plug 'danro/rename.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
+Plug 'fatih/vim-hclfmt'
 Plug 'irrationalistic/vim-tasks'
 Plug 'konfekt/fastfold'
 Plug 'majutsushi/tagbar'
@@ -98,11 +100,15 @@ syntax on
 set background=dark
 
 " use truecolor
-if empty($TMUX_SET_STATUSLINE)
-  if has('termguicolors')
-    set termguicolors
-  endif
-endif
+" if empty($TMUX_SET_STATUSLINE)
+"   if has('termguicolors')
+"     set termguicolors
+"
+"     " see :help xterm-true-color
+"     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"   endif
+" endif
 
 " let g:airline_theme = 'bubblegum'
 " colorscheme bubblegum-256-dark
@@ -147,16 +153,16 @@ nnoremap <leader>f <C-r><C-w><CR>
 nnoremap <C-H> :bp<CR>
 nnoremap <C-L> :bn<CR>
 
-" nnoremap <C-R> :CtrlPFunky<CR>
+nnoremap <C-R> :CtrlPFunky<CR>
 
-" if has('osx')
-  set clipboard=unnamedplus
-" endif
+if has('osx')
+  set clipboard=unnamed
+endif
 
 if has('nvim')
   " ensure mouse does nothing
   set mouse=
-  " set clipboard=unnamedplus
+  set clipboard=unnamedplus
 endif
 " }}}
 " Spaces and Tabs {{{
@@ -239,6 +245,7 @@ let g:NERDCommentEmptyLines = 1
 " }}}
 " Vim Go {{{
 let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
@@ -269,6 +276,10 @@ au filetype go nmap <leader>b <Plug>(go-build)
 au filetype go nmap <leader>r <Plug>(go-run)
 
 let g:jsx_ext_required = 0
+
+augroup filetypedetect
+  au BufRead,BufNewFile *.arb set ft=ruby
+augroup END
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
