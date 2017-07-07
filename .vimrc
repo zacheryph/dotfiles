@@ -164,6 +164,18 @@ if has('nvim')
   set mouse=
   set clipboard=unnamedplus
 endif
+
+" never do this again --> :set paste <ctrl-v> :set no paste
+let &t_SI .= "\<Esc>[?2004h"
+let &t_EI .= "\<Esc>[?2004l"
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
 " }}}
 " Spaces and Tabs {{{
 set expandtab
