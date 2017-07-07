@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+### Install Stuff
 # Taps
 brew tap caskroom/cask
 brew tap grpc/grpc
@@ -56,6 +57,9 @@ brew install vim \
 pip3 install neovim
 
 # Shell
-brew install fish
-echo "/usr/local/bin/fish" | sudo tee -a /etc/shells >/dev/null
-chsh -s /usr/local/bin/fish
+brew install zsh
+echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells >/dev/null
+chsh -s /usr/local/bin/zsh
+
+### Git
+git config --global credential.helper=osxkeychain
