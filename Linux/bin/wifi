@@ -6,10 +6,11 @@ INTERFACES=/etc/network/interfaces.d
 
 usage() {
   echo "usage:"
-  echo "  wifi list             - list configured networks"
-  echo "  wifi show <tag>       - show network configuration"
   echo "  wifi add <tag> <ssid> - add network configuration"
+  echo "  wifi down             - take wifi interface down"
+  echo "  wifi list             - list configured networks"
   echo "  wifi set <tag>        - connect to specific network"
+  echo "  wifi show <tag>       - show network configuration"
   echo "  wifi <tag>            - connect to specific network"
   exit
 }
@@ -77,20 +78,27 @@ set_network() {
   sudo ifup $WIRELESS_INTERFACE=${net}
 }
 
+down_interface() {
+  sudo ifdown $WIRELESS_INTERFACE >/dev/null 2>&1
+}
+
 # main
 [[ -z "$1" ]] && usage
 
 case "$1" in
+  add)
+    [[ -z "$2" || -z "$3" ]] && usage
+    add_network $2 $3
+    ;;
+  down)
+    down_interface
+    ;;
   list)
     list_network
     ;;
   show)
     [[ -z "$2" ]] && usage
     show_network $2
-    ;;
-  add)
-    [[ -z "$2" || -z "$3" ]] && usage
-    add_network $2 $3
     ;;
   set)
     [[ -z "$2" ]] && usage
