@@ -1,6 +1,11 @@
 # Bootstrap oh-my-zsh
 if [[ ! -d $HOME/.oh-my-zsh ]]; then
   sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  mkdir -p $HOME/.oh-my-zsh/custom/plugins
+  mkdir -p $HOME/.oh-my-zsh/custom/themes
+  git clone https://github.com/zsh-users/zsh-autosuggestions $HOME/.oh-my-zsh/custom/plugins/
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting  $HOME/.oh-my-zsh/custom/plugins/
+  curl -o $HOME/.oh-my-zsh/custom/themes/gitster.zsh-theme https://raw.githubusercontent.com/shashankmehta/dotfiles/master/thesetup/zsh/.oh-my-zsh/custom/themes/gitster.zsh-theme
 fi
 
 # If you come from bash you might have to change your $PATH.
