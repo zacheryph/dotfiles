@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+# Script to add/change wifi networks
+source ${HOME}/bin/CONFIG
+
+INTERFACES=/etc/network/interfaces.d
+
+usage() {
+  echo "usage:"
+  echo "  wifi list             - list configured networks"
+  echo "  wifi show <tag>       - show network configuration"
+  echo "  wifi add <tag> <ssid> - add network configuration"
+  echo "  wifi set <tag>        - connect to specific network"
+  echo "  wifi <tag>            - connect to specific network"
+  exit
+}
+
+exit_current_network() {
+  net=$1
+  current_ssid=$(sudo ifquery $WIRELESS_INTERFACE | \
+    grep ssid | \
+    sed 's/wpa-ssid: //')
+
+  if sudo grep -q $current_ssid $INTERFACES/$net ; then
+    echo "== network '${net}' is already active"
+    exit
+  fi
+}
+
+list_network() {
+  sudo ls -1 /etc/network/interfaces.d
+}
+
+show_network() {
+  net=$1
+  sudo cat $INTERFACES/$net
+}
+
+add_network() {
+  name=$1
+  net=$2
+
+  read -s -p 'Password: ' pswd
+  echo
+
+  wpa_output=$(wpa_passphrase "$net" "$pswd")
+  if [[ $? -ne 0 ]]; then
+    echo "!! error executing wpa_passphrase"
+    echo "=> ${wpa_output}"
+    exit
+  fi
+
+  psk=$(echo "$wpa_output" | \
+    grep 'psk' | \
+    grep -v '#psk' | \
+    sed -E "s/\s+psk=/wpa-psk  /")
+
+  sudo dd status=none of=$INTERFACES/$name <<EOF
+iface ${name} inet dhcp
+  wpa-ssid ${net}
+  ${psk}
+  # passphrase '${pswd}'
+EOF
+
+  echo "== added network '$name' for ssid '$net'"
+}
+
+set_network() {
+  net=$1
+  exit_current_network $net
+
+  if sudo [ ! -e /etc/network/interfaces.d/$net ]; then
+    echo "!! network not found: ${net}"
+    exit 1
+  fi
+
+  sudo ifdown $WIRELESS_INTERFACE >/dev/null 2>&1
+  sudo ifup $WIRELESS_INTERFACE=${net}
+}
+
+# main
+[[ -z "$1" ]] && usage
+
+case "$1" in
+  list)
+    list_network
+    ;;
+  show)
+    [[ -z "$2" ]] && usage
+    show_network $2
+    ;;
+  add)
+    [[ -z "$2" || -z "$3" ]] && usage
+    add_network $2 $3
+    ;;
+  set)
+    [[ -z "$2" ]] && usage
+    set_network $2
+    ;;
+  *)
+    set_network $1
+    ;;
+esac
