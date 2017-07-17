@@ -15,18 +15,6 @@ usage() {
   exit
 }
 
-exit_current_network() {
-  net=$1
-  current_ssid=$(sudo ifquery $WIRELESS_INTERFACE | \
-    grep ssid | \
-    sed 's/wpa-ssid: //')
-
-  if sudo grep -q $current_ssid $INTERFACES/$net ; then
-    echo "== network '${net}' is already active"
-    exit
-  fi
-}
-
 list_network() {
   sudo ls -1 /etc/network/interfaces.d
 }
@@ -67,7 +55,6 @@ EOF
 
 set_network() {
   net=$1
-  exit_current_network $net
 
   if sudo [ ! -e /etc/network/interfaces.d/$net ]; then
     echo "!! network not found: ${net}"
