@@ -1,1 +1,3 @@
+URxvt.perl-ext-common: selection-to-clipboard
+
 URxvt.font: xft:Inconsolata for Powerline:pixelsize=36,style=Medium
