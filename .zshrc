@@ -70,7 +70,9 @@ if [ -z "$_zsh_custom_scripts_loaded" ]; then
   plugins+=(zsh-autosuggestions zsh-syntax-highlighting)
 fi
 
-export RBENV_ROOT=/usr/local/var/rbenv
+if [[ -d /usr/local/var/rbenv ]]; then
+  export RBENV_ROOT=/usr/local/var/rbenv
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -82,7 +84,7 @@ export GPG_TTY=$(tty)
 
 [ -z "$_ORIGINAL_PATH" ] && _ORIGINAL_PATH="$PATH"
 export GOPATH=$HOME/.go
-export PATH=$GOPATH/bin:/usr/local/opt/go/libexec/bin:/usr/local/sbin:$_ORIGINAL_PATH
+export PATH=$HOME/bin:$GOPATH/bin:$_ORIGINAL_PATH
 
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
