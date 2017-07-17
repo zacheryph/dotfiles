@@ -1,22 +1,35 @@
 # Certain things ripped off from jessfraz/dotfiles
-.PHONY: setup dotfiles test shellcheck
+.PHONY: all setup bin dotfiles test shellcheck
 
 OS := $(shell uname -s)
 
+all: bin dotfiles
+
 setup:
-	@if test -f $(OS)/setup.sh ; then \
+	if test -f $(OS)/setup.sh ; then \
 		echo == Setup $(OS); \
 		./$(OS)/setup.sh; \
 	fi;
 
+bin:
+	mkdir -p $(HOME)/bin && \
+	for file in $(shell find $(CURDIR)/bin -type f -not -name '.*'); do \
+		f=$$(basename $$file); \
+		ln -sfn $$file $(HOME)/bin/$$f; \
+	done; \
+	for file in $(shell find $(CURDIR)/$(OS)/bin -type f -not -name '.*'); do \
+		f=$$(basename $$file); \
+		ln -sfn $$file $(HOME)/bin/$$f; \
+	done;
+
 dotfiles:
 	# link global and OS specific dotfiles
-	for file in $(shell find $(CURDIR) -name ".*" -not -name ".git" -not -name ".travis.yml"); do \
-		f=$(basnename $$file); \
+	for file in $(shell find $(CURDIR) -depth 1 -name ".*" -not -name ".git" -not -name ".keep" -not -name ".travis.yml"); do \
+		f=$$(basename $$file); \
 	  ln -sfn $$file $(HOME)/$$f; \
 	done; \
   for file in $(shell find $(CURDIR)/$(OS) -name ".*"); do \
-		f=$(basnename $$file); \
+		f=$$(basename $$file); \
 	  ln -sfn $$file $(HOME)/$$f; \
 	done;
 
