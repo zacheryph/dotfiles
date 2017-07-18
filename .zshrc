@@ -78,7 +78,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 export LANG=en_US.UTF-8
-export EDITOR="nvim"
+export EDITOR="vim"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=10
 export GPG_TTY=$(tty)
 
