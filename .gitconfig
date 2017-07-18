@@ -14,13 +14,10 @@
   diff = true
   status = true
 
-[credential "https://git-codecommit.us-east-1.amazonaws.com"]
+[credential "https://git-codecommit.*.amazonaws.com"]
   helper = ""
   helper = !aws codecommit credential-helper $@
   UseHttpPath = true
-
-[credential]
-  helper = osxkeychain
 
 [diff]
   renames = copies
@@ -30,6 +27,18 @@
   name = Zachery Hostens
   signingkey = 0x37CDFB272575E480
   username = zacheryph
+
+[commit]
+  gpgsign = true
+
+[merge]
+  log = true
+
+[mergetool]
+  keepBackup = true
+
+[push]
+  default = current
 
 [core]
   packedGitLimit = 50m
@@ -51,12 +60,3 @@
 
 [url "https://gist.github.com/"]
   insteadOf = "gist:"
-
-[merge]
-  log = true
-
-[mergetool]
-  keepBackup = true
-
-[push]
-  default = current
