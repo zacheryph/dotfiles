@@ -121,10 +121,13 @@ run_docker() {
     $(lsb_release -cs)
     stable"
 
-  sudo apt install -y --no-install-recommends docker-ce
+  sudo apt install -y --no-install-recommends \
+    docker-ce \
+    docker-compose
 
   sudo chown :docker /etc/docker
   sudo chmod g+x /etc/docker
+  newgrp docker
 }
 
 run_dotfiles() {
