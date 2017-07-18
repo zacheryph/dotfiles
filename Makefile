@@ -1,9 +1,9 @@
 # Certain things ripped off from jessfraz/dotfiles
-.PHONY: all setup bin dotfiles test shellcheck
+.PHONY: all setup bin dotfiles etc test shellcheck
 
 OS := $(shell uname -s)
 
-all: bin dotfiles
+all: bin etc dotfiles
 
 setup:
 	if test -f $(OS)/setup.sh ; then \
@@ -33,6 +33,12 @@ dotfiles:
 	  ln -sfn $$file $(HOME)/$$f; \
 	done;
 
+etc:
+	test -d $(CURDIR)/$(OS)/etc && for file in $(shell find $(CURDIR)/$(OS)/etc -type f -not -name ".*"); do \
+		f=$$(echo $$file | sed -e 's|$(CURDIR)/$(OS)||'); \
+		sudo cp $$file $$f; \
+		sudo chown root:root $$f; \
+	done;
 
 # if this session isn't interactive, then we don't want to allocate a
 # TTY, which would fail, but if it is interactive, we do want to attach
