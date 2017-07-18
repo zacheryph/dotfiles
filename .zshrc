@@ -82,9 +82,9 @@ export EDITOR="nvim"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=10
 export GPG_TTY=$(tty)
 
-[ -z "$_ORIGINAL_PATH" ] && _ORIGINAL_PATH="$PATH"
+[ -z "$_ORIGINAL_PATH" ] && _ORIGINAL_PATH=$PATH
 export GOPATH=$HOME/.go
-export PATH=$HOME/bin:$GOPATH/bin:$_ORIGINAL_PATH
+export PATH=$HOME/bin:$GOPATH/bin:/usr/local/go/bin:$_ORIGINAL_PATH
 
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
