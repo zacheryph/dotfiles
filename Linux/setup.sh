@@ -21,6 +21,7 @@ commands:
   all       - run all setups
   base      - install base/need/want to have packages
               this should get smaller as stuff moves to docker
+  cloud     - google cloud sdk / kubernetes tools
   console   - setup console fonts / etc
   docker    - setup docker installation
   dotfiles  - install dotfiles
@@ -47,6 +48,7 @@ run_all() {
   run_console
   run_gui
   run_docker
+  run_cloud
   run_shell
   run_dotfiles
 }
@@ -108,8 +110,21 @@ run_base() {
     zsh
 }
 
+run_cloud() {
+  curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+
+  sudo apt-add-repository "deb https://packages.cloud.google.com/apt
+    cloud-sdk-$(lsb_release -cs)
+    main"
+
+  sudo apt update
+  sudo apt install -y --no-install-recommends \
+    google-cloud-sdk \
+    kubectl
+}
+
 run_console() {
-  echo "Select Terminus & 16x32"
+  echo "== Select Terminus & 16x32"
   sleep 3
   sudo dpkg-reconfigure console-setup
 }
@@ -121,13 +136,16 @@ run_docker() {
     $(lsb_release -cs)
     stable"
 
+  sudo apt update
+
   sudo apt install -y --no-install-recommends \
     docker-ce \
     docker-compose
 
   sudo chown :docker /etc/docker
   sudo chmod g+x /etc/docker
-  newgrp docker
+
+  echo "== run 'newgrp docker' or re-login"
 }
 
 run_dotfiles() {
@@ -204,19 +222,10 @@ run_wifi() {
 }
 
 
-
+# == TODO ==
 # fonts
-# xorg.conf
-# grub resolution
 # booting
-
-# sudo
-
-# docker
-
 # oh-my-zsh properly
-
-# xorg configs
 
 [[ -z "$1" ]] && usage
 case "$1" in
@@ -225,6 +234,9 @@ case "$1" in
     ;;
   base)
     run_base
+    ;;
+  cloud)
+    run_cloud
     ;;
   console)
     run_console
