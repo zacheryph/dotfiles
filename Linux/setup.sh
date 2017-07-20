@@ -99,12 +99,6 @@ run_base() {
     tzdata \
     unzip \
     vim \
-    xbacklight \
-    xcape \
-    xclip \
-    xcompmgr \
-    xinput \
-    xserver-xorg-input-synaptics \
     xz-utils \
     zip \
     zsh
@@ -174,6 +168,12 @@ run_gui() {
     xorg \
     xserver-xorg \
     xserver-xorg-video-intel \
+    xbacklight \
+    xcape \
+    xclip \
+    xcompmgr \
+    xinput \
+    xserver-xorg-input-synaptics \
     lightdm \
     feh \
     i3 \
