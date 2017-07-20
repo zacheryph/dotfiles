@@ -1,8 +1,7 @@
-#!/usr/bin/env bash
-source ${HOME}/bin/CONFIG
-
-for repo in $(find $HOME/src -type d -name ".git"); do
-  name=$(dirname $repo | sed "s|$HOME/src/||")
+#!/bin/bash
+find "${HOME}/src" -type d -name ".git" |
+while read -r repo; do
+  name=$(dirname "$repo" | sed "s|$HOME/src/||")
   echo "== Compacting $name"
   GIT_DIR=$repo git gc --aggressive --prune=now --quiet
 done

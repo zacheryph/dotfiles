@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # set -e
 
 ## SETTINGS
@@ -148,9 +148,9 @@ run_dotfiles() {
 
 run_golang() {
   tmpfile=$(mktemp --tmpdir golang-XXXXXX)
-  curl -o $tmpfile https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz
-  sudo tar -C /usr/local -xf $tmpfile
-  rm -f $tmpfile
+  curl -o "$tmpfile" "https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz"
+  sudo tar -C /usr/local -xf "$tmpfile"
+  rm -f "$tmpfile"
 }
 
 read -r -d '' INITRAMFS_MODULES <<EOF
@@ -182,9 +182,8 @@ run_gui() {
     scrot
 
   sudo cp /etc/default/grub /etc/default/grub.setup-backup
-  cat /etc/default/grub \
+  sed -e 's/GRUB_GFXMODE=.*/GRUB_GFXMODE=1024x768-32/' /etc/default/grub \
     | sed -e "s/GRUB_CMDLINE_LINUX_DEFAULT=\"\(.*\)\"/GRUB_CMDLINE_LINUX_DEFAULT=\"\1 splash\"/" \
-    | sed -e 's/GRUB_GFXMODE=.*/GRUB_GFXMODE=1024x768-32/' \
     | sudo dd status=none of=/etc/default/grub
 
   echo "GRUB_BACKGROUND=/usr/share/images/grub/Plasma-lamp.tga" \
