@@ -16,7 +16,7 @@ dotfiles:
 	while read -r file; do \
 		f=$$(basename $$file); \
 		ln -sfn $$file $(HOME)/$$f; \
-	done;
+	done
 
 bin: linux-only
 	mkdir -p $(HOME)/bin && \
@@ -24,7 +24,7 @@ bin: linux-only
 	while read -r file; do \
 		f=$$(basename $$file); \
 		ln -sfn $$file $(HOME)/bin/$$f; \
-	done;
+	done
 
 etc: linux-only
 	find $(CURDIR)/etc -type f | \
@@ -32,7 +32,9 @@ etc: linux-only
 		f=$$(echo $$file | sed -e 's|$(CURDIR)||'); \
 		sudo cp $$file $$f; \
 		sudo chown root:root $$f; \
-	done;
+	done
+	systemctl --user daemon-reload
+	sudo systemctl daemon-reload
 
 # if this session isn't interactive, then we don't want to allocate a
 # TTY, which would fail, but if it is interactive, we do want to attach
