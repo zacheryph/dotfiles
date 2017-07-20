@@ -27,7 +27,7 @@ bin: linux-only
 	done;
 
 etc: linux-only
-	find $(CURDIR)/etc -type f; do \
+	find $(CURDIR)/etc -type f | \
 	while read -r file; do \
 		f=$$(echo $$file | sed -e 's|$(CURDIR)||'); \
 		sudo cp $$file $$f; \
