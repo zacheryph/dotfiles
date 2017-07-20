@@ -1,41 +1,35 @@
 # Certain things ripped off from jessfraz/dotfiles
-.PHONY: all setup bin dotfiles etc test shellcheck
+.PHONY: all bin dotfiles etc test shellcheck
 
 OS := $(shell uname -s)
 
 all: bin etc dotfiles
 
-setup:
-	if test -f $(OS)/setup.sh ; then \
-		echo == Setup $(OS); \
-		./$(OS)/setup.sh; \
-	fi;
-
-bin:
-	mkdir -p $(HOME)/bin && \
-	for file in $(shell find $(CURDIR)/bin -type f -not -name '.*'); do \
-		f=$$(basename $$file); \
-		ln -sfn $$file $(HOME)/bin/$$f; \
-	done; \
-	for file in $(shell find $(CURDIR)/$(OS)/bin -type f -not -name '.*'); do \
-		f=$$(basename $$file); \
-		ln -sfn $$file $(HOME)/bin/$$f; \
-	done;
+linux-only:
+ifneq ($(OS), Linux)
+	$(error only supported on linux)
+endif
 
 dotfiles:
-	# link global and OS specific dotfiles
-	for file in $(shell find $(CURDIR) -depth 1 -name ".*" -not -name ".git" -not -name ".keep" -not -name ".travis.yml"); do \
+	# just link all. OSX gets extra files it doesnt care about but whatever
+	find $(CURDIR) -name ".*" -not -name ".git" -not -name ".travis.yml" | \
+	while read -r file; do \
 		f=$$(basename $$file); \
-	  ln -sfn $$file $(HOME)/$$f; \
-	done; \
-  for file in $(shell find $(CURDIR)/$(OS) -name ".*"); do \
-		f=$$(basename $$file); \
-	  ln -sfn $$file $(HOME)/$$f; \
+		ln -sfn $$file $(HOME)/$$f; \
 	done;
 
-etc:
-	test -d $(CURDIR)/$(OS)/etc && for file in $(shell find $(CURDIR)/$(OS)/etc -type f -not -name ".*"); do \
-		f=$$(echo $$file | sed -e 's|$(CURDIR)/$(OS)||'); \
+bin: linux-only
+	mkdir -p $(HOME)/bin && \
+	find $(CURDIR)/bin -type f -not -name ".*" | \
+	while read -r file; do \
+		f=$$(basename $$file); \
+		ln -sfn $$file $(HOME)/bin/$$f; \
+	done;
+
+etc: linux-only
+	find $(CURDIR)/etc -type f; do \
+	while read -r file; do \
+		f=$$(echo $$file | sed -e 's|$(CURDIR)||'); \
 		sudo cp $$file $$f; \
 		sudo chown root:root $$f; \
 	done;
