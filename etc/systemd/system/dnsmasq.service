@@ -1,0 +1,23 @@
+[Unit]
+Description=dnsmasq
+Documentation=http://www.thekelleys.org.uk/dnsmasq/doc.html
+After=network.target docker.socket
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStartPre=-/usr/bin/docker rm -f dnsmasq
+ExecStart=/usr/bin/docker run \
+  --detach \
+  --restart always \
+  --cap-add NET_ADMIN \
+  --publish 127.0.0.1:53:53/tcp \
+  --publish 127.0.0.1:53:53/udp \
+  --name dnsmasq \
+  andyshinn/dnsmasq \
+    --address=/local/127.0.0.1 \
+    --address=/dev/127.0.0.1 \
+    --address=/docker/127.0.0.1
+
+[Install]
+WantedBy=multi-user.target
