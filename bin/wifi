@@ -1,19 +1,16 @@
 #!/bin/bash
 # Script to add/change wifi networks
-INTERFACES=/etc/network/interfaces.d
+WPA_CONFIG="/etc/wpa_supplicant/wpa_supplicant.conf"
 
 read -r -d USAGE <<EOF
 wifi: add wifi networks to wpa_supplicant
 
-note: NOT CURRENTLY WORKING
-
 usage:
   wifi add <tag> <ssid> - add network configuration
   wifi down             - take wifi interface down
+  wifi init <iface>     - initialize wpa_supplicant
   wifi list             - list configured networks
-  wifi set <tag>        - connect to specific network
   wifi show <tag>       - show network configuration
-  wifi <tag>            - connect to specific network
 EOF
 
 usage() {
@@ -21,13 +18,31 @@ usage() {
   exit
 }
 
+init_wifi() {
+  iface="$1"
+  conf="/etc/network/interfaces.d/wifi-${iface}"
+
+  if [[ -e "$conf" ]]; then
+    echo "!! wifi interface ${iface} already configured"
+    echo "=> remove ${conf} to re-initialize"
+    exit
+  fi
+
+  sudo dd status=none of="$conf" <<EOF
+allow-hotplug $iface
+iface $iface inet manual
+  wpa-driver wext
+  wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+EOF
+
+}
+
 list_network() {
-  sudo ls -1 /etc/network/interfaces.d
+  sudo wpa_cli list_networks
 }
 
 show_network() {
-  net=$1
-  sudo cat "$INTERFACES/$net"
+  echo "show"
 }
 
 add_network() {
@@ -43,35 +58,14 @@ add_network() {
     exit
   fi
 
-  psk=$(echo "$wpa_output" | \
-    grep 'psk' | \
-    grep -v '#psk' | \
-    sed -E "s/\s+psk=/wpa-psk  /")
+  sudo dd status=none conv=notrunc oflag=append of="$WPA_CONFIG" <<EOF
 
-  sudo dd status=none of="$INTERFACES/$name" <<EOF
-iface ${name} inet dhcp
-  wpa-ssid ${net}
-  ${psk}
-  # passphrase '${pswd}'
+# wifi-net: ${name}
+${wpa_output}
 EOF
 
+  sudo wpa_cli reconfigure
   echo "== added network '$name' for ssid '$net'"
-}
-
-set_network() {
-  net=$1
-
-  if sudo [ ! -e "/etc/network/interfaces.d/$net" ]; then
-    echo "!! network not found: ${net}"
-    exit 1
-  fi
-
-  sudo ifdown "$WIRELESS_INTERFACE" >/dev/null 2>&1
-  sudo ifup "$WIRELESS_INTERFACE"="${net}"
-}
-
-down_interface() {
-  sudo ifdown "$WIRELESS_INTERFACE" >/dev/null 2>&1
 }
 
 # main
@@ -85,6 +79,10 @@ case "$1" in
   down)
     down_interface
     ;;
+  init)
+    [[ -z "$2" ]] && usage
+    init_wifi "$2"
+    ;;
   list)
     list_network
     ;;
@@ -92,11 +90,7 @@ case "$1" in
     [[ -z "$2" ]] && usage
     show_network "$2"
     ;;
-  set)
-    [[ -z "$2" ]] && usage
-    set_network "$2"
-    ;;
   *)
-    set_network "$1"
+    usage
     ;;
 esac
