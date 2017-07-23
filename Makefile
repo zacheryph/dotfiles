@@ -33,6 +33,7 @@ etc: linux-only
 		sudo cp $$file $$f; \
 		sudo chown root:root $$f; \
 	done
+	sed -E -i 's/#?prepend domain-name-servers .*/prepend domain-name-servers 127.0.0.1;/' /etc/dhcp/dhclient.conf
 	systemctl --user daemon-reload
 	sudo systemctl daemon-reload
 
