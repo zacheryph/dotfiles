@@ -11,6 +11,7 @@ ExecStart=/usr/bin/docker run \
   --detach \
   --restart always \
   --cap-add NET_ADMIN \
+  --net host \
   --publish 127.0.0.1:53:53/tcp \
   --publish 127.0.0.1:53:53/udp \
   --name dnsmasq \
