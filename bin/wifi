@@ -2,7 +2,7 @@
 # Script to add/change wifi networks
 WPA_CONFIG="/etc/wpa_supplicant/wpa_supplicant.conf"
 
-read -r -d USAGE <<EOF
+read -r -d '' USAGE <<EOF
 wifi: add wifi networks to wpa_supplicant
 
 usage:
@@ -34,7 +34,6 @@ iface $iface inet manual
   wpa-driver wext
   wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
 EOF
-
 }
 
 list_network() {
