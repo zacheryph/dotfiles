@@ -12,7 +12,7 @@ notes:
   * currently only supports debian
   * this is for me. if you dont like it, tough
   * assumes current user is "only" user (will sudo for what it needs)
-  * this is tailered around an XPS 13 Touch (QHD)
+  * this is tailored around an XPS 13 Touch (QHD)
 
 usage:
   setup.sh <command>
