@@ -132,14 +132,18 @@ run_cluster() {
     qemu \
     qemu-kvm
 
-  sudo usermod -a -G libvirt $USER
+  sudo usermod -a -G libvirt "$USER"
   newgrp libvirt
 
   sudo systemctl restart libvirtd
 
   # echo "$LIBVIRT_POLKIT_RULE" | sudo dd of=/etc/polkit-1/rules.d/50-org.libvirt.unix.manage.rules
 
-  cd $HOME/src
+  mkdir -p "${HOME}/src"
+  cd "$HOME/src" || {
+    echo "!! failed to cd to src"
+    exit
+  }
 
   export KUBERNETES_PROVIDER=libvirt-coreos
   curl -sS https://get.k8s.io | bash
@@ -245,7 +249,7 @@ run_sudo() {
 }
 
 run_wifi() {
-  echo "wifi"
+  echo "== use wifi command to initialize wifi/networking"
 }
 
 
