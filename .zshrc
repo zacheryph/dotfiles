@@ -8,8 +8,10 @@ if [[ ! -d $HOME/.oh-my-zsh ]]; then
   curl -o $HOME/.oh-my-zsh/custom/themes/gitster.zsh-theme https://raw.githubusercontent.com/shashankmehta/dotfiles/master/thesetup/zsh/.oh-my-zsh/custom/themes/gitster.zsh-theme
 fi
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+[ -z "$_ORIGINAL_PATH" ] && export _ORIGINAL_PATH=$PATH
+export GOPATH=$HOME/.go
+export PATH=$HOME/bin:$GOPATH/bin:/usr/local/go/bin:$_ORIGINAL_PATH
+
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -81,10 +83,6 @@ export LANG=en_US.UTF-8
 export EDITOR="vim"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=10
 export GPG_TTY=$(tty)
-
-[ -z "$_ORIGINAL_PATH" ] && _ORIGINAL_PATH=$PATH
-export GOPATH=$HOME/.go
-export PATH=$HOME/bin:$GOPATH/bin:/usr/local/go/bin:$_ORIGINAL_PATH
 
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
