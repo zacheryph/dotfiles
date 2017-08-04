@@ -22,7 +22,6 @@ commands:
   base      - install base/need/want to have packages
               this should get smaller as stuff moves to docker
   cloud     - google cloud sdk / kubernetes tools
-  cluster   - setup kubernetes cluster using libvirt-coreos
   console   - setup console fonts / etc
   docker    - setup docker installation
   dotfiles  - install dotfiles
@@ -50,7 +49,6 @@ run_all() {
   run_gui
   run_docker
   run_cloud
-  run_cluster
   run_shell
   run_dotfiles
 }
@@ -117,36 +115,6 @@ run_cloud() {
   sudo apt install -y --no-install-recommends \
     google-cloud-sdk \
     kubectl
-}
-
-run_cluster() {
-  echo "!! disabled as libvirt-coreos does not work currently."
-  return
-
-  sudo apt install -y --no-install-recommends \
-    dnsmasq \
-    ebtables \
-    libvirt-clients \
-    libvirt-daemon \
-    libvirt-daemon-system \
-    qemu \
-    qemu-kvm
-
-  sudo usermod -a -G libvirt "$USER"
-  newgrp libvirt
-
-  sudo systemctl restart libvirtd
-
-  # echo "$LIBVIRT_POLKIT_RULE" | sudo dd of=/etc/polkit-1/rules.d/50-org.libvirt.unix.manage.rules
-
-  mkdir -p "${HOME}/src"
-  cd "$HOME/src" || {
-    echo "!! failed to cd to src"
-    exit
-  }
-
-  export KUBERNETES_PROVIDER=libvirt-coreos
-  curl -sS https://get.k8s.io | bash
 }
 
 run_console() {

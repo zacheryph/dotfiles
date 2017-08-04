@@ -1,0 +1,283 @@
+#!/bin/bash
+CLUSTER_BRIDGE=${CLUSTER_BRIDGE:-kubernetes}
+CLUSTER_DNSMASQ=${CLUSTER_DNSMASQ:-kubernetes-dnsmasq}
+CLUSTER_NETWORK=${CLUSTER_NETWORK:-172.158.0.0/24}
+CLUSTER_NODES=${CLUSTER_NOTES:-"1 2 3"}
+
+CLUSTER_KUBELET_VCPU=${CLUSTER_KUBELET_VCPU:-2}
+CLUSTER_KUBELET_MASTER_MEM=${CLUSTER_KUBELET_MASTER_MEM:-4096}
+CLUSTER_KUBELET_NODE_MEM=${CLUSTER_KUBELET_NODE_MEM:-2048}
+CLUSTER_KUBELET_DISK=${CLUSTER_KUBELET_DISK:-8G}
+
+NETWORK_PREFIX=$(echo "$CLUSTER_NETWORK" | sed -E "s|([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+).*|\\1|")
+NETWORK_GATEWAY="${NETWORK_PREFIX}.1"
+NETWORK_MASTER="${NETWORK_PREFIX}.10"
+NETWORK_RANGE="${NETWORK_PREFIX}.200,${NETWORK_PREFIX}.250"
+
+read -r -d '' USAGE <<EOF
+cluster: kubernetes cluster with docker/linuxkit
+
+note: this is very rudamentary. state is not saved.
+      will attempt to run stuff twice.
+
+usage:
+  cluster qemu     - configure qemu access
+  cluster network  - create docker/bridge network
+  cluster dnsmasq  - create dnsmasq dhcp server
+  cluster init-all - run all initializations
+  cluster refresh  - refresh kubernetes images
+  cluster master   - create master instance
+  cluster setup    - run setup for master instance
+  cluster nodes    - start all nodes
+  cluster stop     - stop the master and all nodes
+  cluster init     - sets kubeconfig environment
+  cluster exec     - execute a command on the master
+  cluster ssh      - ssh into master for the giggles
+EOF
+
+usage() {
+  echo "$USAGE"
+  echo
+  exit
+}
+
+fatal() {
+  echo "!! $@"
+  exit
+}
+
+init_qemu() {
+  sudo u+s /usr/lib/qemu/qemu-bridge-helper
+  sudo mkdir -p /etc/qemu
+  echo "allow $CLUSTER_BRIDGE" | sudo dd status=none of=/etc/qemu/bridge.conf
+  sudo chown root:kvm /etc/qemu/bridge.conf
+  sudo chmod 0640 /etc/qemu/bridge.conf
+}
+
+init_network() {
+  docker network create \
+    --driver bridge \
+    --subnet "$CLUSTER_NETWORK" \
+    --gateway "$NETWORK_GATEWAY" \
+    --opt 'com.docker.network.bridge.name'="$CLUSTER_BRIDGE" \
+    --opt 'com.docker.network.bridge.enable_ip_masquerade'='1' \
+    --opt 'com.docker.network.bridge.enable_icc'='1' \
+    "$CLUSTER_BRIDGE"
+}
+
+init_dnsmasq() {
+  docker rm --force "$CLUSTER_DNSMASQ" 2>/dev/null
+
+  docker run \
+    --detach \
+    --restart always \
+    --name "$CLUSTER_DNSMASQ" \
+    --cap-add NET_ADMIN \
+    --network kubernetes \
+    --expose 67/udp \
+    --dns 8.8.8.8 \
+    --dns 8.8.4.4 \
+    andyshinn/dnsmasq \
+      --bind-interfaces \
+      --log-dhcp \
+      --dhcp-authoritative \
+      --dhcp-range "$NETWORK_RANGE" \
+      --dhcp-option "option:router,$NETWORK_GATEWAY" \
+      --dhcp-host "id:master,${NETWORK_MASTER},master"
+}
+
+init_linuxkit() {
+  [ -d "${HOME}/src/linuxkit" ] && return
+  mkdir -p "${HOME}/src"
+  cd "${HOME}/src" || fatal "failed to cd ${HOME}/src"
+  git clone https://github.com/linuxkit/linuxkit
+
+  cd ${HOME}/src/linuxkit && make
+}
+
+init_all() {
+  init_qemu
+  init_network
+  init_dnsmasq
+  init_linuxkit
+}
+
+goto_cluster() {
+  cd "${HOME}/.cluster" || fatal "cluster not found. run refresh"
+}
+
+ensure_setup() {
+  [[ -e "${HOME}/.cluster/token" ]] || fatal "token not found. run setup"
+  CLUSTER_TOKEN=$(cat "${HOME}/.cluster/token")
+}
+
+run_master() {
+  goto_cluster
+  statedir="kube-master-state"
+  mkdir -p "$statedir"
+
+  (${HOME}/src/linuxkit/bin/linuxkit run \
+    -networking "bridge,${CLUSTER_BRIDGE}" \
+    -cpus "$CLUSTER_KUBELET_VCPU" \
+    -mem "$CLUSTER_KUBELET_MASTER_MEM" \
+    -state "$statedir" \
+    -disk "size=$CLUSTER_KUBELET_DISK" \
+    kube-master >"$statedir/console.log" 2>&1 &)
+
+  echo "== waiting for master to come up"
+  while true ; do
+    if timeout 0.5 ping -c1 "$NETWORK_MASTER" >/dev/null ; then
+      break
+    fi
+  done
+  echo "== master is up and running."
+}
+
+ssh_command() {
+  ssh \
+    -o LogLevel=FATAL \
+    -o StrictHostKeyChecking=no \
+    -o UserKnownHostsFile=/dev/null \
+    -o IdentitiesOnly=yes \
+    -t root@"${NETWORK_MASTER}" \
+    ctr exec --tty --exec-id ssh kubelet "$@"
+}
+
+run_exec() {
+  ssh \
+    -o LogLevel=FATAL \
+    -o StrictHostKeyChecking=no \
+    -o UserKnownHostsFile=/dev/null \
+    -o IdentitiesOnly=yes \
+    -t root@"${NETWORK_MASTER}" \
+    ctr exec --exec-id ssh kubelet "$@" 2>/dev/null
+}
+
+run_ssh() {
+  ssh_command ash -l
+}
+
+run_setup() {
+  goto_cluster
+
+  echo "== initializing kubernetes master"
+  if ! output=$(ssh_command /usr/bin/kubeadm-init.sh | tee setup.log); then
+    echo "failed to run setup:"
+    echo "$output"
+  fi
+
+  echo "== saving token"
+  token=$(echo "$output" | grep "kubeadm join" | awk '{print $4}')
+  if [[ -z "$token" ]]; then
+    echo "error getting join command. check ~/.cluster/setup.log"
+    exit
+  fi
+  echo "$token" > "${HOME}/.cluster/token"
+
+  echo "== retrieving cluster configuration"
+  run_exec cat /etc/kubernetes/admin.conf > "${HOME}/.cluster/config"
+}
+
+run_init() {
+  echo "# properly load with: eval \"\$(cluster init)\""
+  echo "export KUBECONFIG=\"${HOME}/.cluster/config\""
+}
+
+run_nodes() {
+  goto_cluster
+  ensure_setup
+
+  for instance in $CLUSTER_NODES ; do
+    echo "== starting node ${instance}"
+
+    statedir="kube-node-${instance}-state"
+    mkdir -p "$statedir"
+
+    (${HOME}/src/linuxkit/bin/linuxkit run \
+      -networking "bridge,${CLUSTER_BRIDGE}" \
+      -cpus "$CLUSTER_KUBELET_VCPU" \
+      -mem "$CLUSTER_KUBELET_NODE_MEM" \
+      -state "$statedir" \
+      -disk "$CLUSTER_KUBELET_DISK" \
+      -data "--token ${CLUSTER_TOKEN} ${NETWORK_MASTER}:8443" \
+      kube-node >"$statedir/console.log" 2>&1 &)
+  done
+}
+
+run_refresh() {
+  cd ${HOME}/src/linuxkit/projects/kubernetes || fatal "linuxkit not found"
+  git pull
+  # make clean
+  make build-vm-images || fatal "failed to build images"
+  mkdir -p "${HOME}/.cluster"
+  rm -f "${HOME}/.cluster/"kube-*-{cmdline,initrd.img,kernel}
+  cp kube-*-{cmdline,initrd.img,kernel} "${HOME}/.cluster"
+}
+
+run_stop() {
+  goto_cluster
+  for instance in $CLUSTER_NODES ; do
+    [[ -e "kube-node-$instance-state/qemu.pid" ]] && kill $(cat "kube-node-$instance-state/qemu.pid") 2>/dev/null
+  done
+
+  [[ -e "kube-master-state/qemu.pid" ]] && kill $(cat kube-master-state/qemu.pid) 2>/dev/null
+}
+
+
+run_purge() {
+  run_stop
+  rm -rf "${HOME}/.cluster"
+  echo "== leaving ${HOME}/src/linuxkit in place."
+}
+
+
+[[ -z "$1" ]] && usage
+
+case "$1" in
+  qemu)
+    init_qemu
+    ;;
+  network)
+    init_network
+    ;;
+  dnsmasq)
+    init_dnsmasq
+    ;;
+  linuxkit)
+    init_linuxkit
+    ;;
+  init-all)
+    init_all
+    ;;
+  refresh)
+    run_refresh
+    ;;
+  master)
+    run_master
+    ;;
+  setup)
+    run_setup
+    ;;
+  nodes)
+    run_nodes
+    ;;
+  stop)
+    run_stop
+    ;;
+  init)
+    run_init
+    ;;
+  ssh)
+    run_ssh
+    ;;
+  exec)
+    shift
+    run_exec "$@"
+    ;;
+  purge)
+    run_purge
+    ;;
+  *)
+    usage
+    ;;
+esac
