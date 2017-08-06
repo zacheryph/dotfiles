@@ -1,7 +1,7 @@
 [alias]
   co = checkout
   st = status
-  ci = commit
+  ci = commit -s
   b = branch -v -a
   mb = merge-base
   cp = cherry-pick
