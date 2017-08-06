@@ -6,7 +6,7 @@ CLUSTER_NODES=${CLUSTER_NOTES:-"1 2 3"}
 
 CLUSTER_KUBELET_VCPU=${CLUSTER_KUBELET_VCPU:-2}
 CLUSTER_KUBELET_MASTER_MEM=${CLUSTER_KUBELET_MASTER_MEM:-4096}
-CLUSTER_KUBELET_NODE_MEM=${CLUSTER_KUBELET_NODE_MEM:-2048}
+CLUSTER_KUBELET_NODE_MEM=${CLUSTER_KUBELET_NODE_MEM:-4096}
 CLUSTER_KUBELET_DISK=${CLUSTER_KUBELET_DISK:-8G}
 
 NETWORK_PREFIX=$(echo "$CLUSTER_NETWORK" | sed -E "s|([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+).*|\\1|")
@@ -33,6 +33,8 @@ usage:
   cluster init     - sets kubeconfig environment
   cluster exec     - execute a command on the master
   cluster ssh      - ssh into master for the giggles
+  cluster clean    - stop and wipe states
+  cluster purge    - THE purge.
 EOF
 
 usage() {
@@ -198,7 +200,7 @@ run_nodes() {
       -cpus "$CLUSTER_KUBELET_VCPU" \
       -mem "$CLUSTER_KUBELET_NODE_MEM" \
       -state "$statedir" \
-      -disk "$CLUSTER_KUBELET_DISK" \
+      -disk "size=$CLUSTER_KUBELET_DISK" \
       -data "--token ${CLUSTER_TOKEN} ${NETWORK_MASTER}:8443" \
       kube-node >"$statedir/console.log" 2>&1 &)
   done
@@ -221,8 +223,14 @@ run_stop() {
   done
 
   [[ -e "kube-master-state/qemu.pid" ]] && kill $(cat kube-master-state/qemu.pid) 2>/dev/null
+
+  rm -f kube-*-state/qemu.pid
 }
 
+run_clean() {
+  run_stop
+  rm -rf "${HOME}/.cluster/kube-*-state"
+}
 
 run_purge() {
   run_stop
@@ -273,6 +281,9 @@ case "$1" in
   exec)
     shift
     run_exec "$@"
+    ;;
+  clean)
+    run_clean
     ;;
   purge)
     run_purge
