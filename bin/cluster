@@ -75,7 +75,7 @@ init_dnsmasq() {
     --restart always \
     --name "$CLUSTER_DNSMASQ" \
     --cap-add NET_ADMIN \
-    --network kubernetes \
+    --network "$CLUSTER_BRIDGE" \
     --expose 67/udp \
     --dns 8.8.8.8 \
     --dns 8.8.4.4 \
