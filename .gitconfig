@@ -6,7 +6,7 @@
   mb = merge-base
   cp = cherry-pick
   l = log --graph --decorate
-  ru = remote update
+  ru = remote update --prune
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
 
 [color]
