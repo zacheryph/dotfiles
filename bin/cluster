@@ -1,4 +1,6 @@
 #!/bin/bash
+# shellcheck disable=SC2029
+#   SC2029 thinks '--exec-id ssh' is 'ssh': https://github.com/koalaman/shellcheck/wiki/SC2029
 CLUSTER_BRIDGE=${CLUSTER_BRIDGE:-kubernetes}
 CLUSTER_DNSMASQ=${CLUSTER_DNSMASQ:-kubernetes-dnsmasq}
 CLUSTER_NETWORK=${CLUSTER_NETWORK:-172.158.0.0/24}
@@ -44,7 +46,7 @@ usage() {
 }
 
 fatal() {
-  echo "!! $@"
+  echo "!! $*"
   exit
 }
 
@@ -94,7 +96,7 @@ init_linuxkit() {
   cd "${HOME}/src" || fatal "failed to cd ${HOME}/src"
   git clone https://github.com/linuxkit/linuxkit
 
-  cd ${HOME}/src/linuxkit && make
+  cd "${HOME}/src/linuxkit" && make
 }
 
 init_all() {
@@ -118,7 +120,7 @@ run_master() {
   statedir="kube-master-state"
   mkdir -p "$statedir"
 
-  (${HOME}/src/linuxkit/bin/linuxkit run \
+  ("${HOME}/src/linuxkit/bin/linuxkit" run \
     -networking "bridge,${CLUSTER_BRIDGE}" \
     -cpus "$CLUSTER_KUBELET_VCPU" \
     -mem "$CLUSTER_KUBELET_MASTER_MEM" \
@@ -195,19 +197,19 @@ run_nodes() {
     statedir="kube-node-${instance}-state"
     mkdir -p "$statedir"
 
-    (${HOME}/src/linuxkit/bin/linuxkit run \
+    ("${HOME}/src/linuxkit/bin/linuxkit" run \
       -networking "bridge,${CLUSTER_BRIDGE}" \
       -cpus "$CLUSTER_KUBELET_VCPU" \
       -mem "$CLUSTER_KUBELET_NODE_MEM" \
       -state "$statedir" \
       -disk "size=$CLUSTER_KUBELET_DISK" \
-      -data "--token ${CLUSTER_TOKEN} ${NETWORK_MASTER}:8443" \
+      -data "--token ${CLUSTER_TOKEN} ${NETWORK_MASTER}:6443" \
       kube-node >"$statedir/console.log" 2>&1 &)
   done
 }
 
 run_refresh() {
-  cd ${HOME}/src/linuxkit/projects/kubernetes || fatal "linuxkit not found"
+  cd "${HOME}/src/linuxkit/projects/kubernetes" || fatal "linuxkit not found"
   git pull
   # make clean
   make build-vm-images || fatal "failed to build images"
@@ -219,10 +221,10 @@ run_refresh() {
 run_stop() {
   goto_cluster
   for instance in $CLUSTER_NODES ; do
-    [[ -e "kube-node-$instance-state/qemu.pid" ]] && kill $(cat "kube-node-$instance-state/qemu.pid") 2>/dev/null
+    [[ -e "kube-node-$instance-state/qemu.pid" ]] && kill "$(cat "kube-node-$instance-state/qemu.pid")" 2>/dev/null
   done
 
-  [[ -e "kube-master-state/qemu.pid" ]] && kill $(cat kube-master-state/qemu.pid) 2>/dev/null
+  [[ -e "kube-master-state/qemu.pid" ]] && kill "$(cat kube-master-state/qemu.pid)" 2>/dev/null
 
   rm -f kube-*-state/qemu.pid
 }
