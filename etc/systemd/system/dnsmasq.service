@@ -11,11 +11,14 @@ ExecStart=/usr/bin/docker run \
   --detach \
   --restart always \
   --cap-add NET_ADMIN \
+  --dns 8.8.8.8 \
+  --dns 8.8.4.4 \
   --net host \
   --publish 127.0.0.1:53:53/tcp \
   --publish 127.0.0.1:53:53/udp \
   --name dnsmasq \
   andyshinn/dnsmasq \
+    --log-facility=- \
     --address=/local/127.0.0.1 \
     --address=/docker/127.0.0.1
 
