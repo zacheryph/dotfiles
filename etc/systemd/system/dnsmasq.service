@@ -17,7 +17,6 @@ ExecStart=/usr/bin/docker run \
   --name dnsmasq \
   andyshinn/dnsmasq \
     --address=/local/127.0.0.1 \
-    --address=/dev/127.0.0.1 \
     --address=/docker/127.0.0.1
 
 [Install]
