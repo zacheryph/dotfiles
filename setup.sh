@@ -66,6 +66,7 @@ run_base() {
     cgroupfs-mount \
     coreutils \
     curl \
+    dhcpcd \
     dirmngr \
     dnsutils \
     firmware-misc-nonfree \
