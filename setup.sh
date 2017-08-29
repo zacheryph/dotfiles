@@ -2,7 +2,7 @@
 # set -e
 
 ## SETTINGS
-GOLANG_VERSION=1.8.3
+GOLANG_VERSION=1.9
 ##
 
 read -r -d '' USAGE <<EOF
@@ -106,7 +106,7 @@ run_base() {
 }
 
 run_cloud() {
-  curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+  curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
   sudo apt-add-repository "deb https://packages.cloud.google.com/apt
     cloud-sdk-$(lsb_release -cs)
@@ -149,7 +149,8 @@ run_dotfiles() {
 
 run_golang() {
   tmpfile=$(mktemp --tmpdir golang-XXXXXX)
-  curl -o "$tmpfile" "https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz"
+  curl --progress-bar -o "$tmpfile" "https://storage.googleapis.com/golang/go${GOLANG_VERSION}.linux-amd64.tar.gz"
+  sudo rm -rf /usr/local/go
   sudo tar -C /usr/local -xf "$tmpfile"
   rm -f "$tmpfile"
 }
