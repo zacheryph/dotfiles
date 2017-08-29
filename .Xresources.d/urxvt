@@ -1,4 +1,4 @@
 URxvt.perl-ext-common: selection-to-clipboard
 
-URxvt.font: xft:Anonymice Powerline:pixelsize=44,style=Medium
+URxvt.font: xft:Anonymice Powerline:pixelsize=42,style=Medium
 URxvt.boldFont:
