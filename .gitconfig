@@ -19,6 +19,9 @@
   helper = !aws codecommit credential-helper $@
   UseHttpPath = true
 
+[credential]
+  helper = "store --file ~/.gitcredential"
+
 [diff]
   renames = copies
 
