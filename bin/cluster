@@ -51,7 +51,8 @@ fatal() {
 }
 
 init_qemu() {
-  sudo u+s /usr/lib/qemu/qemu-bridge-helper
+  sudo chown :kvm /usr/lib/qemu/qemu-bridge-helper
+  sudo chmod u+s /usr/lib/qemu/qemu-bridge-helper
   sudo mkdir -p /etc/qemu
   echo "allow $CLUSTER_BRIDGE" | sudo dd status=none of=/etc/qemu/bridge.conf
   sudo chown root:kvm /etc/qemu/bridge.conf
@@ -119,14 +120,16 @@ run_master() {
   goto_cluster
   statedir="kube-master-state"
   mkdir -p "$statedir"
+  export KUBE_MASTER_AUTOINIT=1
 
   ("${HOME}/src/linuxkit/bin/linuxkit" run \
     -networking "bridge,${CLUSTER_BRIDGE}" \
     -cpus "$CLUSTER_KUBELET_VCPU" \
     -mem "$CLUSTER_KUBELET_MASTER_MEM" \
     -state "$statedir" \
+    -data '{"kubeadm": {"init": ""}}' \
     -disk "size=$CLUSTER_KUBELET_DISK" \
-    kube-master >"$statedir/console.log" 2>&1 &)
+    kube-master.iso >"$statedir/console.log" 2>&1 &)
 
   echo "== waiting for master to come up"
   while true ; do
@@ -144,7 +147,7 @@ ssh_command() {
     -o UserKnownHostsFile=/dev/null \
     -o IdentitiesOnly=yes \
     -t root@"${NETWORK_MASTER}" \
-    ctr exec --tty --exec-id ssh kubelet "$@"
+    ctr tasks exec --tty --exec-id ssh kubelet "$@"
 }
 
 run_exec() {
@@ -154,7 +157,7 @@ run_exec() {
     -o UserKnownHostsFile=/dev/null \
     -o IdentitiesOnly=yes \
     -t root@"${NETWORK_MASTER}" \
-    ctr exec --exec-id ssh kubelet "$@" 2>/dev/null
+    ctr tasks exec --exec-id ssh kubelet "$@" 2>/dev/null
 }
 
 run_ssh() {
@@ -204,7 +207,7 @@ run_nodes() {
       -state "$statedir" \
       -disk "size=$CLUSTER_KUBELET_DISK" \
       -data "--token ${CLUSTER_TOKEN} ${NETWORK_MASTER}:6443" \
-      kube-node >"$statedir/console.log" 2>&1 &)
+      kube-node.iso >"$statedir/console.log" 2>&1 &)
   done
 }
 
@@ -214,8 +217,8 @@ run_refresh() {
   # make clean
   make build-vm-images || fatal "failed to build images"
   mkdir -p "${HOME}/.cluster"
-  rm -f "${HOME}/.cluster/"kube-*-{cmdline,initrd.img,kernel}
-  cp kube-*-{cmdline,initrd.img,kernel} "${HOME}/.cluster"
+  rm -f "${HOME}/.cluster/"kube-{master,node}.iso
+  cp kube-*.iso "${HOME}/.cluster"
 }
 
 run_stop() {
