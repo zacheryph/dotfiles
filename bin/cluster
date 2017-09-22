@@ -215,7 +215,7 @@ run_refresh() {
   cd "${HOME}/src/linuxkit/projects/kubernetes" || fatal "linuxkit not found"
   git pull
   # make clean
-  make build-vm-images || fatal "failed to build images"
+  make build-vm-images KUBE_RUNTIME=cri-containerd || fatal "failed to build images"
   mkdir -p "${HOME}/.cluster"
   rm -f "${HOME}/.cluster/"kube-{master,node}.iso
   cp kube-*.iso "${HOME}/.cluster"
