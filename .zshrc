@@ -105,3 +105,7 @@ function goto() {
   fi
   echo "!! Go Project $1 Not Found."
 }
+
+function reset-tmuxline() {
+  env TMUX_SET_STATUSLINE=1 vim -c 'Tmuxline airline' -c 'q'
+}
