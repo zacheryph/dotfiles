@@ -8,7 +8,7 @@ CLUSTER_NODES=${CLUSTER_NOTES:-"1 2 3"}
 
 CLUSTER_KUBELET_VCPU=${CLUSTER_KUBELET_VCPU:-2}
 CLUSTER_KUBELET_MASTER_MEM=${CLUSTER_KUBELET_MASTER_MEM:-1024}
-CLUSTER_KUBELET_NODE_MEM=${CLUSTER_KUBELET_NODE_MEM:-4096}
+CLUSTER_KUBELET_NODE_MEM=${CLUSTER_KUBELET_NODE_MEM:-2048}
 CLUSTER_KUBELET_DISK=${CLUSTER_KUBELET_DISK:-8G}
 
 NETWORK_PREFIX=$(echo "$CLUSTER_NETWORK" | sed -E "s|([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+).*|\\1|")
@@ -113,7 +113,7 @@ goto_cluster() {
 
 ensure_setup() {
   [[ -e "${HOME}/.cluster/token" ]] || fatal "token not found. run setup"
-  CLUSTER_TOKEN=$(cat "${HOME}/.cluster/token")
+  CLUSTER_TOKEN=$(cat "${HOME}/.cluster/token" | tr -d "\r\n")
 }
 
 run_master() {
@@ -174,7 +174,7 @@ run_setup() {
   fi
 
   echo "== saving token"
-  token=$(echo "$output" | grep "kubeadm join" | awk '{print $4}')
+  token=$(echo "$output" | grep "kubeadm join" | sed -E 's/^[[:blank:]]+kubeadm join +//' | sed -E 's/\r$//')
   if [[ -z "$token" ]]; then
     echo "error getting join command. check ~/.cluster/setup.log"
     exit
@@ -206,7 +206,7 @@ run_nodes() {
       -mem "$CLUSTER_KUBELET_NODE_MEM" \
       -state "$statedir" \
       -disk "size=$CLUSTER_KUBELET_DISK" \
-      -data "--token ${CLUSTER_TOKEN} ${NETWORK_MASTER}:6443" \
+      -data "{\"kubeadm\": {\"join\": \"${CLUSTER_TOKEN}\"} }" \
       kube-node.iso >"$statedir/console.log" 2>&1 &)
   done
 }
@@ -218,7 +218,7 @@ run_refresh() {
   make build-vm-images KUBE_RUNTIME=cri-containerd || fatal "failed to build images"
   mkdir -p "${HOME}/.cluster"
   rm -f "${HOME}/.cluster/"kube-{master,node}.iso
-  cp kube-*.iso "${HOME}/.cluster"
+  cp kube-{master,node}.iso "${HOME}/.cluster"
 }
 
 run_stop() {
