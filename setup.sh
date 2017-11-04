@@ -2,7 +2,7 @@
 # set -e
 
 ## SETTINGS
-GOLANG_VERSION=1.9.1
+GOLANG_VERSION=1.9.2
 ##
 
 read -r -d '' USAGE <<EOF
