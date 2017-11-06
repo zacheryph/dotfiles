@@ -6,6 +6,9 @@ CLUSTER_DNSMASQ=${CLUSTER_DNSMASQ:-kubernetes-dnsmasq}
 CLUSTER_NETWORK=${CLUSTER_NETWORK:-172.158.0.0/24}
 CLUSTER_NODES=${CLUSTER_NOTES:-"1 2 3"}
 
+CLUSTER_RUNTIME=${CLUSTER_RUNTIME:-docker}
+CLUSTER_INIT_FLAGS=${CLUSTER_INIT_FLAGS:-""}
+
 CLUSTER_KUBELET_VCPU=${CLUSTER_KUBELET_VCPU:-2}
 CLUSTER_KUBELET_MASTER_MEM=${CLUSTER_KUBELET_MASTER_MEM:-1024}
 CLUSTER_KUBELET_NODE_MEM=${CLUSTER_KUBELET_NODE_MEM:-2048}
@@ -31,6 +34,7 @@ usage:
   cluster master   - create master instance
   cluster setup    - run setup for master instance
   cluster nodes    - start all nodes
+  cluster start    - start master and nodes
   cluster stop     - stop the master and all nodes
   cluster init     - sets kubeconfig environment
   cluster exec     - execute a command on the master
@@ -108,12 +112,12 @@ init_all() {
 }
 
 goto_cluster() {
-  cd "${HOME}/.cluster" || fatal "cluster not found. run refresh"
+  cd "${HOME}/.cluster" 2>/dev/null || fatal "cluster not found. run refresh"
 }
 
 ensure_setup() {
   [[ -e "${HOME}/.cluster/token" ]] || fatal "token not found. run setup"
-  CLUSTER_TOKEN=$(cat "${HOME}/.cluster/token" | tr -d "\r\n")
+  CLUSTER_TOKEN=$(tr -d "\r\n" < "$HOME/.cluster/token")
 }
 
 run_master() {
@@ -198,7 +202,11 @@ run_nodes() {
     echo "== starting node ${instance}"
 
     statedir="kube-node-${instance}-state"
-    mkdir -p "$statedir"
+
+    if [[ ! -d "$statedir" ]]; then
+      mkdir -p "$statedir"
+      DATAOPT="{\"kubeadm\": {\"join\": \"${CLUSTER_TOKEN}\"} }"
+    fi
 
     ("${HOME}/src/linuxkit/bin/linuxkit" run \
       -networking "bridge,${CLUSTER_BRIDGE}" \
@@ -206,7 +214,7 @@ run_nodes() {
       -mem "$CLUSTER_KUBELET_NODE_MEM" \
       -state "$statedir" \
       -disk "size=$CLUSTER_KUBELET_DISK" \
-      -data "{\"kubeadm\": {\"join\": \"${CLUSTER_TOKEN}\"} }" \
+      -data "$DATAOPT" \
       kube-node.iso >"$statedir/console.log" 2>&1 &)
   done
 }
@@ -215,7 +223,7 @@ run_refresh() {
   cd "${HOME}/src/linuxkit/projects/kubernetes" || fatal "linuxkit not found"
   git pull
   # make clean
-  make build-vm-images KUBE_RUNTIME=cri-containerd || fatal "failed to build images"
+  make build-vm-images KUBE_RUNTIME="$CLUSTER_RUNTIME" || fatal "failed to build images"
   mkdir -p "${HOME}/.cluster"
   rm -f "${HOME}/.cluster/"kube-{master,node}.iso
   cp kube-{master,node}.iso "${HOME}/.cluster"
@@ -272,6 +280,10 @@ case "$1" in
     run_setup
     ;;
   nodes)
+    run_nodes
+    ;;
+  start)
+    run_master
     run_nodes
     ;;
   stop)
