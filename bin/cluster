@@ -16,7 +16,8 @@ CLUSTER_KUBELET_DISK=${CLUSTER_KUBELET_DISK:-8G}
 
 NETWORK_PREFIX=$(echo "$CLUSTER_NETWORK" | sed -E "s|([[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+).*|\\1|")
 NETWORK_GATEWAY="${NETWORK_PREFIX}.1"
-NETWORK_MASTER="${NETWORK_PREFIX}.10"
+NETWORK_MASTER_ADDR="${NETWORK_PREFIX}.10"
+NETWORK_MASTER_MAC="1C:A5:EA:A2:89:30"
 NETWORK_RANGE="${NETWORK_PREFIX}.200,${NETWORK_PREFIX}.250"
 
 read -r -d '' USAGE <<EOF
@@ -92,7 +93,7 @@ init_dnsmasq() {
       --dhcp-authoritative \
       --dhcp-range "$NETWORK_RANGE" \
       --dhcp-option "option:router,$NETWORK_GATEWAY" \
-      --dhcp-host "id:master,${NETWORK_MASTER},master"
+      --dhcp-host "${NETWORK_MASTER_MAC},${NETWORK_MASTER_ADDR},master"
 }
 
 init_linuxkit() {
@@ -124,6 +125,7 @@ run_master() {
   goto_cluster
   statedir="kube-master-state"
   mkdir -p "$statedir"
+  echo -n "${NETWORK_MASTER_MAC}" > "$statedir/mac-addr"
   export KUBE_MASTER_AUTOINIT=1
 
   ("${HOME}/src/linuxkit/bin/linuxkit" run \
@@ -137,7 +139,7 @@ run_master() {
 
   echo "== waiting for master to come up"
   while true ; do
-    if timeout 0.5 ping -c1 "$NETWORK_MASTER" >/dev/null ; then
+    if timeout 0.5 ping -c1 "$NETWORK_MASTER_ADDR" >/dev/null ; then
       break
     fi
   done
@@ -150,7 +152,7 @@ ssh_command() {
     -o StrictHostKeyChecking=no \
     -o UserKnownHostsFile=/dev/null \
     -o IdentitiesOnly=yes \
-    -t root@"${NETWORK_MASTER}" \
+    -t root@"${NETWORK_MASTER_ADDR}" \
     ctr tasks exec --tty --exec-id ssh kubelet "$@"
 }
 
@@ -160,7 +162,7 @@ run_exec() {
     -o StrictHostKeyChecking=no \
     -o UserKnownHostsFile=/dev/null \
     -o IdentitiesOnly=yes \
-    -t root@"${NETWORK_MASTER}" \
+    -t root@"${NETWORK_MASTER_ADDR}" \
     ctr tasks exec --exec-id ssh kubelet "$@" 2>/dev/null
 }
 
