@@ -63,7 +63,6 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'baskerville/bubblegum'
 Plug 'fatih/molokai'
 Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'nlknguyen/papercolor-theme'
 Plug 'notpratheek/vim-luna'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'morhetz/gruvbox'
@@ -99,39 +98,30 @@ syntax on
 " Colors {{{
 set background=dark
 
-" use truecolor
-" if empty($TMUX_SET_STATUSLINE)
-"   if has('termguicolors')
-"     set termguicolors
-"
-"     " see :help xterm-true-color
-"     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-"   endif
-" endif
+function! SetTheme(name, airline, ...)
+  if a:0 > 0
+    if has('termguicolors')
+      set termguicolors
 
-" let g:airline_theme = 'bubblegum'
-" colorscheme bubblegum-256-dark
+      " see :help xterm-true-color
+      let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+      let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    endif
+  endif
 
-" let g:airline_theme = 'solarized'
+  exec 'colorscheme '.a:name
+  let g:airline_theme = a:airline
+endfunction
+
+" call SetTheme('bubblegum-256-dark', 'bubblegum')
+call SetTheme('deep-space', 'deep_space', 1)
+" call SetTheme('gruvbox', 'gruvbox', 1)
+" call SetTheme('hybrid_material', 'hybrid', 1)
+" call SetTheme('luna', 'luna', 1)
+
 " let g:solarized_bold= 0
 " let g:solarized_underline = 0
-" colorscheme solarized
-
-" let g:airline_theme = 'deep_space'
-" colorscheme deep-space
-
-" let g:airline_theme = "hybrid"
-" colorscheme hybrid_material
-
-let g:airline_theme = "gruvbox"
-colorscheme gruvbox
-
-" let g:airline_theme = 'luna'
-" colorscheme luna
-
-" let g:airline_theme = 'papercolor'
-" colorscheme papercolor
+" call SetTheme('solarized', 'solarized')
 
 " }}}
 " Leader {{{
