@@ -1,3 +1,6 @@
 #include ".Xresources.d/xft"
 #include ".Xresources.d/urxvt"
-#include ".Xresources.d/gruvbox-dark"
+
+!! theme
+! #include ".Xresources.d/theme/gruvbox-dark"
+#include ".Xresources.d/theme/deep-space"
