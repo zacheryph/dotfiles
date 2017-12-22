@@ -218,6 +218,9 @@ let g:ctrlp_abbrev = {
   \   },
   \ ]
   \ }
+
+let g:ctrlp_funky_syntax_highlight = 1
+let g:ctrlp_funky_nolim = 1
 " }}}
 " Airline {{{
 let g:airline_powerline_fonts = 1
@@ -274,6 +277,7 @@ au BufWritePre * StripWhitespace
 " Type Specifics {{{
 au filetype go setlocal noexpandtab
 
+au filetype go nmap <leader>i <Plug>(go-import)
 au filetype go nmap <leader>b <Plug>(go-build)
 au filetype go nmap <leader>r <Plug>(go-run)
 
