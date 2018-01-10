@@ -1,0 +1,36 @@
+#!/bin/bash
+# this currently depends on all these being in sync:
+#   udev/rules.d - proper UUID
+#   fstab - proper UUID
+if [[ $(id -u) = 0 ]]; then
+  su - context -c /home/context/bin/sync-music
+  exit
+fi
+
+TITLE="Music Stick"
+MOUNT="/media/music"
+MUSIC="$HOME/Music/car"
+
+export DISPLAY=:0
+export XAUTHORITY=/home/context/.Xauthority
+
+function msg_normal() {
+  notify-send "$TITLE" "$*"
+}
+
+function msg_error() {
+  notify-send -u critical "$TITLE" "$*"
+  exit
+}
+
+msg_normal "Initiating update"
+
+mount /media/music || msg_error "Failed to mount disk"
+
+if ! rsync -av --delete "${MUSIC}/" "${MOUNT}/"; then
+ msg_error "Failed to sync music"
+fi
+
+umount /media/music
+
+msg_normal "Successfully updated Music on USB Stick"

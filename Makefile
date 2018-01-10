@@ -30,12 +30,14 @@ etc: linux-only
 	find $(CURDIR)/etc -type f | \
 	while read -r file; do \
 		f=$$(echo $$file | sed -e 's|$(CURDIR)||'); \
+		echo "=etc= $$f"; \
 		sudo cp $$file $$f; \
 		sudo chown root:root $$f; \
 	done
 	sudo sed -E -i 's/#?name_servers=.*/name_servers=127.0.0.1/' /etc/resolvconf.conf
 	systemctl --user daemon-reload
 	sudo systemctl daemon-reload
+	sudo udevadm control --reload
 
 # if this session isn't interactive, then we don't want to allocate a
 # TTY, which would fail, but if it is interactive, we do want to attach

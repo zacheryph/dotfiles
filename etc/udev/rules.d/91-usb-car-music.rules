@@ -1,0 +1,2 @@
+ACTION=="add", SUBSYSTEM=="block", ENV{ID_FS_UUID}=="6630-278D", \
+  RUN+="/home/context/bin/sync-music"
