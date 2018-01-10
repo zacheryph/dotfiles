@@ -12,18 +12,18 @@ endif
 " }}}
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
+
+" functionality
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dag/vim-fish'
 Plug 'danro/rename.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
-Plug 'fatih/vim-hclfmt'
 Plug 'irrationalistic/vim-tasks'
 Plug 'konfekt/fastfold'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
-Plug 'mxw/vim-jsx'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'raimondi/delimitmate'
 Plug 'scrooloose/nerdcommenter'
@@ -48,15 +48,12 @@ else
   Plug 'shougo/neocomplete.vim'
 endif
 
+" syntax
 Plug 'fatih/vim-go'
-
+Plug 'fatih/vim-hclfmt'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-
-Plug 'elixir-lang/vim-elixir'
-Plug 'slashmili/alchemist.vim'
-
-Plug 'tmhedberg/SimpylFold'
+Plug 'mxw/vim-jsx'
 
 " colorschemes
 Plug 'altercation/vim-colors-solarized'
@@ -219,6 +216,7 @@ let g:ctrlp_abbrev = {
   \ ]
   \ }
 
+let g:ctrlp_funky_go_types = 1
 let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_funky_nolim = 1
 " }}}
