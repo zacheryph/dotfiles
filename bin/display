@@ -1,0 +1,81 @@
+#!/bin/bash
+# this script is to configure monitor output via xrandr
+# it also gets called via udev/rules.d/90-monitors.rules
+# when a DRM change event is triggered
+#
+# Right now this only supports single location
+# still need to dig into how to find out what/which
+# monitor we are plugged into. by name/uuid/something.
+
+DP1_SETTINGS=(--auto --above eDP1 --mode 3440x1440)
+
+# we force execution if/when being executed as root
+if [[ $(id -u) = 0 ]]; then
+  su - context -c /home/context/bin/display $1
+  exit
+fi
+
+export DISPLAY=:0
+export XAUTHORITY=/home/context/.Xauthority
+
+read -r -d '' USAGE <<EOF
+display: set monitor configuration
+
+usage:
+  display auto    - automatic configuration
+  display mobile  - not at a desk
+  display home    - desk at home (34" LG)
+EOF
+
+usage() {
+  echo "$USAGE"
+  exit
+}
+
+log() {
+  echo "$(date): $*" >> /home/context/udev.log
+}
+
+is_connected() {
+  read status < "/sys/class/drm/card0-${1}/status"
+
+  if [ "$status" = "connected" ]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+set_auto() {
+  if is_connected "DP-1"; then
+    sleep 1
+    set_home
+  else
+    set_mobile
+  fi
+}
+
+set_mobile() {
+  log "enabling mobile"
+  xrandr --screen 0 --output DP1 --off
+}
+
+set_home() {
+  log "enabling home"
+  xrandr --screen 0 --output DP1 "${DP1_SETTINGS[@]}"
+}
+
+# main
+[[ -z "$1" ]] && usage
+
+case "$1" in
+  auto)
+    set_auto
+    ;;
+  mobile)
+    set_mobile
+    ;;
+  home)
+    set_home
+    ;;
+esac

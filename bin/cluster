@@ -6,6 +6,7 @@ CLUSTER_DNSMASQ=${CLUSTER_DNSMASQ:-kubernetes-dnsmasq}
 CLUSTER_NETWORK=${CLUSTER_NETWORK:-172.158.0.0/24}
 CLUSTER_NODES=${CLUSTER_NOTES:-"1 2 3"}
 
+CLUSTER_HOME="${HOME}/.cluster"
 CLUSTER_RUNTIME=${CLUSTER_RUNTIME:-docker}
 CLUSTER_INIT_FLAGS=${CLUSTER_INIT_FLAGS:-""}
 
@@ -97,12 +98,13 @@ init_dnsmasq() {
 }
 
 init_linuxkit() {
-  [ -d "${HOME}/src/linuxkit" ] && return
-  mkdir -p "${HOME}/src"
-  cd "${HOME}/src" || fatal "failed to cd ${HOME}/src"
-  git clone https://github.com/linuxkit/linuxkit
+  go get -u github.com/linuxkit/linuxkit/src/cmd/linuxkit
+  go install github.com/linuxkit/linuxkit/src/cmd/linuxkit
+}
 
-  cd "${HOME}/src/linuxkit" && make
+init_project() {
+  # pull linuxkit/kubernetes
+  echo "."
 }
 
 init_all() {
@@ -117,8 +119,8 @@ goto_cluster() {
 }
 
 ensure_setup() {
-  [[ -e "${HOME}/.cluster/token" ]] || fatal "token not found. run setup"
-  CLUSTER_TOKEN=$(tr -d "\r\n" < "$HOME/.cluster/token")
+  [[ -e "${CLUSTER_HOME}/token" ]] || fatal "token not found. run setup"
+  CLUSTER_TOKEN=$(tr -d "\r\n" < "$CLUSTER_HOME/token")
 }
 
 run_master() {
@@ -128,12 +130,12 @@ run_master() {
   echo -n "${NETWORK_MASTER_MAC}" > "$statedir/mac-addr"
   export KUBE_MASTER_AUTOINIT=1
 
-  ("${HOME}/src/linuxkit/bin/linuxkit" run \
+  (linuxkit run \
     -networking "bridge,${CLUSTER_BRIDGE}" \
     -cpus "$CLUSTER_KUBELET_VCPU" \
     -mem "$CLUSTER_KUBELET_MASTER_MEM" \
     -state "$statedir" \
-    -data '{"kubeadm": {"init": ""}}' \
+    -data '{"kubeadm": {"entries": {"init": {"content": ""} } } }' \
     -disk "size=$CLUSTER_KUBELET_DISK" \
     kube-master.iso >"$statedir/console.log" 2>&1 &)
 
@@ -185,15 +187,15 @@ run_setup() {
     echo "error getting join command. check ~/.cluster/setup.log"
     exit
   fi
-  echo "$token" > "${HOME}/.cluster/token"
+  echo "$token" > "${CLUSTER_HOME}/token"
 
   echo "== retrieving cluster configuration"
-  run_exec cat /etc/kubernetes/admin.conf > "${HOME}/.cluster/config"
+  run_exec cat /etc/kubernetes/admin.conf > "${CLUSTER_HOME}/config"
 }
 
 run_init() {
   echo "# properly load with: eval \"\$(cluster init)\""
-  echo "export KUBECONFIG=\"${HOME}/.cluster/config\""
+  echo "export KUBECONFIG=\"${CLUSTER_HOME}/config\""
 }
 
 run_nodes() {
@@ -207,10 +209,10 @@ run_nodes() {
 
     if [[ ! -d "$statedir" ]]; then
       mkdir -p "$statedir"
-      DATAOPT="{\"kubeadm\": {\"join\": \"${CLUSTER_TOKEN}\"} }"
+      DATAOPT="{\"kubeadm\": {\"entries\": {\"join\": {\"content\": \"${CLUSTER_TOKEN}\"} } } }"
     fi
 
-    ("${HOME}/src/linuxkit/bin/linuxkit" run \
+    (linuxkit run \
       -networking "bridge,${CLUSTER_BRIDGE}" \
       -cpus "$CLUSTER_KUBELET_VCPU" \
       -mem "$CLUSTER_KUBELET_NODE_MEM" \
@@ -226,9 +228,9 @@ run_refresh() {
   git pull
   # make clean
   make build-vm-images KUBE_RUNTIME="$CLUSTER_RUNTIME" || fatal "failed to build images"
-  mkdir -p "${HOME}/.cluster"
-  rm -f "${HOME}/.cluster/"kube-{master,node}.iso
-  cp kube-{master,node}.iso "${HOME}/.cluster"
+  mkdir -p "${CLUSTER_HOME}"
+  rm -f "${CLUSTER_HOME}/"kube-{master,node}.iso
+  cp kube-{master,node}.iso "${CLUSTER_HOME}"
 }
 
 run_stop() {
@@ -244,12 +246,15 @@ run_stop() {
 
 run_clean() {
   run_stop
-  rm -rf "${HOME}/.cluster/kube-*-state"
+  rm -rf "${CLUSTER_HOME}/"kube-*-state
+  rm -f "${CLUSTER_HOME}/config"
+  rm -f "${CLUSTER_HOME}/token"
+  rm -f "${CLUSTER_HOME}/setup.log"
 }
 
 run_purge() {
   run_stop
-  rm -rf "${HOME}/.cluster"
+  rm -rf "${CLUSTER_HOME}"
   echo "== leaving ${HOME}/src/linuxkit in place."
 }
 
