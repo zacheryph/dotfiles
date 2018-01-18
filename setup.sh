@@ -3,6 +3,8 @@
 
 ## SETTINGS
 GOLANG_VERSION=1.9.2
+TERRAFORM_VERSION=0.11.2
+TF_CT_VERSION=0.2.0
 ##
 
 read -r -d '' USAGE <<EOF
@@ -27,6 +29,7 @@ commands:
   dotfiles  - install dotfiles
   golang    - install latest golang
   gui       - setup x11, boot ui, display manger
+  hashi     - hashicorp utilities (terraform)
   shell     - setup my zsh shell and oh-my-zsh
   sudo      - setup sudo access for user (good to run first)
   wifi      - setup roaming wifi profile
@@ -49,6 +52,7 @@ run_all() {
   run_gui
   run_docker
   run_cloud
+  run_hashi
   run_shell
   run_dotfiles
 }
@@ -155,6 +159,16 @@ run_golang() {
   rm -f "$tmpfile"
 }
 
+run_hashi() {
+  terra_url="https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip"
+  ct_provider_url="https://github.com/coreos/terraform-provider-ct/releases/download/v${TF_CT_VERSION}/terraform-provider-ct-v${TF_CT_VERSION}-linux-amd64.tar.gz"
+
+  curl -s -L "$terra_url" | funzip | sudo dd status=none of=/usr/local/bin/terraform
+  curl -s -L "$ct_provider_url" | gunzip | sudo tar x -C /usr/local/bin --strip 1
+
+  chmod +x /usr/local/bin/{terraform,terraform-provider-ct}
+}
+
 read -r -d '' INITRAMFS_MODULES <<EOF
 intel_agp
 drm
@@ -256,6 +270,9 @@ case "$1" in
     ;;
   gui)
     run_gui
+    ;;
+  hashi)
+    run_hashi
     ;;
   shell)
     run_shell

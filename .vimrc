@@ -51,6 +51,7 @@ endif
 " syntax
 Plug 'fatih/vim-go'
 Plug 'fatih/vim-hclfmt'
+Plug 'hashivim/vim-terraform'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 Plug 'mxw/vim-jsx'
