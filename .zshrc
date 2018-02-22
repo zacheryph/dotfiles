@@ -65,7 +65,7 @@ HIST_STAMPS="yyyy-mm-dd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(aws colorize colored-man-pages docker git git-extras git-flow golang)
+plugins=(aws colorize colored-man-pages docker docker-compose docker-machine git git-extras git-flow golang kubectl helm)
 
 if [ -z "$_zsh_custom_scripts_loaded" ]; then
   _zsh_custom_scripts_loaded=1
