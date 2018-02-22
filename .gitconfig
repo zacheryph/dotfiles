@@ -68,3 +68,6 @@
   insteadOf = "lab:"
   pushInsteadOf = "lab:"
   pushInsteadOf = "https://gitlab.com/"
+
+[url "https://git.zro.io/"]
+  insteadOf = "zro:"
