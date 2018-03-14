@@ -21,10 +21,10 @@ Plug 'danro/rename.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'irrationalistic/vim-tasks'
+Plug 'junegunn/vim-easy-align'
 Plug 'konfekt/fastfold'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
-Plug 'ntpeters/vim-better-whitespace'
 Plug 'raimondi/delimitmate'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -54,6 +54,7 @@ Plug 'fatih/vim-hclfmt'
 Plug 'hashivim/vim-terraform'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
+Plug 'rhysd/vim-crystal'
 Plug 'mxw/vim-jsx'
 
 " colorschemes
@@ -133,6 +134,9 @@ nnoremap <leader>m qt0
 vnoremap <leader>m :'<,'> norm @t<CR>
 
 nnoremap <leader>t :e ~/src/TASKS.todo<CR>
+
+" align markdown tables
+au filetype markdown vmap <leader><bslash> :EasyAlign*<bar><Enter>
 
 " Faster ag
 nnoremap <leader>f <C-r><C-w><CR>
