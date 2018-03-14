@@ -127,7 +127,7 @@ run_cloud() {
   helm_url="https://kubernetes-helm.storage.googleapis.com/helm-v${HELM_VERSION}-linux-amd64.tar.gz"
   curl -sL "$helm_url" | sudo tar -xzf - -C /usr/local/bin --strip 1 -- linux-amd64/helm
 
-  machine_url="https://github.com/docker/machine/releases/download/v${MACHINE_VERSION}/docker-machine-`uname -s`-`uname -m`"
+  machine_url="https://github.com/docker/machine/releases/download/v${MACHINE_VERSION}/docker-machine-$(uname -s)-$(uname -m)"
   curl -sL "$machine_url" | sudo dd status=none of=/usr/local/bin/docker-machine
 
   sudo chmod +x /usr/local/bin/{helm,docker-machine}
