@@ -112,9 +112,9 @@ function! SetTheme(name, airline, ...)
   let g:airline_theme = a:airline
 endfunction
 
-" call SetTheme('bubblegum-256-dark', 'bubblegum')
-call SetTheme('deep-space', 'deep_space', 1)
-" call SetTheme('gruvbox', 'gruvbox', 1)
+" call SetTheme('bubblegum-256-dark', 'bubblegum', 1)
+" call SetTheme('deep-space', 'deep_space', 1)
+call SetTheme('gruvbox', 'gruvbox')
 " call SetTheme('hybrid_material', 'hybrid', 1)
 " call SetTheme('luna', 'luna', 1)
 
@@ -274,8 +274,6 @@ set autowrite
 set nobackup
 set nowritebackup
 set noswapfile
-
-au BufWritePre * StripWhitespace
 " }}}
 " Type Specifics {{{
 au filetype go setlocal noexpandtab
