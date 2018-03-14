@@ -2,9 +2,12 @@
 # set -e
 
 ## SETTINGS
-GOLANG_VERSION=1.9.2
+GOLANG_VERSION=1.10
+DOCTL_VERSION=1.7.1
 TERRAFORM_VERSION=0.11.2
 TF_CT_VERSION=0.2.0
+HELM_VERSION=2.8.1
+MACHINE_VERSION=0.13.0
 ##
 
 read -r -d '' USAGE <<EOF
@@ -110,16 +113,24 @@ run_base() {
 }
 
 run_cloud() {
-  curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+  # curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+  #
+  # sudo apt-add-repository "deb https://packages.cloud.google.com/apt
+  #   cloud-sdk-$(lsb_release -cs)
+  #   main"
 
-  sudo apt-add-repository "deb https://packages.cloud.google.com/apt
-    cloud-sdk-$(lsb_release -cs)
-    main"
+  # sudo apt update
+  # sudo apt install -y --no-install-recommends \
+  #   google-cloud-sdk \
+  #   kubectl
 
-  sudo apt update
-  sudo apt install -y --no-install-recommends \
-    google-cloud-sdk \
-    kubectl
+  helm_url="https://kubernetes-helm.storage.googleapis.com/helm-v${HELM_VERSION}-linux-amd64.tar.gz"
+  curl -sL "$helm_url" | sudo tar -xzf - -C /usr/local/bin --strip 1 -- linux-amd64/helm
+
+  machine_url="https://github.com/docker/machine/releases/download/v${MACHINE_VERSION}/docker-machine-`uname -s`-`uname -m`"
+  curl -sL "$machine_url" | sudo dd status=none of=/usr/local/bin/docker-machine
+
+  sudo chmod +x /usr/local/bin/{helm,docker-machine}
 }
 
 run_console() {
@@ -167,6 +178,11 @@ run_hashi() {
   curl -s -L "$ct_provider_url" | gunzip | sudo tar x -C /usr/local/bin --strip 1
 
   chmod +x /usr/local/bin/{terraform,terraform-provider-ct}
+}
+
+run_doctl() {
+  doctl_url="https://github.com/digitalocean/doctl/releases/download/v${DOCTL_VERSION}/doctl-${DOCTL_VERSION}-linux-amd64.tar.gz"
+  curl -s -L "$doctl_url" | gunzip | sudo tar x -C /usr/local/bin
 }
 
 read -r -d '' INITRAMFS_MODULES <<EOF
@@ -261,6 +277,9 @@ case "$1" in
     ;;
   docker)
     run_docker
+    ;;
+  digitalocean)
+    run_doctl
     ;;
   dotfiles)
     run_dotfiles
