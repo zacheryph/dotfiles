@@ -52,27 +52,25 @@ endif
 Plug 'fatih/vim-go'
 Plug 'fatih/vim-hclfmt'
 Plug 'hashivim/vim-terraform'
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-Plug 'rhysd/vim-crystal'
 Plug 'mxw/vim-jsx'
+Plug 'rhysd/vim-crystal'
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
 
 " colorschemes
 Plug 'altercation/vim-colors-solarized'
 Plug 'baskerville/bubblegum'
 Plug 'fatih/molokai'
 Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'mhartington/oceanic-next'
+Plug 'morhetz/gruvbox'
 Plug 'notpratheek/vim-luna'
 Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'morhetz/gruvbox'
 
 call plug#end()
 " }}}
 " Terminal {{{
 set shell=/bin/bash
-
-" set t_ut=
-" set t_Co=256
 
 if !has('nvim')
   set encoding=utf-8
@@ -114,9 +112,10 @@ endfunction
 
 " call SetTheme('bubblegum-256-dark', 'bubblegum', 1)
 " call SetTheme('deep-space', 'deep_space', 1)
-call SetTheme('gruvbox', 'gruvbox')
+" call SetTheme('gruvbox', 'gruvbox')
 " call SetTheme('hybrid_material', 'hybrid', 1)
 " call SetTheme('luna', 'luna', 1)
+call SetTheme('OceanicNext', 'oceanicnext', 1)
 
 " let g:solarized_bold= 0
 " let g:solarized_underline = 0
