@@ -94,16 +94,19 @@ alias fig="docker-compose"
 alias ranpass="ruby -r securerandom -e 'puts SecureRandom.urlsafe_base64'"
 alias dotfile="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 
+function dr() {
+  docker run --rm -it --user $(id -u):$(id -g) -v ${PWD}:/data --workdir /data "$@"
+}
+
 function goto() {
-  if [[ -d "$GOPATH/src/github.com/zro/$1" ]]; then
-    cd $GOPATH/src/github.com/zro/$1
-    return
+  paths=("$GOPATH/src/git.zro.io" "$GOPATH/src/github.com/zro" "$GOPATH/src/github.com/zacheryph")
+  repo=$(find "$paths[@]" -type d -name $1 | head -1)
+
+  if [[ -n "$repo" ]]; then
+    cd "$repo"
+  else
+    echo "!! Go Project $1 Not Found."
   fi
-  if [[ -d "$GOPATH/src/github.com/zacheryph/$1" ]]; then
-    cd $GOPATH/src/github.com/zacheryph/$1
-    return
-  fi
-  echo "!! Go Project $1 Not Found."
 }
 
 function reset-tmuxline() {
