@@ -206,8 +206,15 @@ set foldmethod=syntax
 nnoremap <space> za
 " }}}
 " CtrlP {{{
+let g:ctrlp_open_multiple_files = '1jr'
+
 let g:ctrlp_line_prefix = '> '
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+let g:ctrlp_user_command = {
+  \ 'types': {
+  \   1: ['.git', 'cd %s && git ls-files'],
+  \ },
+  \ 'fallback': 'ag %s -l --nocolor --hidden -g ""',
+  \ }
 
 let g:ctrlp_abbrev = {
   \ 'gmode': 'i',
