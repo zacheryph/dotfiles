@@ -10,8 +10,8 @@ fi
 
 [ -z "$_ORIGINAL_PATH" ] && export _ORIGINAL_PATH=$PATH
 export GOPATH=$HOME/.go
-export PATH=$HOME/bin:$GOPATH/bin:/usr/local/go/bin:$_ORIGINAL_PATH
-
+export CARGOPATH=$HOME/.cargo
+export PATH=$HOME/bin:$CARGOPATH/bin:$GOPATH/bin:/usr/local/go/bin:$_ORIGINAL_PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -93,6 +93,10 @@ export HOMEBREW_GITHUB_API_TOKEN=8cb8caf8c48ff75fedf7cd76c96731f5fef5210b
 alias fig="docker-compose"
 alias ranpass="ruby -r securerandom -e 'puts SecureRandom.urlsafe_base64'"
 alias dotfile="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
+
+if [ -e "${CARGOPATH}/bin/bat" ]; then
+  alias cat="${CARGOPATH}/bin/bat"
+fi
 
 function dr() {
   docker run --rm -it --user $(id -u):$(id -g) -v ${PWD}:/data --workdir /data "$@"
