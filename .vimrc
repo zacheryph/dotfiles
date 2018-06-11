@@ -16,7 +16,6 @@ call plug#begin('~/.vim/plugged')
 " functionality
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dag/vim-fish'
 Plug 'danro/rename.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
@@ -48,14 +47,26 @@ else
   Plug 'shougo/neocomplete.vim'
 endif
 
-" syntax
-Plug 'fatih/vim-go'
+" file formats
 Plug 'fatih/vim-hclfmt'
 Plug 'hashivim/vim-terraform'
 Plug 'mxw/vim-jsx'
+
+" development
+Plug 'scrooloose/syntastic'
+Plug 'autozimu/LanguageClient-neovim', {
+  \ 'branch': 'next',
+  \ 'do': 'bash install.sh',
+  \ }
+
+Plug 'fatih/vim-go'
 Plug 'rhysd/vim-crystal'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
+
+Plug 'rust-lang/rust.vim'
+Plug 'timonv/vim-cargo'
+Plug 'cespare/vim-toml'
 
 " colorschemes
 Plug 'altercation/vim-colors-solarized'
@@ -231,6 +242,19 @@ let g:ctrlp_funky_go_types = 1
 let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_funky_nolim = 1
 " }}}
+" Syntastic {{{
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_loc_list_height = 4
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_rust_checkers = ['cargo']
+" }}}
 " Airline {{{
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -251,6 +275,17 @@ else
 endif
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
+
+" Language Client
+set hidden
+
+let g:LanguageClient_serverCommands = {
+  \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+  \ }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 " }}}
 " NERDCommenter {{{
 let g:NERDSpaceDelims = 1
@@ -284,15 +319,22 @@ set noswapfile
 " Type Specifics {{{
 au filetype go setlocal noexpandtab
 
-au filetype go nmap <leader>i <Plug>(go-import)
 au filetype go nmap <leader>b <Plug>(go-build)
+au filetype go nmap <leader>i <Plug>(go-import)
 au filetype go nmap <leader>r <Plug>(go-run)
+
+au filetype rust nmap <leader>b <Plug>(CargoBuild)
+au filetype rust nmap <leader>d <Plug>(CargoDoc)
+au filetype rust nmap <leader>r <Plug>(CargoRun)
+au filetype rust nmap <leader>t <Plug>(CargoTest)
 
 let g:jsx_ext_required = 0
 
 augroup filetypedetect
   au BufRead,BufNewFile *.arb set ft=ruby
 augroup END
+
+let g:rustfmt_autosave = 1
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
