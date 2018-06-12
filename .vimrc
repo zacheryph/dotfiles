@@ -242,6 +242,16 @@ let g:ctrlp_funky_go_types = 1
 let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_funky_nolim = 1
 " }}}
+" Airline {{{
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+
+if empty($TMUX_SET_STATUSLINE)
+  let g:airline#extensions#tmuxline#enabled = 0
+else
+  let g:airline#extensions#tmuxline#enabled = 1
+endif
+" }}}
 " Syntastic {{{
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -255,16 +265,6 @@ let g:syntastic_check_on_wq = 0
 
 let g:syntastic_rust_checkers = ['cargo']
 " }}}
-" Airline {{{
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-
-if empty($TMUX_SET_STATUSLINE)
-  let g:airline#extensions#tmuxline#enabled = 0
-else
-  let g:airline#extensions#tmuxline#enabled = 1
-endif
-" }}}
 " Autocomplete {{{
 if has('nvim')
   let g:deoplete#enable_at_startup = 1
@@ -275,8 +275,8 @@ else
 endif
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
-
-" Language Client
+" }}}
+" Language Client {{{
 set hidden
 
 let g:LanguageClient_serverCommands = {
