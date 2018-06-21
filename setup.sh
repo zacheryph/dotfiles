@@ -2,12 +2,12 @@
 # set -e
 
 ## SETTINGS
-GOLANG_VERSION=1.10.1
-DOCTL_VERSION=1.7.1
-TERRAFORM_VERSION=0.11.2
-TF_CT_VERSION=0.2.0
-HELM_VERSION=2.8.1
-MACHINE_VERSION=0.13.0
+GOLANG_VERSION=1.10.3
+DOCTL_VERSION=1.8.3
+TERRAFORM_VERSION=0.11.7
+TF_CT_VERSION=0.3.0
+HELM_VERSION=2.9.1
+MACHINE_VERSION=0.15.0
 ##
 
 read -r -d '' USAGE <<EOF
@@ -28,6 +28,7 @@ commands:
               this should get smaller as stuff moves to docker
   cloud     - google cloud sdk / kubernetes tools
   console   - setup console fonts / etc
+  digitalocean - install doctl
   docker    - setup docker installation
   dotfiles  - install dotfiles
   golang    - install latest golang
