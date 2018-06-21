@@ -51,6 +51,7 @@ endif
 Plug 'fatih/vim-hclfmt'
 Plug 'hashivim/vim-terraform'
 Plug 'mxw/vim-jsx'
+Plug 'peter-edge/vim-capnp'
 
 " development
 Plug 'scrooloose/syntastic'
