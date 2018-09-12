@@ -10,7 +10,8 @@ $ make dotfiles
 
 ## Setup
 
-There are two seperate setups. `setup.sh` for Linux (Debian in particular) and `darwin.sh` for OS X.
+* `setup.sh` - Debian Linux (Dotfiles, systemd, apt)
+* `darwin.sh` - OS X (Dotfiles, Homebrew)
 
 ## Tests
 
