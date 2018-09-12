@@ -14,7 +14,7 @@
   diff = true
   status = true
 
-[credential "https://git-codecommit.*.amazonaws.com"]
+[credential "https://git-codecommit.us-east-2.amazonaws.com"]
   helper = ""
   helper = !aws codecommit credential-helper $@
   UseHttpPath = true
@@ -66,3 +66,7 @@
 [url "https://git.zro.io/"]
   insteadOf = "zro:"
   pushInsteadOf = "zro:"
+
+[url "https://aur.archlinux.org/"]
+  insteadOf = "aur:"
+  pushInsteadOf = "aur:"
