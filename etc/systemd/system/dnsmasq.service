@@ -1,22 +1,24 @@
 [Unit]
 Description=dnsmasq
 Documentation=http://www.thekelleys.org.uk/dnsmasq/doc.html
-After=network.target docker.socket
+After=network.target docker.service
+Requires=docker.service
 
 [Service]
-Type=oneshot
-RemainAfterExit=yes
-ExecStartPre=-/usr/bin/docker rm -f dnsmasq
+TimeoutStartSec=0
+Restart=always
+ExecStartPre=-/usr/bin/docker stop %n
+ExecStartPre=-/usr/bin/docker rm %n
+
 ExecStart=/usr/bin/docker run \
-  --detach \
-  --restart always \
+  --rm \
+  --name %n \
   --cap-add NET_ADMIN \
   --dns 8.8.8.8 \
   --dns 8.8.4.4 \
   --net host \
   --publish 127.0.0.1:53:53/tcp \
   --publish 127.0.0.1:53:53/udp \
-  --name dnsmasq \
   andyshinn/dnsmasq \
     --log-facility=- \
     --server=/zro.io/172.21.7.1 \
