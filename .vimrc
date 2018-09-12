@@ -21,7 +21,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'irrationalistic/vim-tasks'
 Plug 'junegunn/vim-easy-align'
-Plug 'konfekt/fastfold'
+" Plug 'konfekt/fastfold'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
 Plug 'raimondi/delimitmate'
@@ -52,6 +52,7 @@ Plug 'fatih/vim-hclfmt'
 Plug 'hashivim/vim-terraform'
 Plug 'mxw/vim-jsx'
 Plug 'peter-edge/vim-capnp'
+Plug 'cespare/vim-toml'
 
 " development
 Plug 'scrooloose/syntastic'
@@ -67,7 +68,6 @@ Plug 'vim-ruby/vim-ruby'
 
 Plug 'rust-lang/rust.vim'
 Plug 'timonv/vim-cargo'
-Plug 'cespare/vim-toml'
 
 " colorschemes
 Plug 'altercation/vim-colors-solarized'
