@@ -7,6 +7,7 @@
 # still need to dig into how to find out what/which
 # monitor we are plugged into. by name/uuid/something.
 
+EDP1_SETTINGS=(--auto --mode 3200x1800 --scale 0.75x0.75)
 DP1_SETTINGS=(--auto --above eDP1 --mode 3440x1440)
 
 # we force execution if/when being executed as root
@@ -57,12 +58,12 @@ set_auto() {
 
 set_mobile() {
   log "enabling mobile"
-  xrandr --screen 0 --output DP1 --off
+  xrandr --screen 0 --output eDP1 "${EDP1_SETTINGS[@]}" --output DP1 --off
 }
 
 set_home() {
   log "enabling home"
-  xrandr --screen 0 --output DP1 "${DP1_SETTINGS[@]}"
+  xrandr --screen 0 --output eDP1 "${EDP1_SETTINGS[@]}" --output DP1 "${DP1_SETTINGS[@]}"
 }
 
 # main
