@@ -19,16 +19,19 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'danro/rename.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
+Plug 'godlygeek/tabular'
 Plug 'irrationalistic/vim-tasks'
 Plug 'junegunn/vim-easy-align'
 " Plug 'konfekt/fastfold'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
+Plug 'ntpeters/vim-better-whitespace'
 Plug 'raimondi/delimitmate'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'tacahiroy/ctrlp-funky'
 Plug 'tmux-plugins/vim-tmux'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -51,8 +54,18 @@ endif
 Plug 'fatih/vim-hclfmt'
 Plug 'hashivim/vim-terraform'
 Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'posva/vim-vue'
+Plug 'alvan/vim-closetag'
 Plug 'peter-edge/vim-capnp'
 Plug 'cespare/vim-toml'
+Plug 'matt-deacalion/vim-systemd-syntax'
+Plug 'vim-scripts/groovy.vim'
+
+Plug 'zainin/vim-mikrotik'
+
+Plug 'udalov/kotlin-vim'
 
 " development
 Plug 'scrooloose/syntastic'
@@ -187,6 +200,7 @@ set softtabstop=2
 set shiftwidth=2
 set smarttab
 set autoindent
+set smartindent
 set copyindent
 set shiftround
 set hidden
@@ -223,9 +237,9 @@ let g:ctrlp_open_multiple_files = '1jr'
 let g:ctrlp_line_prefix = '> '
 let g:ctrlp_user_command = {
   \ 'types': {
-  \   1: ['.git', 'cd %s && git ls-files'],
+  \   1: ['.git', 'cd %s && git ls-files -co --exclude-standard'],
   \ },
-  \ 'fallback': 'ag %s -l --nocolor --hidden -g ""',
+  \ 'fallback': 'ag %s -l --nocolor --hidden --ignore .git --ignore tmp -g ""',
   \ }
 
 let g:ctrlp_abbrev = {
@@ -276,6 +290,8 @@ else
 endif
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<Tab>"
+
+let g:omni_sql_no_default_maps = 1
 " }}}
 " Language Client {{{
 set hidden
@@ -316,6 +332,8 @@ set autowrite
 set nobackup
 set nowritebackup
 set noswapfile
+
+au BufWritePre * StripWhitespace
 " }}}
 " Type Specifics {{{
 au filetype go setlocal noexpandtab
@@ -333,9 +351,19 @@ let g:jsx_ext_required = 0
 
 augroup filetypedetect
   au BufRead,BufNewFile *.arb set ft=ruby
+
+  au BufRead,BufNewFile PKGBUILD set ft=sh
 augroup END
 
 let g:rustfmt_autosave = 1
+
+let g:closetag_filenames = "*.erb,*.js,*.jsx,*.vue"
+let g:closetag_xhtml_filenames = "*.erb,*.js,*.jsx,*.vue"
+let g:closetag_emptyTags_caseSensitive = 1
+
+au filetype xml,js,vue let b:delimitMate_matchpairs = "(:),[:],{:}"
+
+let b:delimitMate_expand_cr = 1
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0

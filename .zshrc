@@ -9,9 +9,12 @@ if [[ ! -d $HOME/.oh-my-zsh ]]; then
 fi
 
 [ -z "$_ORIGINAL_PATH" ] && export _ORIGINAL_PATH=$PATH
-export GOPATH=$HOME/.go
-export CARGOPATH=$HOME/.cargo
-export PATH=$HOME/bin:$CARGOPATH/bin:$GOPATH/bin:/usr/local/go/bin:$_ORIGINAL_PATH
+export GOPATH="${HOME}/.go"
+export CARGOPATH="${HOME}/.cargo"
+export KREWPATH="${KREW_ROOT:-$HOME/.krew}"
+export YARNPATH="${HOME}/.yarn"
+
+export PATH=${HOME}/bin:${CARGOPATH}/bin:${GOPATH}/bin:${KREWPATH}/bin:${YARNPATH}/bin:/usr/local/go/bin:$_ORIGINAL_PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -72,9 +75,8 @@ if [ -z "$_zsh_custom_scripts_loaded" ]; then
   plugins+=(zsh-autosuggestions zsh-syntax-highlighting)
 fi
 
-if [[ -d /usr/local/var/rbenv ]]; then
-  export RBENV_ROOT=/usr/local/var/rbenv
-fi
+# rbenv
+[ -x "$(command -v rbenv)" ] && eval "$(rbenv init -)"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -87,6 +89,7 @@ export GPG_TTY=$(tty)
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 export HOMEBREW_GITHUB_API_TOKEN=8cb8caf8c48ff75fedf7cd76c96731f5fef5210b
+export GITHUB_API_TOKEN=c3c8bebaee519a82f4b83de6f5a34954d36cee87
 
 # Aliases
 # alias vim="nvim"
@@ -115,4 +118,8 @@ function goto() {
 
 function reset-tmuxline() {
   env TMUX_SET_STATUSLINE=1 vim -c 'Tmuxline airline' -c 'q'
+}
+
+function calc() {
+  echo "$*" | bc
 }
