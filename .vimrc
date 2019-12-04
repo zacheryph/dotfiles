@@ -17,12 +17,13 @@ call plug#begin('~/.vim/plugged')
 Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'danro/rename.vim'
-Plug 'editorconfig/editorconfig-vim'
+" Plug 'editorconfig/editorconfig-vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'godlygeek/tabular'
 Plug 'irrationalistic/vim-tasks'
-Plug 'junegunn/vim-easy-align'
+" Plug 'junegunn/vim-easy-align'
 " Plug 'konfekt/fastfold'
+" Plug 'mattn/emmet-vim'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
 Plug 'ntpeters/vim-better-whitespace'
@@ -51,11 +52,11 @@ else
 endif
 
 " file formats
-Plug 'fatih/vim-hclfmt'
-Plug 'hashivim/vim-terraform'
-Plug 'mxw/vim-jsx'
+" Plug 'fatih/vim-hclfmt'
+" Plug 'hashivim/vim-terraform'
 Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
+" Plug 'mxw/vim-jsx'
 Plug 'posva/vim-vue'
 Plug 'alvan/vim-closetag'
 Plug 'peter-edge/vim-capnp'
@@ -139,8 +140,9 @@ endfunction
 " call SetTheme('deep-space', 'deep_space', 1)
 " call SetTheme('gruvbox', 'gruvbox')
 " call SetTheme('hybrid_material', 'hybrid', 1)
+call SetTheme('hybrid_material', 'deep_space', 1)
 " call SetTheme('luna', 'luna', 1)
-call SetTheme('OceanicNext', 'oceanicnext', 1)
+" call SetTheme('OceanicNext', 'oceanicnext', 1)
 
 " let g:solarized_bold= 0
 " let g:solarized_underline = 0
@@ -346,8 +348,6 @@ au filetype rust nmap <leader>b <Plug>(CargoBuild)
 au filetype rust nmap <leader>d <Plug>(CargoDoc)
 au filetype rust nmap <leader>r <Plug>(CargoRun)
 au filetype rust nmap <leader>t <Plug>(CargoTest)
-
-let g:jsx_ext_required = 0
 
 augroup filetypedetect
   au BufRead,BufNewFile *.arb set ft=ruby

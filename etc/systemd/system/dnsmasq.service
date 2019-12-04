@@ -21,9 +21,9 @@ ExecStart=/usr/bin/docker run \
   --publish 127.0.0.1:53:53/udp \
   andyshinn/dnsmasq \
     --log-facility=- \
-    --server=/zro.io/172.21.7.1 \
-    --server=/zro.net/172.21.7.1 \
-    --server=/hostens.family/172.21.7.1 \
+    --server=/zro.io/172.21.50.1 \
+    --server=/zro.net/172.21.50.1 \
+    --server=/hostens.family/172.21.50.1 \
     --address=/local/127.0.0.1 \
     --address=/docker/127.0.0.1
 
