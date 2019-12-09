@@ -20,7 +20,7 @@
   UseHttpPath = true
 
 [credential]
-  helper = "store --file ~/.gitcredential"
+  helper = osxkeychain
 
 [diff]
   renames = copies
@@ -28,7 +28,7 @@
 [user]
   email = zacheryph@gmail.com
   name = Zachery Hostens
-  signingkey = 0x37CDFB272575E480
+  signingkey = 0x4B9C178B49228EFD
   username = zacheryph
 
 [commit]
