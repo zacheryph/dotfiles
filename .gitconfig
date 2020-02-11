@@ -28,7 +28,7 @@
 [user]
   email = zacheryph@gmail.com
   name = Zachery Hostens
-  signingkey = 0x4B9C178B49228EFD
+  signingkey = EB80AB0F6256C899
   username = zacheryph
 
 [commit]
@@ -51,17 +51,11 @@
 
 [url "https://github.com/"]
   insteadOf = "hub:"
-
-[url "git@github.com:"]
   pushInsteadOf = "hub:"
-  pushInsteadOf = "https://github.com/"
 
 [url "https://gitlab.com/"]
   insteadOf = "lab:"
-
-[url "git@gitlab.com:"]
   pushInsteadOf = "lab:"
-  pushInsteadOf = "https://gitlab.com/"
 
 [url "https://git.zro.io/"]
   insteadOf = "zro:"
