@@ -17,6 +17,7 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="yyyy-mm-dd"
 
+# plugins=(aws colored-man-pages docker doctl helm osx systemadmin gcloud git-extras gpg-agent zsh-autosuggestions zsh-syntax-highlighting)
 plugins=(aws colored-man-pages docker doctl helm osx systemadmin gcloud git-extras gpg-agent zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
@@ -31,15 +32,24 @@ export GPG_TTY=$(tty)
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=10
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
-[ -x "$(command -v rbenv)" ] && eval "$(rbenv init -)"
+# [ -x "$(command -v rbenv)" ] && eval "$(rbenv init -)"
 
-# The all mighty Path
+# Nix Path
+[ -z "$_ORIGINAL_PATH" ] && export _ORIGINAL_PATH=$PATH
 export CARGOPATH="${HOME}/.cargo"
 export KREWPATH="${KREW_ROOT:-$HOME/.krew}"
-export YARNPATH="${HOME}/.yarn"
 
-[ -z "$_ORIGINAL_PATH" ] && export _ORIGINAL_PATH=$PATH
-export PATH=${HOME}/bin:${CARGOPATH}/bin:${KREWPATH}/bin:${YARNPATH}/bin:/usr/local/sbin:$_ORIGINAL_PATH
+# export PATH="${HOME}/bin:${CARGOPATH}/bin:${KREWPATH}/bin:${_ORIGINAL_PATH}"
+
+# The all mighty Path
+# export GOPATH="${HOME}/.go"
+# export GOBIN="${HOME}/bin"
+# export CARGOPATH="${HOME}/.cargo"
+# export KREWPATH="${KREW_ROOT:-$HOME/.krew}"
+# export WASMTIME_HOME="$HOME/.wasmtime"
+#
+# [ -z "$_ORIGINAL_PATH" ] && export _ORIGINAL_PATH=$PATH
+# export PATH=${HOME}/bin:${CARGOPATH}/bin:${WASMTIME_HOME}/bin:${KREWPATH}/bin:/usr/local/sbin:$_ORIGINAL_PATH
 
 # General Aliases
 alias ranpass="ruby -r securerandom -e 'puts SecureRandom.urlsafe_base64'"
@@ -54,9 +64,18 @@ dr() { docker run --rm -it --user $(id -u):$(id -g) -v ${PWD}:/data --workdir /d
 
 # Kubernetes Aliases / Autocompletion
 alias k="kubectl"
-alias kg="kubectl get"
-alias kns="kubectl config set-context --current --namespace"
-alias kex="kubectl explain"
-alias kexr="kubectl explain --recursive"
+alias kap="k apply -f"
+alias kr="k run"
+alias kd="k describe"
+alias kg="k get"
+alias kga="kg --all-namespaces"
+alias kns="k config set-context --current --namespace"
+alias ke="k explain"
+alias ker="k explain --recursive"
+alias ktr="k run --dry-run --output=yaml"
+alias ktc="k create --dry-run --output=yaml"
+alias kts="k expose --dry-run --output=yaml"
+alias kctx="k config use-context"
+alias kns="k config set-context --current --namespace"
 
 source <(kubectl completion zsh)

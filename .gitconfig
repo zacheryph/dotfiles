@@ -64,3 +64,5 @@
 [url "https://aur.archlinux.org/"]
   insteadOf = "aur:"
   pushInsteadOf = "aur:"
+[pull]
+	ff = only

@@ -8,31 +8,28 @@ brew tap neovim/neovim
 
 # Casks
 brew cask install \
-  atom \
   rowanj-gitx \
-  google-chrome \
   keybase \
-  mocksmtp \
   monolingual \
-  transmission \
-  transmit \
-  vmware-fusion \
+  dash \
+  insomnia \
+  visual-studio-code \
   iterm2
 
 # General
 brew install \
-  cayley \
+  # cayley \
   cloc \
   stormssh \
   htop \
   ifstat \
-  irssi \
-  keybase \
+  # irssi \
+  # keybase \
   mtr \
   nmap \
   tmux \
-  wrk \
-  youtube-dl
+  # wrk \
+  # youtube-dl
 
 # Development
 brew install \
@@ -53,8 +50,6 @@ brew install \
 brew install vim \
   --with-lua \
   --with-override-system-vi
-
-pip3 install neovim
 
 # Shell
 brew install zsh

@@ -58,14 +58,15 @@ Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
 Plug 'alvan/vim-closetag'
-Plug 'peter-edge/vim-capnp'
 Plug 'cespare/vim-toml'
 Plug 'matt-deacalion/vim-systemd-syntax'
 Plug 'vim-scripts/groovy.vim'
 
 Plug 'zainin/vim-mikrotik'
 
-Plug 'udalov/kotlin-vim'
+Plug 'LnL7/vim-nix'
+
+" Plug 'udalov/kotlin-vim'
 
 " development
 Plug 'scrooloose/syntastic'
