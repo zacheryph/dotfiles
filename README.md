@@ -4,24 +4,14 @@
 
 ## Installing
 
-```console
-$ make dotfiles
-```
+_TODO_: this is vastly different now since moving to nix.
 
-## Setup
+## Darwin
 
-* `setup.sh` - Debian Linux (Dotfiles, systemd, apt)
-* `darwin.sh` - OS X (Dotfiles, Homebrew)
+These packages currently do not have anything in nix. Noted here.
 
-## Tests
-
-Tests use shellcheck run inside a docker container
-
-```console
-$ make test
-```
-
-## Shoutout
-
-Some code was ripped off of jessfraz/dotfiles.
-
+* Fork
+* Keybase
+* Monolingual
+* Dash
+* Insomnia
