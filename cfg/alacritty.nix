@@ -26,6 +26,9 @@
         italic.family = "SpaceMono Nerd Font";
       };
 
+      selection = {
+        save_to_clipboard = true;
+      };
 
       # Nord
       colors = {

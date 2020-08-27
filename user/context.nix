@@ -61,6 +61,9 @@
     cargo-udeps
     cargo-watch
 
+    ### network
+    iperf
+
     ### cloud tools
     awscli2
     doctl
@@ -69,6 +72,7 @@
     istioctl
     kubectl
     kubectx
+    kubeval
     kubernetes-helm
     kubeseal
     kustomize

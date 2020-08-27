@@ -6,6 +6,8 @@
     clock24 = true;
     escapeTime = 0;
     historyLimit = 10000;
+    shortcut = "a";
+    terminal = "screen-256color";
 
     extraConfig = ''
       if "test ! -d ~/.tmux/plugins/tpm" \
@@ -23,7 +25,6 @@
       setw -g pane-base-index 1
 
       # 24 bit true-color
-      set -g default-terminal "screen-256color"
       set -ga terminal-overrides ",xterm-256color:Tc,screen-256color:Tc"
 
       # window titles

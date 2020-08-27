@@ -7,15 +7,16 @@
     enableAutosuggestions = true;
 
     envExtra = ''
-      CASE_SENSITIVE="true"
-      COMPLETION_WAITING_DOTS="true"
-      DISABLE_UNTRACKED_FILES_DIRTY="true"
-      EDITOR=vim
-      GPG_TTY=$(tty)
-      HIST_STAMPS="yyyy-mm-dd"
-      LANG=en_US.UTF-8
-      SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=10
+      export BAT_THEME=Nord
+      export CASE_SENSITIVE="true"
+      export COMPLETION_WAITING_DOTS="true"
+      export DISABLE_UNTRACKED_FILES_DIRTY="true"
+      export EDITOR=vim
+      export GPG_TTY=$(tty)
+      export HIST_STAMPS="yyyy-mm-dd"
+      export LANG=en_US.UTF-8
+      export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+      export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=10
     '';
 
     shellAliases = {
