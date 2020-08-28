@@ -9,23 +9,13 @@
 
   # Use a custom configuration.nix location.
   # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
-  # environment.darwinConfig = "$HOME/.config/nixpkgs/darwin/configuration.nix";
+  environment.darwinConfig = "$HOME/.config/nixpkgs/darwin.nix";
 
   fonts = {
     enableFontDir = true;
     fonts = with pkgs; [
-      # anonymousPro
-      # fira-code
-      # fira-code-symbols
-      # jetbrains-mono
-      # liberation_ttf
-      # noto-fonts
-      # paratype-pt-mono
-      # roboto-mono
-      # source-code-pro
-      # ttf-envy-code-r
-      victor-mono
       nerdfonts
+      victor-mono
     ];
   };
 

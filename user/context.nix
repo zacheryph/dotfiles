@@ -31,7 +31,6 @@
     pinentry_mac
     pwgen-secure
     tokei
-    # topgrade # needed with nix?
     wrk
     youtube-dl
 
@@ -57,7 +56,6 @@
     cargo-geiger
     cargo-generate
     cargo-outdated
-    cargo-tree
     cargo-udeps
     cargo-watch
 
