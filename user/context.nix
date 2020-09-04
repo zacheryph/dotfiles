@@ -12,6 +12,7 @@
     ../cfg/git.nix
     ../cfg/gpg.nix
     ../cfg/tmux.nix
+    ../cfg/vim.nix
     ../cfg/zsh.nix
   ];
 
@@ -40,7 +41,6 @@
     # insomnia # linux only
     neovim
     shellcheck
-    vim
 
     ### languages
     go
