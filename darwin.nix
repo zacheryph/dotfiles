@@ -3,12 +3,14 @@
 {
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  environment.systemPackages = [
-    pkgs.vim
+  environment.systemPackages = with pkgs; [
+    nix-index
+    nix-zsh-completions
+    vim
   ];
 
   # Use a custom configuration.nix location.
-  # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin/configuration.nix
+  # $ darwin-rebuild switch -I darwin-config=$HOME/.config/nixpkgs/darwin.nix
   environment.darwinConfig = "$HOME/.config/nixpkgs/darwin.nix";
 
   fonts = {
