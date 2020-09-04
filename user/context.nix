@@ -31,6 +31,7 @@
     nmap
     pinentry_mac
     pwgen-secure
+    silver-searcher
     tokei
     wrk
     youtube-dl
@@ -47,17 +48,26 @@
     nodejs
     yarn
 
+    ### ruby
+    ruby
+    rubyPackages.rubocop
+    rubyPackages.rubocop-performance
+    bundler-audit
+
     ### rust
     rustup
     cargo-audit
     cargo-bloat
     cargo-deps
+    cargo-edit
     cargo-expand
     cargo-geiger
     cargo-generate
     cargo-outdated
+    cargo-sweep
     cargo-udeps
     cargo-watch
+    wasm-pack
 
     ### network
     iperf
@@ -76,5 +86,6 @@
     kustomize
     linkerd
     stern
+    wrangler
   ];
 }
