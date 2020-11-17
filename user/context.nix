@@ -43,6 +43,7 @@
     gitAndTools.git-crypt
     gitAndTools.git-extras
     gitAndTools.gitflow
+    gitAndTools.pre-commit
     # insomnia # linux only
     neovim
     shellcheck
