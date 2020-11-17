@@ -20,10 +20,11 @@
 
   home.packages = with pkgs; [
     ### general
-    bandwhich
+    # bandwhich
     bat
     cloc
     exa
+    go-task
     htop
     jq
     # minio-client # builder failing
@@ -33,10 +34,13 @@
     pwgen-secure
     silver-searcher
     tokei
+    unixtools.watch
     wrk
     youtube-dl
 
     ### development
+    drone-cli
+    gitAndTools.git-crypt
     gitAndTools.git-extras
     gitAndTools.gitflow
     # insomnia # linux only
@@ -51,7 +55,7 @@
     ### ruby
     ruby
     rubyPackages.rubocop
-    rubyPackages.rubocop-performance
+    # rubyPackages.rubocop-performance
     bundler-audit
 
     ### rust
@@ -59,13 +63,13 @@
     cargo-audit
     cargo-bloat
     cargo-deps
-    cargo-edit
+    # cargo-edit
     cargo-expand
     cargo-geiger
-    cargo-generate
+    # cargo-generate
     cargo-outdated
     cargo-sweep
-    cargo-udeps
+    # cargo-udeps
     cargo-watch
     wasm-pack
 
@@ -78,6 +82,7 @@
     fluxctl
     google-cloud-sdk
     istioctl
+    # kube3d
     kubectl
     kubectx
     kubeval
@@ -86,6 +91,6 @@
     kustomize
     linkerd
     stern
-    wrangler
+    # wrangler
   ];
 }
