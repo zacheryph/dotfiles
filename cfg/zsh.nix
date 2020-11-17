@@ -21,9 +21,12 @@
 
     shellAliases = {
       # misc
+      batl = "bat -l yaml";
+      batn = "bat -l json";
       pwgen = "ruby -r securerandom -e 'puts SecureRandom.urlsafe_base64'";
 
-      # docker for mac
+      # docker helpers
+      up = "docker-compose up -d";
       dockervm = "docker run --rm -it --privileged --pid=host walkerlee/nsenter -t 1 -m -u -i -n bash";
 
       # kubernetes
@@ -37,9 +40,10 @@
       kga = "kg --all-namespaces";
       kns = "k config set-context --current --namespace";
       kr = "k run";
-      ktc = "k create --dry-run --output=yaml";
+      ktc = "k create --dry-run=client --output=yaml";
       ktr = "k run --dry-run --output=yaml";
       kts = "k expose --dry-run --output=yaml";
+      kseal = "kubeseal --format=yaml";
     };
 
     initExtra = ''
