@@ -20,14 +20,16 @@
 
   home.packages = with pkgs; [
     ### general
-    # bandwhich
+    bandwhich
     bat
     cloc
+    envsubst
     exa
+    gomplate
     go-task
     htop
     jq
-    # minio-client # builder failing
+    # minio-client # broken
     mtr
     nmap
     pinentry_mac
@@ -37,6 +39,7 @@
     unixtools.watch
     wrk
     youtube-dl
+    yq-go
 
     ### development
     drone-cli
@@ -56,7 +59,7 @@
     ### ruby
     ruby
     rubyPackages.rubocop
-    # rubyPackages.rubocop-performance
+    rubyPackages.rubocop-performance
     bundler-audit
 
     ### rust
@@ -64,13 +67,13 @@
     cargo-audit
     cargo-bloat
     cargo-deps
-    # cargo-edit
+    cargo-edit
     cargo-expand
     cargo-geiger
-    # cargo-generate
+    cargo-generate
     cargo-outdated
     cargo-sweep
-    # cargo-udeps
+    cargo-udeps
     cargo-watch
     wasm-pack
 
@@ -92,6 +95,6 @@
     kustomize
     linkerd
     stern
-    # wrangler
+    wrangler
   ];
 }
