@@ -23,7 +23,7 @@
       # misc
       batl = "bat -l yaml";
       batn = "bat -l json";
-      pwgen = "ruby -r securerandom -e 'puts SecureRandom.urlsafe_base64'";
+      pwgen = "ruby -r securerandom -e 'puts SecureRandom.urlsafe_base64(rand(24..40))'";
 
       # docker helpers
       up = "docker-compose up -d";
