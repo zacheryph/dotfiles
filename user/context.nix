@@ -83,6 +83,7 @@
     ### cloud tools
     awscli2
     doctl
+    fluxcd
     fluxctl
     google-cloud-sdk
     istioctl
