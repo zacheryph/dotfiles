@@ -1,11 +1,10 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
-  programs.gpg = {
-    enable = true;
+  home.sessionVariables = {
+    HOMEBREW_BUNDLE_FILE = "$HOME/.config/nixpkgs/config/macos/Brewfile";
   };
 
-  # can't use services.gpg-agent on macos
   home.file.".gnupg/gpg-agent.conf".text = ''
     enable-ssh-support
     default-cache-ttl 300

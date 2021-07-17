@@ -1,0 +1,39 @@
+# taps
+tap 'homebrew/cask-fonts'
+tap 'homebrew/cask'
+tap 'knative/client'
+
+# macOS specific
+brew "m-cli"
+
+# /Application's
+cask 'alacritty'
+cask 'appcleaner'
+cask 'balenaetcher'
+cask 'bitwarden'
+cask 'discord'
+cask 'docker'
+cask 'firefox'
+cask 'fork'
+cask 'handbrake'
+cask 'keybase'
+cask 'monolingual'
+cask 'signal'
+cask 'slack'
+cask 'virtualbox-extension-pack'
+cask 'virtualbox'
+cask 'visual-studio-code'
+
+# mac app store
+mas 'Bear', id: 1091189122
+mas 'Home Assistant', id: 1099568401
+mas 'WireGuard', id: 1451685025
+
+# these are here cause the versions on nix
+# dont work on darwin or are not up to date
+brew 'cloudflare-wrangler'
+brew 'k3d'
+brew 'knative/client/kn'
+
+# fonts
+cask 'font-victor-mono-nerd-font'

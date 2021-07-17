@@ -1,6 +1,0 @@
-#!/bin/bash
-
-kubectl get pod -ojson \
-  | jq -r '(.items[] | select(.status.reason == "Evicted")) | .metadata.name' \
-  | xargs kubectl delete pod
-
