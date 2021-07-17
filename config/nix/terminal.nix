@@ -115,6 +115,8 @@
     enableAutosuggestions = true;
 
     envExtra = ''
+      [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ] && source "$HOME/.nix-profile/etc/profile.d/nix.sh"
+
       export BAT_THEME=Nord
       export CASE_SENSITIVE="true"
       export COMPLETION_WAITING_DOTS="true"
