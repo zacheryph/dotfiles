@@ -47,3 +47,7 @@ brew bundle --verbose
   * Slack
 * Download
   * Dank Mono [https://app.gumroad.com/library]
+
+## Thanks
+
+Current dotfiles owe thanks to [https://github.com/biosan/dotfiles].
