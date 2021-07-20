@@ -22,7 +22,6 @@
     envsubst
     exa
     htop
-    minio-client
     nix-zsh-completions
     pinentry_mac
     pwgen-secure
@@ -36,9 +35,9 @@
     youtube-dl
 
     # network
+    minio-client
     mtr
     nmap
-    # minio-client
     wget
   ];
 
