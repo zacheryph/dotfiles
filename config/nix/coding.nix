@@ -17,16 +17,16 @@
     yarn
 
     rustup
-    # cargo-audit
-    # cargo-bloat
-    # cargo-deps
-    # cargo-edit
-    # cargo-expand
-    # cargo-geiger
-    # cargo-generate
-    # cargo-outdated
-    # cargo-sweep
-    # cargo-udeps
+    cargo-audit
+    cargo-bloat
+    cargo-deps
+    cargo-edit
+    cargo-expand
+    cargo-geiger
+    cargo-generate
+    cargo-outdated
+    cargo-sweep
+    cargo-udeps
     # cargo-watch
     # wasm-pack
 
@@ -52,12 +52,14 @@
     fluxcd
     google-cloud-sdk
     istioctl
+    krew
     kubectl
     kubectx
     kubernetes-helm
     kubeval
     kustomize
     stern
+    telepresence2
   ];
 
   programs.git = {

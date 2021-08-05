@@ -1,6 +1,7 @@
 # taps
 tap 'homebrew/cask-fonts'
 tap 'homebrew/cask'
+tap 'datawire/blackbird'
 tap 'knative/client'
 
 # macOS specific
@@ -32,8 +33,13 @@ mas 'WireGuard', id: 1451685025
 # these are here cause the versions on nix
 # dont work on darwin or are not up to date
 brew 'cloudflare-wrangler'
+brew 'datawire/blackbird/telepresence'
 brew 'k3d'
 brew 'knative/client/kn'
+brew 'mkdocs'
+brew 'velero'
 
 # fonts
+brew 'subversion' # some fonts require this
+cask 'font-ibm-plex-mono'
 cask 'font-victor-mono-nerd-font'

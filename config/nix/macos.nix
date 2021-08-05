@@ -13,4 +13,9 @@
     max-cache-ttl-ssh 600
     pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
   '';
+
+  # macos specific packages
+  home.packages = with pkgs; [
+    reattach-to-user-namespace
+  ];
 }

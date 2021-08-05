@@ -11,7 +11,7 @@
     EDITOR = "vim";
     GOPATH = "$HOME/.go";
     LANG = "en_US.UTF-8";
-    PATH = "$HOME/bin:$HOME/.cargo/bin:$HOME/.go/bin:$HOME/.nix-profile/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin";
+    PATH = "$HOME/bin:$HOME/.krew/bin:$HOME/.cargo/bin:$HOME/.go/bin:$HOME/.nix-profile/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin";
   };
 
   home.packages = with pkgs; [
