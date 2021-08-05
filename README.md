@@ -48,6 +48,16 @@ brew bundle --verbose
 * Download
   * Dank Mono [https://app.gumroad.com/library]
 
+## Upgrading
+
+Steps to upgrade all packages until I decide how to automate it
+
+```shell
+nix-channel --update
+home-manager switch
+brew upgrade
+```
+
 ## Thanks
 
 Current dotfiles owe thanks to [https://github.com/biosan/dotfiles].
