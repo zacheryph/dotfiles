@@ -222,9 +222,10 @@
 
       nnoremap <C-R> :CtrlPFunky<CR>
 
-      if has('osx')
-        set clipboard=unnamed
-      endif
+      " cant get this to work with alacritty
+      " if has('osx')
+      "   set clipboard=unnamed
+      " endif
 
       " copy/pasta without headaches
       let &t_SI .= "\<Esc>[?2004h"

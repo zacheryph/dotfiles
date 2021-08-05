@@ -95,6 +95,9 @@
       setw -g automatic-rename on
       set -g set-titles on
 
+      # copy/pasta
+      set -g default-command 'reattach-to-user-namespace $SHELL --login'
+
       # Unbreak Neovim trying to be fancy
       set -ga terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[2 q'
 
