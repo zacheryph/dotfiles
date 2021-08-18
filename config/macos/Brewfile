@@ -37,6 +37,7 @@ brew 'datawire/blackbird/telepresence'
 brew 'k3d'
 brew 'knative/client/kn'
 brew 'mkdocs'
+brew 'postman'
 brew 'velero'
 brew 'waypoint'
 
