@@ -60,6 +60,15 @@
     kustomize
     stern
     telepresence2
+
+    terraform
+    terraform-providers.aws
+    terraform-providers.sops
+    terraform-providers.local
+    terraform-providers.github
+    terraform-providers.docker
+    terraform-providers.cloudflare
+    terraform-providers.digitalocean
   ];
 
   programs.git = {

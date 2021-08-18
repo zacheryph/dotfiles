@@ -38,6 +38,7 @@ brew 'k3d'
 brew 'knative/client/kn'
 brew 'mkdocs'
 brew 'velero'
+brew 'waypoint'
 
 # fonts
 brew 'subversion' # some fonts require this
