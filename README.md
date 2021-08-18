@@ -56,6 +56,7 @@ Steps to upgrade all packages until I decide how to automate it
 nix-channel --update
 home-manager switch
 brew upgrade
+rustup update
 ```
 
 ## Thanks
