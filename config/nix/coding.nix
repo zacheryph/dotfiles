@@ -30,12 +30,6 @@
     # cargo-watch
     # wasm-pack
 
-    bundler-audit
-    ruby
-    rubyPackages.rubocop
-    rubyPackages.rubocop-performance
-    solargraph
-
     # scm
     gitAndTools.git-crypt
     gitAndTools.git-extras

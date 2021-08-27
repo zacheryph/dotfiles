@@ -38,6 +38,7 @@ mas 'WireGuard', id: 1451685025
 brew 'awscli'
 brew 'cloudflare-wrangler'
 brew 'datawire/blackbird/telepresence'
+brew 'frum'
 brew 'k3d'
 brew 'knative/client/kn'
 brew 'mkdocs'

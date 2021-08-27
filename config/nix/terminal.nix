@@ -169,6 +169,7 @@
         docker run --rm -it --user $(id -u):$(id -g) -v $PWD:/data --workdir /data "$@"
       }
 
+      source <(frum init)
       source <(kubectl completion zsh)
     '';
 
