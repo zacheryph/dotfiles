@@ -57,6 +57,7 @@ nix-channel --update
 home-manager switch
 brew upgrade
 rustup update
+nix-collect-garbage --delete-older-than 14d
 ```
 
 ## Thanks
