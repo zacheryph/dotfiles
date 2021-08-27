@@ -31,8 +31,11 @@ mas 'Bear', id: 1091189122
 mas 'Home Assistant', id: 1099568401
 mas 'WireGuard', id: 1451685025
 
-# these are here cause the versions on nix
-# dont work on darwin or are not up to date
+# these are here cause in nixpkgs they either:
+# - do not exist
+# - are not up to date
+# - do not work on darwin
+brew 'awscli'
 brew 'cloudflare-wrangler'
 brew 'datawire/blackbird/telepresence'
 brew 'k3d'

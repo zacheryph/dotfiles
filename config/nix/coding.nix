@@ -47,7 +47,6 @@
     tektoncd-cli
 
     # cloud
-    awscli2
     doctl
     fluxcd
     google-cloud-sdk
