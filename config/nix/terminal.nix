@@ -7,6 +7,10 @@
     settings = {
       background_opacity = 0.90;
       cursor.style = "Beam";
+      shell = {
+        program = "/bin/zsh";
+        args = [ "-c" "tmux -2 attach" ];
+      };
 
       window = {
         padding.x = 2;
