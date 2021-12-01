@@ -8,22 +8,21 @@ tap 'knative/client'
 brew "m-cli"
 
 # /Application's
-cask 'alacritty'
+# cask 'alacritty' # !arm64 (compile manually)
 cask 'appcleaner'
-cask 'balenaetcher'
-cask 'bitwarden'
-cask 'discord'
-cask 'docker'
+# cask 'balenaetcher' # !arm64
+# cask 'bitwarden' # !arm64
+# cask 'discord' # !arm64 (using canary)
+# cask 'docker' # !arm64 (using colima)
 cask 'firefox'
 cask 'fork'
 cask 'handbrake'
-cask 'keybase'
-cask 'monolingual'
+# cask 'keybase' # !arm64
 cask 'postman'
-cask 'signal'
+# cask 'signal' # !arm64
 cask 'slack'
-cask 'virtualbox-extension-pack'
-cask 'virtualbox'
+# cask 'virtualbox-extension-pack' # !arm64
+# cask 'virtualbox' # !arm64
 cask 'visual-studio-code'
 
 # mac app store
@@ -38,10 +37,9 @@ mas 'WireGuard', id: 1451685025
 brew 'awscli'
 brew 'cloudflare-wrangler'
 brew 'datawire/blackbird/telepresence'
-brew 'frum'
 brew 'k3d'
 brew 'knative/client/kn'
-brew 'mkdocs'
+brew 'rbenv'
 brew 'velero'
 brew 'waypoint'
 

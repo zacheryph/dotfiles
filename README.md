@@ -48,6 +48,11 @@ brew bundle --verbose
 * Download
   * Dank Mono [https://app.gumroad.com/library]
 
+### NodeJS
+NodeJS is garbage. Nix' `yarn` hard links to node-14, brew `yarn` depends on `node` which
+is always latest. I want stable. So you have to install `node@16 yarn` remove `node`, and
+then `link --overwrite node@16` (at least for now)
+
 ## Upgrading
 
 Steps to upgrade all packages until I decide how to automate it

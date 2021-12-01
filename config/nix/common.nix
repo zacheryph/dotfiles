@@ -4,17 +4,20 @@
   programs.home-manager.enable = true;
   programs.man.enable = true;
 
-  home.username = "context";
-  home.homeDirectory = "/Users/context";
+  home.username = builtins.getEnv "USER";
+  home.homeDirectory = builtins.getEnv "HOME";
 
   home.sessionVariables = {
     EDITOR = "vim";
     GOPATH = "$HOME/.go";
     LANG = "en_US.UTF-8";
-    PATH = "$HOME/bin:$HOME/.krew/bin:$HOME/.cargo/bin:$HOME/.go/bin:$HOME/.nix-profile/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin";
+    PATH = "$HOME/bin:$HOME/.krew/bin:$HOME/.cargo/bin:$HOME/.go/bin:$HOME/.nix-profile/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/bin:/bin:/usr/sbin:/sbin";
   };
 
   home.packages = with pkgs; [
+    # yes nix. we depend on nix.
+    nix
+
     # general
     bat
     cloc
@@ -28,7 +31,6 @@
     silver-searcher
     unixtools.watch
     wget
-    wrk
 
     # media
     ffmpeg

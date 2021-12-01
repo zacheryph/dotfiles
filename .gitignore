@@ -1,1 +1,2 @@
 config/macos/Brewfile.lock.json
+local.nix

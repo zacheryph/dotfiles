@@ -13,8 +13,7 @@
     # language
     go
 
-    nodejs
-    yarn
+    # node... read readme
 
     rustup
     cargo-audit
@@ -37,7 +36,6 @@
     gitAndTools.pre-commit
 
     # ci/cd
-    drone-cli
     tektoncd-cli
 
     # cloud
@@ -59,9 +57,8 @@
   programs.git = {
     enable = true;
     userName = "Zachery Hostens";
-    userEmail = "zacheryph@gmail.com";
-
-    signing.key = "EB80AB0F6256C899";
+    # LOCAL: userEmail = "";
+    # LOCAL: signing.key = "";
     signing.signByDefault = true;
 
     aliases = {

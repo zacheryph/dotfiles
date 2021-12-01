@@ -5,7 +5,6 @@
     enable = true;
 
     settings = {
-      background_opacity = 0.90;
       cursor.style = "Beam";
       shell = {
         program = "/bin/zsh";
@@ -15,6 +14,7 @@
       window = {
         padding.x = 2;
         padding.y = 2;
+        opactity = 0.90;
         # decorations = "transparent";
 
         dimensions.columns = 120;
@@ -108,7 +108,7 @@
       bind -n C-k send-keys "C-l"\; run "tmux clear-history"
 
       # TODO: need to be able to set name from machine.
-      new-session -d -s 16
+      new-session -d -s console
       new-window -d
       new-window -d
       new-window -d
@@ -169,7 +169,7 @@
         docker run --rm -it --user $(id -u):$(id -g) -v $PWD:/data --workdir /data "$@"
       }
 
-      source <(frum init)
+      source <(rbenv init - zsh)
       source <(kubectl completion zsh)
     '';
 
@@ -203,7 +203,7 @@
         "docker"
         "doctl"
         "helm"
-        "osx"
+        "macos"
         "systemadmin"
         # "gcloud" # error looking for homebrews /usr/local/Caskroom
         "git-extras"
