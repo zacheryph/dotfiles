@@ -15,7 +15,7 @@
         padding.x = 2;
         padding.y = 2;
         opactity = 0.90;
-        # decorations = "transparent";
+        decorations = "buttonless";
 
         dimensions.columns = 120;
         dimensions.lines = 36;
@@ -93,7 +93,7 @@
 
     extraConfig = ''
       # 24 bit true-color
-      set -ga terminal-overrides ",xterm-256color:Tc,screen-256color:Tc"
+      set -sa terminal-overrides ",alacritty:Tc,screen-256color:Tc"
 
       # window titles
       setw -g automatic-rename on

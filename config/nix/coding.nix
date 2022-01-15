@@ -3,8 +3,11 @@
 {
   home.packages = with pkgs; [
     # utility
+    fd
+    gdb
     gomplate
     go-task
+    ripgrep
     shellcheck
     sops
     jq
@@ -16,12 +19,13 @@
     # node... read readme
 
     rustup
+    rust-analyzer
     cargo-audit
     cargo-bloat
     cargo-deps
     cargo-edit
     cargo-expand
-    cargo-geiger
+    # cargo-geiger
     cargo-generate
     cargo-outdated
     cargo-sweep
