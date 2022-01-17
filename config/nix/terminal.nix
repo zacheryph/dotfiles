@@ -17,8 +17,8 @@
         opactity = 0.90;
         decorations = "buttonless";
 
-        dimensions.columns = 120;
-        dimensions.lines = 36;
+        dimensions.columns = 124;
+        dimensions.lines = 34;
       };
 
       font = {
