@@ -102,8 +102,7 @@
       # copy/pasta
       set -g default-command 'reattach-to-user-namespace $SHELL --login'
 
-      # Unbreak Neovim trying to be fancy
-      set -ga terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[2 q'
+      set-option -g focus-events on
 
       bind -n C-k send-keys "C-l"\; run "tmux clear-history"
 
