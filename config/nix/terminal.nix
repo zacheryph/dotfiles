@@ -18,16 +18,19 @@
         decorations = "buttonless";
 
         dimensions.columns = 124;
-        dimensions.lines = 34;
+        dimensions.lines = 40;
       };
 
       font = {
         size = 22;
         use_thin_strokes = true;
 
-        normal.family = "Dank Mono";
-        bold = { family = "Dank Mono"; style = "Regular"; };
-        italic.family = "Dank Mono";
+        # normal.family = "VictorMono Nerd Font Mono";
+        # bold = { family = "VictorMono Nerd Font Mono"; style = "Regular"; };
+        # italic.family = "VictorMono Nerd Font Mono";
+        normal.family = "DankMono Nerd Font Mono";
+        bold = { family = "DankMono Nerd Font Mono"; style = "Regular"; };
+        italic.family = "DankMono Nerd Font Mono";
       };
 
       selection = {
