@@ -5,6 +5,7 @@ vim.cmd[[colorscheme nord]]
 
 -- options
 o.modelines = 1
+o.termguicolors = true
 
 o.autowriteall = true
 o.backup = false

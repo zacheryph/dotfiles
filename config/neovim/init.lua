@@ -13,3 +13,14 @@ require('lualine').setup {
   }
 }
 
+-- exit telescope one on esc
+local actions = require("telescope.actions")
+require('telescope').setup({
+  defaults = {
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close,
+      },
+    },
+  },
+})
