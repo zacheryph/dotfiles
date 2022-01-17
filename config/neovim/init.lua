@@ -3,6 +3,8 @@ require('settings')
 require('completion')
 require('mappings')
 
+vim.cmd[[colorscheme neodark]]
+
 -- comment needs to be initialized
 require('nvim_comment').setup()
 

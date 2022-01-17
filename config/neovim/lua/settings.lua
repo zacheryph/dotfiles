@@ -1,8 +1,6 @@
 local o = vim.opt
 local g = vim.g
 
-vim.cmd[[colorscheme nord]]
-
 -- options
 o.modelines = 1
 o.termguicolors = true
