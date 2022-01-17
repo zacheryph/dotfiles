@@ -3,6 +3,7 @@
 {
   programs.alacritty = {
     enable = true;
+    package = pkgs.bat;
 
     settings = {
       cursor.style = "Beam";
