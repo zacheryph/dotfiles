@@ -3,7 +3,8 @@ require('settings')
 require('completion')
 require('mappings')
 
-vim.cmd[[colorscheme neodark]]
+vim.cmd[[let g:everforest_background = 'hard']]
+vim.cmd[[colorscheme everforest]]
 
 -- comment needs to be initialized
 require('nvim_comment').setup()
@@ -11,7 +12,9 @@ require('nvim_comment').setup()
 -- lualine
 require('lualine').setup {
   options = {
-    theme = 'nord',
+    theme = 'everforest',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
   }
 }
 

@@ -1,3 +1,4 @@
+-- bootstrap packer
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -44,8 +45,8 @@ return require('packer').startup(function(use)
       'williamboman/nvim-lsp-installer',
     }
   }
-  -- use { 'folke/lsp-trouble.nvim' }
-  use { 
+  use { 'folke/lsp-trouble.nvim' }
+  use {
     'hrsh7th/nvim-cmp',
     requires = {
       'hrsh7th/cmp-buffer',
@@ -62,9 +63,10 @@ return require('packer').startup(function(use)
   use 'KeitaNakamura/neodark.vim'
   use 'arcticicestudio/nord-vim'
   use 'ellisonleao/gruvbox.nvim'
+  use 'sainnhe/everforest'
+  use 'sainnhe/edge'
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
+  -- bootstrap packer
   if packer_bootstrap then
     require('packer').sync()
   end
