@@ -3,8 +3,13 @@ require('settings')
 require('completion')
 require('mappings')
 
-vim.cmd[[let g:everforest_background = 'hard']]
-vim.cmd[[colorscheme everforest]]
+-- vim.cmd[[colorscheme nightfox]]
+local nightfox = require('nightfox')
+nightfox.setup({
+  fox = 'nordfox',
+  styles = { comments = "italic" },
+})
+nightfox.load()
 
 -- comment needs to be initialized
 require('nvim_comment').setup()
@@ -12,7 +17,7 @@ require('nvim_comment').setup()
 -- lualine
 require('lualine').setup {
   options = {
-    theme = 'everforest',
+    theme = 'nightfox',
     component_separators = { left = '', right = ''},
     section_separators = { left = '', right = ''},
   }

@@ -24,6 +24,7 @@ o.relativenumber = true
 o.swapfile = false
 o.backup = false
 
+o.cursorline = true
 o.hlsearch = true
 o.smartcase = true
 o.smarttab = true

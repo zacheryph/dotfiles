@@ -62,9 +62,8 @@ return require('packer').startup(function(use)
   -- themes
   use 'KeitaNakamura/neodark.vim'
   use 'arcticicestudio/nord-vim'
-  use 'ellisonleao/gruvbox.nvim'
-  use 'sainnhe/everforest'
-  use 'sainnhe/edge'
+  use 'EdenEast/nightfox.nvim'
+  use 'folke/tokyonight.nvim'
 
   -- bootstrap packer
   if packer_bootstrap then
