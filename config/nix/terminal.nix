@@ -80,7 +80,7 @@
     escapeTime = 0;
     historyLimit = 10000;
     shortcut = "a";
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
 
     plugins = with pkgs; [
       tmuxPlugins.sensible
@@ -97,7 +97,7 @@
 
     extraConfig = ''
       # 24 bit true-color
-      set -sa terminal-overrides ",alacritty:Tc,screen-256color:Tc"
+      set -sa terminal-overrides ",alacritty:Tc,xterm-256color:Tc,tmux-256color:Tc"
 
       # window titles
       setw -g automatic-rename on
