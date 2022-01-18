@@ -8,7 +8,7 @@
   home.homeDirectory = builtins.getEnv "HOME";
 
   home.sessionVariables = {
-    EDITOR = "vim";
+    EDITOR = "nvim";
     GOPATH = "$HOME/.go";
     LANG = "en_US.UTF-8";
     PATH = "$HOME/bin:$HOME/.krew/bin:$HOME/.cargo/bin:$HOME/.go/bin:$HOME/.nix-profile/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/bin:/bin:/usr/sbin:/sbin";

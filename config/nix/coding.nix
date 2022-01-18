@@ -70,6 +70,7 @@
       st = "status";
       ci = "commit -s";
       b = "branch -v -a";
+      lb = "branch -v";
       mb = "merge-base";
       cp = "cherry-pick";
       l = "log --graph --decorate";
@@ -96,6 +97,7 @@
     extraConfig = {
       init.defaultBranch= "main";
       diff.renames = "copies";
+      push.default = "current";
       merge.log = true;
       pull.ff = "only";
 
