@@ -11,7 +11,11 @@ key_map('n', '<C-r>', ':Telescope lsp_document_symbols<CR>', { noremap = true, s
 key_map('n', '<C-h>', ':BufferPrevious!<CR>', { silent = true })
 key_map('n', '<C-l>', ':BufferNext!<CR>', { silent = true })
 
+-- debugging
+key_map('n', 't', ':TroubleToggle<CR>', { noremap = true, silent = true })
+
 -- jumping
+key_map('n', '<leader>s', ':AS<CR>', {noremap = true, silent = true }) -- rails rspec
 buf_map('n', 'gd', ':lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
 
 -- folding

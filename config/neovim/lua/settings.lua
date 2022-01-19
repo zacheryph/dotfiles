@@ -12,6 +12,7 @@ o.swapfile = false
 o.wrap = true
 o.linebreak = true
 
+o.colorcolumn = '100,140'
 o.expandtab = true
 o.softtabstop = 2
 o.tabstop = 2
