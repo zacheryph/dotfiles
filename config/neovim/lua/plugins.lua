@@ -11,7 +11,6 @@ return require('packer').startup(function(use)
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   use { 'LnL7/vim-nix' }
-  use { 'Raimondi/delimitMate' }
   use { 'Saecki/crates.nvim' }
   use { 'alvan/vim-closetag' }
   use { 'cespare/vim-toml'}
@@ -23,6 +22,11 @@ return require('packer').startup(function(use)
   use { 'tpope/vim-repeat' }
   use { 'tpope/vim-surround' }
   use { 'vim-ruby/vim-ruby' }
+
+  use {
+    'steelsojka/pears.nvim',
+    config = function() require('pears').setup() end,
+  }
 
   use { 'terrortylor/nvim-comment' }
 

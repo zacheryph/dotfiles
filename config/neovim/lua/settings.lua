@@ -20,6 +20,7 @@ o.shiftwidth = 2
 o.smartindent = true
 
 o.autoindent = true
+o.smartindent = true
 o.number = true
 o.relativenumber = true
 o.swapfile = false
