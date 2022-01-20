@@ -22,6 +22,12 @@ return require('packer').startup(function(use)
   use { 'tpope/vim-repeat' }
   use { 'tpope/vim-surround' }
   use { 'vim-ruby/vim-ruby' }
+  use {
+    'ntpeters/vim-better-whitespace',
+    config = function()
+      vim.cmd[[au BufWritePre * StripWhitespace]]
+    end,
+  }
 
   use {
     'steelsojka/pears.nvim',
