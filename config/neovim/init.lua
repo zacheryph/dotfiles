@@ -1,9 +1,8 @@
--- initialize the world
-require("plugins")
-
 -- decide our fate
 CurrentTheme = "tokyonight"
 
+-- initialize the world
+require("plugins")
 require("settings")
 require("mappings")
 require("completion")
