@@ -12,7 +12,7 @@ o.swapfile = false
 o.wrap = true
 o.linebreak = true
 
-o.colorcolumn = '100,140'
+o.colorcolumn = "100,140"
 o.expandtab = true
 o.softtabstop = 2
 o.tabstop = 2
@@ -31,22 +31,22 @@ o.hlsearch = true
 o.smartcase = true
 o.smarttab = true
 
-o.mouse = 'a'
+o.mouse = "a"
 
 o.scrolloff = 5
 o.sidescrolloff = 10
 
-o.completeopt = 'menu,menuone,noinsert,noselect'
+o.completeopt = "menu,menuone,noinsert,noselect"
 
 --o.splitbelow = true
 --o.splitright = true
 
-g.mapleader = ','
+g.mapleader = ","
 
-o.clipboard = 'unnamedplus'
+o.clipboard = "unnamedplus"
 
 -- folding
 o.foldenable = true
 o.foldlevelstart = 5
 o.foldnestmax = 5
-o.foldmethod = 'syntax'
+o.foldmethod = "syntax"

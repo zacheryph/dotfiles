@@ -1,8 +1,8 @@
 -- lsp (language server) setup
-local lspconf = require('lspconfig')
+local lspconf = require("lspconfig")
 
 -- installer registration
-require('nvim-lsp-installer').on_server_ready(function(server)
+require("nvim-lsp-installer").on_server_ready(function(server)
   local opts = {}
   server:setup(opts)
 end)
@@ -36,11 +36,11 @@ local rust_opts = {
 }
 
 lspconf.rust_analyzer.setup{}
-require('rust-tools').setup(rust_opts)
+require("rust-tools").setup(rust_opts)
 
 -- nvim-cmp configration
-local cmp = require('cmp')
-local lspkind = require('lspkind')
+local cmp = require("cmp")
+local lspkind = require("lspkind")
 
 cmp.setup({
   formatting = {
@@ -64,19 +64,19 @@ cmp.setup({
     end
   },
   mapping = {
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm({
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.close(),
+    ["<CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     }),
-    ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })
+    ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" })
   },
   sources = {
-    { name = 'buffer' },
-    { name = 'nvim_lsp' },
-    { name = 'nvim_lua' },
+    { name = "buffer" },
+    { name = "nvim_lsp" },
+    { name = "nvim_lua" },
   }
 })

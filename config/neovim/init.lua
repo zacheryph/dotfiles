@@ -1,34 +1,24 @@
-require('plugins')
-require('settings')
-require('completion')
-require('mappings')
+-- initialize the world
+require("plugins")
 
--- vim.cmd[[colorscheme nightfox]]
-local nightfox = require('nightfox')
-nightfox.setup({
-  fox = 'nordfox',
-  styles = { comments = "italic" },
-})
-nightfox.load()
+-- decide our fate
+CurrentTheme = "tokyonight"
 
--- comment needs to be initialized
-require('nvim_comment').setup()
+require("settings")
+require("mappings")
+require("completion")
+require("theme")
 
--- lualine
-require('lualine').setup {
-  options = {
-    theme = 'nightfox',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
-  }
-}
-
--- exit telescope one on esc
+-- telescope configuration
+-- this is here cause i cant have lua/telescope.lua
+local telescope = require("telescope")
 local actions = require("telescope.actions")
-require('telescope').setup({
+
+telescope.setup({
   defaults = {
     mappings = {
       i = {
+        -- close telescope with one esc
         ["<esc>"] = actions.close,
       },
     },
@@ -43,4 +33,6 @@ require('telescope').setup({
   }
 })
 
-require('telescope').load_extension('fzf')
+-- fzf lets me use spaces in search
+telescope.load_extension('fzf')
+
