@@ -15,9 +15,16 @@ return require("packer").startup(function(use)
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
 
   -- ui
+  use { "beauwilliams/focus.nvim", config = function() require("focus").setup() end }
   use { "romgrk/barbar.nvim", requires = "kyazdani42/nvim-web-devicons" }
-  use { "nvim-telescope/telescope.nvim", requires = "nvim-lua/plenary.nvim" }
-  use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
+  use {
+    "nvim-telescope/telescope.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-symbols.nvim",
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+    }
+  }
 
   use {
     "nvim-lualine/lualine.nvim",
