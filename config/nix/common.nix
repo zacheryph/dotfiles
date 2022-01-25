@@ -32,10 +32,6 @@
     unixtools.watch
     wget
 
-    # media
-    ffmpeg
-    youtube-dl
-
     # network
     minio-client
     mtr
