@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    direnv
+  ];
+
   programs.alacritty = {
     enable = true;
     package = pkgs.bat;
@@ -199,7 +203,11 @@
 
       # docker helpers
       up = "docker-compose up -d";
-      dockervm = "docker run --rm -it --privileged --pid=host walkerlee/nsenter -t 1 -m -u -i -n bash";
+
+      # work
+      be  = "bundle exec";
+      beg = "bundle exec guard";
+      ber = "bundle exec rspec";
 
       # kubernetes
       fres = "flux reconcile source";
@@ -226,6 +234,7 @@
         docker run --rm -it --user $(id -u):$(id -g) -v $PWD:/data --workdir /data "$@"
       }
 
+      source <(direnv hook zsh)
       source <(rbenv init - zsh)
       source <(kubectl completion zsh)
     '';

@@ -9,7 +9,6 @@
     go-task
     ripgrep
     shellcheck
-    sops
     jq
     yq-go
 

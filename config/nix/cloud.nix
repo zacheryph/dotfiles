@@ -2,6 +2,9 @@
 
 {
   home.packages = with pkgs; [
+    # other
+    sops
+
     # ci/cd
     tektoncd-cli
 
