@@ -19,7 +19,6 @@
     # node... read readme
 
     rustup
-    rust-analyzer
     cargo-audit
     cargo-bloat
     cargo-deps
@@ -34,28 +33,9 @@
     # wasm-pack
 
     # scm
-    gitAndTools.git-crypt
     gitAndTools.git-extras
     gitAndTools.gitflow
     gitAndTools.pre-commit
-
-    # ci/cd
-    tektoncd-cli
-
-    # cloud
-    doctl
-    fluxcd
-    google-cloud-sdk
-    istioctl
-    krew
-    kubectl
-    kubectx
-    kubernetes-helm
-    kubeval
-    kustomize
-    stern
-    telepresence2
-    terraform
   ];
 
   programs.git = {
