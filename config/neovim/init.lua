@@ -7,6 +7,7 @@ require("settings")
 require("mappings")
 require("completion")
 require("theme")
+require("treesitter")
 
 -- telescope configuration
 -- this is here cause i cant have lua/telescope.lua

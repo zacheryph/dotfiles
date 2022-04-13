@@ -12,7 +12,10 @@ return require("packer").startup(function(use)
   -- groundwork
   use { "nvim-lua/plenary.nvim" }
   use { "nvim-lua/popup.nvim" }
-  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+  use { "nvim-treesitter/nvim-treesitter",
+        requires = { "RRethy/nvim-treesitter-endwise" },
+        run = ":TSUpdate",
+      }
 
   -- ui
   use { "beauwilliams/focus.nvim", config = function() require("focus").setup() end }
@@ -34,7 +37,6 @@ return require("packer").startup(function(use)
   -- general
   use { "alvan/vim-closetag" }
   use { "mechatroner/rainbow_csv" }
-  use { "tpope/vim-endwise" }
   use { "tpope/vim-fugitive" }
   use { "tpope/vim-repeat" }
   use { "tpope/vim-surround" }
@@ -53,7 +55,8 @@ return require("packer").startup(function(use)
 
   use {
     "Raimondi/delimitMate",
-    config = function()
+    event = "InsertEnter",
+    setup = function()
       vim.cmd[[let b:delimitMate_expand_cr = 1]]
       vim.cmd[[let b:delimitMate_expand_space = 1]]
       vim.cmd[[let b:delimitMate_jump_expansion = 1]]
