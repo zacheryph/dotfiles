@@ -16,7 +16,6 @@ key_map("n", "t", ":TroubleToggle<CR>", { noremap = true, silent = true })
 
 -- jumping
 key_map("n", "<leader>s", ":AS<CR>", {noremap = true, silent = true }) -- rails rspec
-buf_map("n", "gd", ":lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
 
 -- folding
 key_map("n", "<space>", "za", { noremap = true, silent = true })

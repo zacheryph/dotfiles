@@ -80,3 +80,19 @@ cmp.setup({
     { name = "nvim_lua" },
   }
 })
+
+-- mappings
+-- need to use on_attach to handle buffers
+local on_attach = function(client, bufnr)
+  local function buf_map(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
+  buf_map("n", "gd", ":lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
+end
+
+local servers = { "solargraph", "sumneko_lua", "rust_analyzer" }
+for _, lsp in ipairs(servers) do
+  lspconf[lsp].setup({
+    on_attach = on_attach,
+    flags = { debounce_text_changes = 150 }
+  })
+end
