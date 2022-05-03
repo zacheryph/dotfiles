@@ -12,9 +12,6 @@
     jq
     yq-go
 
-    # language
-    go
-
     # node... read readme
 
     rustup
