@@ -12,10 +12,18 @@ return require("packer").startup(function(use)
   -- groundwork
   use { "nvim-lua/plenary.nvim" }
   use { "nvim-lua/popup.nvim" }
-  use { "nvim-treesitter/nvim-treesitter",
-        requires = { "RRethy/nvim-treesitter-endwise" },
-        run = ":TSUpdate",
+
+  use {
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter.configs").setup{
+        highlight = {
+          enable = true,
+        },
       }
+    end,
+  }
 
   -- ui
   use { "beauwilliams/focus.nvim", config = function() require("focus").setup() end }
