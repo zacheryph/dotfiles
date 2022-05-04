@@ -3,7 +3,6 @@ vim.g.leader = ","
 
 -- key mappings
 local key_map = vim.api.nvim_set_keymap
-local function buf_map(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
 
 -- buffers
 key_map("n", "<C-p>", ":Telescope git_files<CR>", { noremap = true, silent = true })
