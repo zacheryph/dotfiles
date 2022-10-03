@@ -9,17 +9,19 @@
     tektoncd-cli
 
     # cloud
+    buildpack
     doctl
     fluxcd
     google-cloud-sdk
     istioctl
+    kopia
     krew
     kubectl
     kubectx
     kubernetes-helm
-    kubeval
     kustomize
     stern
+    talosctl
     telepresence2
     terraform
   ];

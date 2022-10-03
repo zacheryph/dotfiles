@@ -7,8 +7,8 @@ local key_map = vim.api.nvim_set_keymap
 -- buffers
 key_map("n", "<C-p>", ":Telescope git_files<CR>", { noremap = true, silent = true })
 key_map("n", "<C-r>", ":Telescope lsp_document_symbols<CR>", { noremap = true, silent = true })
-key_map("n", "<C-h>", ":BufferPrevious!<CR>", { silent = true })
-key_map("n", "<C-l>", ":BufferNext!<CR>", { silent = true })
+key_map("n", "<C-h>", ":BufferPrevious<CR>", { silent = true })
+key_map("n", "<C-l>", ":BufferNext<CR>", { silent = true })
 
 -- debugging
 key_map("n", "t", ":TroubleToggle<CR>", { noremap = true, silent = true })

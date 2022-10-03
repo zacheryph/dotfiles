@@ -11,17 +11,15 @@ brew "m-cli"
 cask 'appcleaner'
 # cask 'balenaetcher' # !arm64
 # cask 'bitwarden' # !arm64
-# cask 'discord' # !arm64 (using canary)
-# cask 'docker' # !arm64 (using colima)
-cask 'firefox'
+cask 'discord'
+cask 'docker'
 cask 'fork'
 cask 'handbrake'
 # cask 'keybase' # !arm64
 cask 'postman'
 # cask 'signal' # !arm64
 cask 'slack'
-# cask 'virtualbox-extension-pack' # !arm64
-# cask 'virtualbox' # !arm64
+cask 'utm'
 cask 'visual-studio-code'
 
 # mac app store
@@ -36,7 +34,6 @@ mas 'WireGuard', id: 1451685025
 brew 'awscli'
 brew 'cloudflare-wrangler'
 brew 'datawire/blackbird/telepresence'
-brew 'k3d'
 brew 'kn'
 brew 'rbenv'
 brew 'velero'

@@ -72,7 +72,6 @@
 
     extraConfig = {
       init.defaultBranch= "main";
-      diff.renames = "copies";
       push.default = "current";
       merge.log = true;
       pull.ff = "only";
@@ -97,6 +96,11 @@
           helper = [ "" "!aws codecommit credential-helper $@" ];
           useHttpPath = true;
         };
+      };
+
+      diff = {
+        renames = "copies";
+        sopsdiffer.textconv = "sops -d --config /dev/null";
       };
 
       url = {
