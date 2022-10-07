@@ -168,7 +168,8 @@
 
       bind -n C-k send-keys "C-l"\; run "tmux clear-history"
 
-      # TODO: need to be able to set name from machine.
+      set-option -g status-position top
+
       new-session -d -s console
       new-window -d
       new-window -d
@@ -181,6 +182,7 @@
     enable = true;
     autocd = true;
     enableAutosuggestions = true;
+    enableSyntaxHighlighting = true;
 
     envExtra = ''
       [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ] && source "$HOME/.nix-profile/etc/profile.d/nix.sh"
@@ -237,6 +239,13 @@
       source <(direnv hook zsh)
       source <(rbenv init - zsh)
       source <(kubectl completion zsh)
+
+      bindkey "^[[1;2C" forward-word
+      bindkey "^[[1;2D" backward-word
+
+      # force system paths to the back of the bus
+      SYSTEM_PATH=$(eval $(env PATH= /usr/libexec/path_helper -s); echo $PATH)
+      PATH=''${PATH//''${SYSTEM_PATH}:/}:''${SYSTEM_PATH}
     '';
 
     plugins = [
