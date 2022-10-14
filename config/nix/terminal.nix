@@ -22,13 +22,12 @@
         opactity = 0.90;
         decorations = "buttonless";
 
-        dimensions.columns = 124;
-        dimensions.lines = 40;
+        dimensions.columns = 125;
+        dimensions.lines = 42;
       };
 
       font = {
         size = 22;
-        use_thin_strokes = true;
 
         # normal.family = "VictorMono Nerd Font Mono";
         # bold = { family = "VictorMono Nerd Font Mono"; style = "Regular"; };
