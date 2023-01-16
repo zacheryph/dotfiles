@@ -4,7 +4,6 @@
   home.packages = with pkgs; [
     # utility
     fd
-    gdb
     gomplate
     go-task
     ripgrep
