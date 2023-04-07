@@ -1,6 +1,4 @@
-{ config, pkgs, ... }:
-
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     # utility
     fd
@@ -10,16 +8,6 @@
     shellcheck
     jq
     yq-go
-
-    # neovim
-    neovim-unwrapped
-    tree-sitter
-    ripgrep
-    lazygit
-    gdu
-    bottom
-    alejandra # nix
-    deadnix # nix
 
     # rust
     rustup
@@ -102,7 +90,7 @@
         helper = "osxkeychain";
 
         "https://git-codecommit.us-east-2.amazonaws.com" = {
-          helper = [ "" "!aws codecommit credential-helper $@" ];
+          helper = ["" "!aws codecommit credential-helper $@"];
           useHttpPath = true;
         };
       };
