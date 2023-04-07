@@ -21,6 +21,7 @@
     alejandra # nix
     deadnix # nix
 
+    # rust
     rustup
     cargo-audit
     cargo-bloat
@@ -36,6 +37,7 @@
     # wasm-pack
 
     # scm
+    git-lfs
     gitAndTools.git-extras
     gitAndTools.gitflow
     gitAndTools.pre-commit

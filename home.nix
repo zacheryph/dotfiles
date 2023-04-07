@@ -12,7 +12,7 @@ in
     config/nix/macos.nix
     # config/nix/neovim.nix
   ]
-  ++ lib.optionals (__pathExists localOverrides) [localOverrides];
+  ++ lib.optionals (__pathExists localOverrides) [ localOverrides ];
 
   home.stateVersion = "22.05";
 }
