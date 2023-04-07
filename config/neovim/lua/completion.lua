@@ -13,7 +13,7 @@ lspconf.solargraph.setup {
 }
 
 -- lua
-lspconf.sumneko_lua.setup {}
+lspconf.lua_ls.setup {}
 
 -- rust
 local rust_opts = {
@@ -89,7 +89,7 @@ local on_attach = function(client, bufnr)
   buf_map("n", "gd", ":lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
 end
 
-local servers = { "solargraph", "sumneko_lua", "rust_analyzer" }
+local servers = { "solargraph", "lua_ls", "rust_analyzer" }
 for _, lsp in ipairs(servers) do
   lspconf[lsp].setup({
     on_attach = on_attach,
