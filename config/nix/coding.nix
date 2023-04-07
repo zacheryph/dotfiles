@@ -70,7 +70,7 @@
     ];
 
     extraConfig = {
-      init.defaultBranch= "main";
+      init.defaultBranch = "main";
       push.default = "current";
       merge.log = true;
       pull.ff = "only";
