@@ -10,7 +10,7 @@ in
     config/nix/golang.nix
     config/nix/terminal.nix
     config/nix/macos.nix
-    config/nix/neovim.nix
+    # config/nix/neovim.nix
   ]
   ++ lib.optionals (__pathExists localOverrides) [localOverrides];
 

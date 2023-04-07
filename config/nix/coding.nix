@@ -11,7 +11,15 @@
     jq
     yq-go
 
-    # node... read readme
+    # neovim
+    neovim-unwrapped
+    tree-sitter
+    ripgrep
+    lazygit
+    gdu
+    bottom
+    alejandra # nix
+    deadnix # nix
 
     rustup
     cargo-audit
