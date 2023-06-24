@@ -201,6 +201,7 @@
       batl = "bat -l yaml";
       batn = "bat -l json";
       pwgen = "ruby -r securerandom -e 'puts SecureRandom.urlsafe_base64(rand(24..40))'";
+      dequarantine = "sudo xattr -r -d com.apple.quarantine";
 
       # docker helpers
       up = "docker-compose up -d";
