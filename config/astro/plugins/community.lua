@@ -3,7 +3,8 @@ return {
   "AstroNvim/astrocommunity",
 
   -- colorschemes
-  { import = "astrocommunity.colorscheme.tokyonight" },
+  -- { import = "astrocommunity.colorscheme.tokyonight-nvim" },
+  { import = "astrocommunity.colorscheme.catppuccin" },
 
   -- packs
   { import = "astrocommunity.pack.bash" },
