@@ -181,7 +181,9 @@
     enable = true;
     autocd = true;
     enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting = {
+      enable = true;
+    };
 
     envExtra = ''
       [ -f "$HOME/.nix-profile/etc/profile.d/nix.sh" ] && source "$HOME/.nix-profile/etc/profile.d/nix.sh"
