@@ -27,7 +27,6 @@
     cloc
     dos2unix
     envsubst
-    exa
     htop
     nix-zsh-completions
     pinentry_mac

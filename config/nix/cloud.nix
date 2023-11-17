@@ -23,6 +23,5 @@
     stern
     talosctl
     telepresence2
-    terraform
   ];
 }

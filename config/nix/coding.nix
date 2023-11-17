@@ -2,7 +2,6 @@
   home.packages = with pkgs; [
     # utility
     fd
-    gomplate
     go-task
     ripgrep
     shellcheck
