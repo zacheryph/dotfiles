@@ -67,10 +67,19 @@
     ];
 
     extraConfig = {
+      # git settings
+      fetch.fsckobjects = true;
+      help.autocorrect = 2;
       init.defaultBranch = "main";
-      push.default = "current";
+      log.date = "iso";
+      merge.conflictstyle = "zdiff3";
       merge.log = true;
       pull.ff = "only";
+      push.default = "current";
+      rebase.autostash = true;
+      receive.fsckObjects = true;
+      rerere.enabled = true;
+      transfer.fsckobjects = true;
 
       core = {
         packedGitLimit = "50m";
@@ -81,6 +90,7 @@
       color = {
         branch = true;
         diff = true;
+        editor = "nvim";
         status = true;
       };
 
@@ -95,6 +105,7 @@
       };
 
       diff = {
+        algorithm = "histogram";
         renames = "copies";
         sopsdiffer.textconv = "sops -d --config /dev/null";
       };
@@ -132,7 +143,7 @@
   };
 
   programs.vim = {
-    enable = true;
+    enable = false;
     plugins = with pkgs.vimPlugins; [
       ctrlp-vim
       delimitMate

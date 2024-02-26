@@ -3,6 +3,7 @@
 {
   home.sessionVariables = {
     HOMEBREW_BUNDLE_FILE = "$HOME/.config/nixpkgs/config/macos/Brewfile";
+    HOMEBREW_NO_ENV_HINTS = "1";
   };
 
   home.file.".gnupg/gpg-agent.conf".text = ''
