@@ -68,7 +68,6 @@
 
     extraConfig = {
       # git settings
-      fetch.fsckobjects = true;
       help.autocorrect = 2;
       init.defaultBranch = "main";
       log.date = "iso";
@@ -77,9 +76,7 @@
       pull.ff = "only";
       push.default = "current";
       rebase.autostash = true;
-      receive.fsckObjects = true;
       rerere.enabled = true;
-      transfer.fsckobjects = true;
 
       core = {
         packedGitLimit = "50m";
