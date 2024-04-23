@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   home.packages = with pkgs; [
     # utility
     fd
@@ -12,7 +12,6 @@
     rustup
     cargo-audit
     cargo-bloat
-    cargo-deps
     cargo-edit
     cargo-expand
     # cargo-geiger
@@ -96,7 +95,7 @@
         helper = "osxkeychain";
 
         "https://git-codecommit.us-east-2.amazonaws.com" = {
-          helper = ["" "!aws codecommit credential-helper $@"];
+          helper = [ "" "!aws codecommit credential-helper $@" ];
           useHttpPath = true;
         };
       };
