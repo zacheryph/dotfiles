@@ -12,5 +12,5 @@ in {
     ]
     ++ lib.optionals (__pathExists localOverrides) [localOverrides];
 
-  home.stateVersion = "22.05";
+  home.stateVersion = "24.11";
 }
