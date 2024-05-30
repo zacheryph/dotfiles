@@ -23,6 +23,8 @@
     # wasm-pack
 
     # scm
+    gh
+    gh-dash
     git-lfs
     gitAndTools.git-extras
     gitAndTools.gitflow
