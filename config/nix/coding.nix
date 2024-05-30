@@ -8,6 +8,9 @@
     jq
     yq-go
 
+    # languages
+    go
+
     # rust
     rustup
     cargo-audit

@@ -5,7 +5,6 @@ in {
     [
       config/nix/common.nix
       config/nix/coding.nix
-      config/nix/golang.nix
       config/nix/terminal.nix
       config/nix/macos.nix
       config/nix/neovim.nix
