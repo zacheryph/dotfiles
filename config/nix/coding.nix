@@ -24,7 +24,6 @@
 
     # scm
     gh
-    gh-dash
     git-lfs
     gitAndTools.git-extras
     gitAndTools.gitflow
@@ -137,6 +136,22 @@
           required = true;
         };
       };
+    };
+  };
+
+  programs.gh-dash = {
+    enable = true;
+    settings = {
+      prSections = [
+        {
+          title = "Mine";
+          filters = "is:open author:@me -org:textusbiz";
+        }
+        {
+          title = "Involved";
+          filters = "is:open involves:@me -author:@me -org:textusbiz -author:app/renovate";
+        }
+      ];
     };
   };
 }
