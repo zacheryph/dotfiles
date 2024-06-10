@@ -1,11 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  programs.home-manager.enable = true;
+  # programs.home-manager.enable = true;
   programs.man.enable = true;
 
-  home.username = builtins.getEnv "USER";
-  home.homeDirectory = builtins.getEnv "HOME";
+  # home.username = builtins.getEnv "USER";
+  # home.homeDirectory = builtins.getEnv "HOME";
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -19,9 +19,6 @@
   ];
 
   home.packages = with pkgs; [
-    # yes nix. we depend on nix.
-    nix
-
     # general
     bat
     cloc

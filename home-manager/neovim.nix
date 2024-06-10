@@ -14,7 +14,7 @@
   ];
 
   xdg.configFile."nvim/lua/user" = {
-    source = ../astro;
+    source = ../astro.nvim;
     recursive = true;
   };
 }

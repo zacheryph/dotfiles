@@ -9,11 +9,13 @@
     tektoncd-cli
 
     # cloud
+    awscli2
     buildpack
     doctl
     fluxcd
     google-cloud-sdk
     istioctl
+    kn
     kopia
     krew
     kubectl

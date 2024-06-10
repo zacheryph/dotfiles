@@ -8,24 +8,10 @@
     jq
     yq-go
 
-    # languages
-    go
+    # dev
+    devenv
 
-    # rust
-    rustup
-    cargo-audit
-    cargo-bloat
-    cargo-edit
-    cargo-expand
-    # cargo-geiger
-    cargo-generate
-    cargo-outdated
-    cargo-sweep
-    cargo-udeps
-    # cargo-watch
-    # wasm-pack
-
-    # scm
+    # git[hub]
     gh
     git-lfs
     gitAndTools.git-extras

@@ -1,13 +1,14 @@
-{lib, ...}: let
+{ lib, ... }:
+let
   localOverrides = ./local.nix;
 in {
   imports =
     [
-      config/nix/common.nix
-      config/nix/coding.nix
-      config/nix/terminal.nix
-      config/nix/macos.nix
-      config/nix/neovim.nix
+      ./home-manager/common.nix
+      ./home-manager/coding.nix
+      ./home-manager/terminal.nix
+      ./home-manager/macos.nix
+      ./home-manager/neovim.nix
     ]
     ++ lib.optionals (__pathExists localOverrides) [localOverrides];
 
