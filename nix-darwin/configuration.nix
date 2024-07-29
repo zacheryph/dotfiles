@@ -36,9 +36,9 @@
       "docker"
       "fork"
       "handbrake"
-      "logseq"
+      # "logseq"
       "slack"
-      "utm"
+      # "utm"
       "visual-studio-code"
       # cask 'bitwarden' # !arm64
       # cask 'keybase' # !arm64
