@@ -26,14 +26,15 @@
       };
 
       font = {
-        size = 22;
+        size = 20;
+        normal.family = "VictorMono Nerd Font Mono";
+        bold = { family = "VictorMono Nerd Font Mono"; style = "Regular"; };
+        italic.family = "VictorMono Nerd Font Mono";
 
-        # normal.family = "VictorMono Nerd Font Mono";
-        # bold = { family = "VictorMono Nerd Font Mono"; style = "Regular"; };
-        # italic.family = "VictorMono Nerd Font Mono";
-        normal.family = "DankMono Nerd Font Mono";
-        bold = { family = "DankMono Nerd Font Mono"; style = "Regular"; };
-        italic.family = "DankMono Nerd Font Mono";
+        # size = 22;
+        # normal.family = "DankMono Nerd Font Mono";
+        # bold = { family = "DankMono Nerd Font Mono"; style = "Regular"; };
+        # italic.family = "DankMono Nerd Font Mono";
       };
 
       selection = {

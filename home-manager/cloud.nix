@@ -2,28 +2,33 @@
 
 {
   home.packages = with pkgs; [
-    # other
+    # backups
+    kopia
+
+
+    # encryption / secrets
+    age
     sops
 
-    # ci/cd
-    tektoncd-cli
-
-    # cloud
+    # providers
     awscli2
-    buildpack
     doctl
-    fluxcd
     google-cloud-sdk
+
+    # kubernetes
+    fluxcd
     istioctl
     kn
-    kopia
     krew
     kubectl
     kubectx
     kubernetes-helm
     kustomize
-    stern
     talosctl
     telepresence2
+
+    # # cloud
+    # buildpack
+    # stern
   ];
 }

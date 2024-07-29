@@ -11,6 +11,8 @@
     # dev
     devenv
 
+    rbenv
+
     # git[hub]
     gh
     git-lfs

@@ -25,17 +25,7 @@
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .
     darwinConfigurations.fourteen = nix-darwin.lib.darwinSystem {
-      modules = [
-        ./nix-darwin/configuration.nix
-        # configuration
-        # home-manager.darwinModules.home-manager {
-        #   nixpkgs = { config.allowUnfree = true; };
-
-        #   home-manager.useGlobalPkgs = true;
-        #   home-manager.useUserPackages = true;
-        #   home-manager.users.${username} = import ./home.nix;
-        # }
-      ];
+      modules = [ ./nix-darwin/configuration.nix ];
       specialArgs = { inherit self inputs; };
     };
 
