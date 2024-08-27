@@ -31,24 +31,8 @@
     enable = true;
     casks = [
       "alacritty"
-      "appcleaner"
-      "discord"
-      "docker"
-      "fork"
-      "handbrake"
-      # "logseq"
       "slack"
-      # "utm"
       "visual-studio-code"
-      # cask 'bitwarden' # !arm64
-      # cask 'keybase' # !arm64
-      # cask 'signal' # !arm64
     ];
-
-    masApps = {
-      "Bear" = 1091189122;
-      "Home Assistant" = 1099568401;
-      "WireGuard" = 1451685025;
-    };
   };
 }

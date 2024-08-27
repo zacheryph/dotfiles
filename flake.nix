@@ -25,8 +25,11 @@
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .
     darwinConfigurations.fourteen = nix-darwin.lib.darwinSystem {
-      modules = [ ./nix-darwin/configuration.nix ];
       specialArgs = { inherit self inputs; };
+      modules = [
+        nix-darwin/configuration.nix
+        hosts/fourteen/darwin.nix
+      ];
     };
 
     # Expose the package set, including overlays, for convenience.
