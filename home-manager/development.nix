@@ -95,7 +95,8 @@
       diff = {
         algorithm = "histogram";
         renames = "copies";
-        sopsdiffer.textconv = "sops -d --config /dev/null";
+
+        age.textconf = "cat";
       };
 
       url = {
@@ -120,6 +121,11 @@
       };
 
       filter = {
+        "age" = {
+          clean = "age -R .recipients -a -";
+          smudge = "age -d -i ${AGE_IDENTITY_FILE} -";
+          required = true;
+        };
         "lfs" = {
           clean = "git-lfs clean -- %f";
           smudge = "git-lfs smudge -- %f";
