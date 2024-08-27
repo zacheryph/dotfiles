@@ -215,6 +215,7 @@
       source <(direnv hook zsh)
       source <(rbenv init - zsh)
       source <(kubectl completion zsh)
+      source <(/opt/homebrew/bin/brew shellenv)
 
       bindkey "^[[1;2C" forward-word
       bindkey "^[[1;2D" backward-word

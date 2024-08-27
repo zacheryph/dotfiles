@@ -24,9 +24,9 @@
   programs.git = {
     enable = true;
     userName = "Zachery Hostens";
+    userEmail = "zacheryph@gmail.com";
     # LOCAL: userEmail = "";
     # LOCAL: signing.key = "";
-    signing.signByDefault = true;
 
     aliases = {
       co = "checkout";

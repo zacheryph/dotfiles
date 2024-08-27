@@ -5,9 +5,10 @@
     # backups
     kopia
 
-
     # encryption / secrets
     age
+    age-plugin-yubikey
+    keybase
     sops
 
     # providers

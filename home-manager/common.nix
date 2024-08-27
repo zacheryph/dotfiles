@@ -22,6 +22,7 @@
     # general
     bat
     cloc
+    d2
     dos2unix
     envsubst
     htop
