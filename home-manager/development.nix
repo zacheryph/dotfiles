@@ -24,9 +24,6 @@
   programs.git = {
     enable = true;
     userName = "Zachery Hostens";
-    userEmail = "zacheryph@gmail.com";
-    # LOCAL: userEmail = "";
-    # LOCAL: signing.key = "";
 
     aliases = {
       co = "checkout";
@@ -96,7 +93,7 @@
         algorithm = "histogram";
         renames = "copies";
 
-        age.textconf = "cat";
+        age.textconv = "cat";
       };
 
       url = {
@@ -123,7 +120,7 @@
       filter = {
         "age" = {
           clean = "age -R .recipients -a -";
-          smudge = "age -d -i ${AGE_IDENTITY_FILE} -";
+          smudge = "age -d -i \${AGE_IDENTITY_FILE} -";
           required = true;
         };
         "lfs" = {

@@ -35,10 +35,11 @@
     # Expose the package set, including overlays, for convenience.
     darwinPackages = self.darwinConfigurations.fourteen.pkgs;
 
-    homeConfigurations.context = home-manager.lib.homeManagerConfiguration {
+    homeConfigurations."context@fourteen" = home-manager.lib.homeManagerConfiguration {
       pkgs = import nixpkgs { inherit system; };
       modules = [
         ./home.nix
+        hosts/fourteen/home.nix
         {
           home.username = username;
           home.homeDirectory = "/Users/context";
