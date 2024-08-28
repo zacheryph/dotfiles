@@ -3,9 +3,10 @@
     # utility
     fd
     go-task
+    jq
+    overmind
     ripgrep
     shellcheck
-    jq
     yq-go
 
     # dev
@@ -139,11 +140,11 @@
       prSections = [
         {
           title = "Mine";
-          filters = "is:open author:@me -org:textusbiz";
+          filters = "is:open author:@me";
         }
         {
           title = "Involved";
-          filters = "is:open involves:@me -author:@me -org:textusbiz -author:app/renovate";
+          filters = "is:open involves:@me -author:@me -author:app/renovate";
         }
       ];
     };
