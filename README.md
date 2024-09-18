@@ -27,10 +27,10 @@ ln -s ~/.config/home-manager $(pwd)
 
 # initialize / install nix-darwin
 cd ~/src/dotfiles
-nix run nix-darwin -- --flake .
+nix run nix-darwin -- switch --flake .
 
 # initialize home-manager
-home-manager switch
+home-manager switch --flake .
 
 # clean the garbage
 nix-collect-garbage --delete-older-than 14d
@@ -40,67 +40,14 @@ nix-collect-garbage --delete-older-than 14d
 
 ## Update
 ```shell
-## System Refresh
-darwin-rebuild switch --flake ${DOTFILES}
+## Dotfiles
+cd ~/src/dotfiles
 
-## Home Refresh
-home-manager switch
+brew update
+darwin-rebuild switch --flake .
+home-manager switch --flake .
 ```
-
-
-### Nix
-> https://nixos.org/manual/nix/stable/#sect-macos-installation
-```bash
-sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
-```
-
-### Home-Manager
-> https://github.com/nix-community/home-manager#installation
-```bash
-nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-nix-channel --update
-
-nix-shell '<home-manager>' -A install
-```
-
-### Homebrew
-> https://brew.sh/
-```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-### Bundle
-> home-manager sets `HOMEBREW_BUNDLE_FILE` which informs brew where to find our bundle file.
-```bash
-brew bundle --verbose
-```
-
 ### Manual
 > This is stuff thats currently manual and cannot be automated... yet
-* Authenticate
-  * Bitwarden
-  * Discord
-  * Signal
-  * Slack
 * Download
   * Dank Mono [https://app.gumroad.com/library]
-
-### NodeJS
-NodeJS is garbage. Nix' `yarn` hard links to node-14, brew `yarn` depends on `node` which
-is always latest. I want stable. So you have to install `node@16 yarn` remove `node`, and
-then `link --overwrite node@16` (at least for now)
-
-## Upgrading
-
-Steps to upgrade all packages until I decide how to automate it
-
-```shell
-nix-channel --update
-home-manager switch
-brew upgrade
-rustup update
-nix-collect-garbage --delete-older-than 14d
-```
-
-## Thanks
-
-Current dotfiles owe thanks to [https://github.com/biosan/dotfiles].
