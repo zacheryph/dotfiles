@@ -46,5 +46,11 @@
     scdaemonSettings = {
       disable-ccid = true;
     };
+
+    settings = {
+      auto-key-retrieve = true;
+      default-new-key-algo = "ed25519/cert";
+      keyserver-options = "honor-keyserver-url";
+    };
   };
 }
