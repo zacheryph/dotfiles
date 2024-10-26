@@ -44,6 +44,7 @@ nix-collect-garbage --delete-older-than 14d
 cd ~/src/dotfiles
 
 brew update
+nix flake update
 darwin-rebuild switch --flake .
 home-manager switch --flake .
 ```
