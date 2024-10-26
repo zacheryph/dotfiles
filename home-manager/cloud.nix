@@ -6,10 +6,8 @@
     kopia
 
     # encryption / secrets
-    age
-    age-plugin-yubikey
+    git-crypt
     keybase
-    sops
 
     # providers
     awscli2
