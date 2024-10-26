@@ -11,8 +11,8 @@
 
     # dev
     devenv
-
-    rbenv
+    mise
+    rustup
 
     # git[hub]
     gh
