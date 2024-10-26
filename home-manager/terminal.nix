@@ -213,7 +213,7 @@
       }
 
       source <(direnv hook zsh)
-      source <(rbenv init - zsh)
+      source <(mise activate zsh)
       source <(kubectl completion zsh)
       source <(/opt/homebrew/bin/brew shellenv)
 
