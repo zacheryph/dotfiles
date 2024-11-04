@@ -215,6 +215,7 @@
       source <(direnv hook zsh)
       source <(mise activate zsh)
       source <(kubectl completion zsh)
+      source <(flux completion zsh)
       source <(/opt/homebrew/bin/brew shellenv)
 
       bindkey "^[[1;2C" forward-word

@@ -8,6 +8,7 @@
     # encryption / secrets
     git-crypt
     keybase
+    sops
 
     # providers
     awscli2
