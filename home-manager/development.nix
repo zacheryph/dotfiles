@@ -12,6 +12,7 @@
     # dev
     devenv
     mise
+    pgcli
     rustup
 
     # git[hub]
