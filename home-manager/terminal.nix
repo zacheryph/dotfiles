@@ -176,7 +176,7 @@
       # misc
       batl = "bat -l yaml";
       batn = "bat -l json";
-      pwgen = "ruby -r securerandom -e 'puts SecureRandom.urlsafe_base64(rand(24..40))'";
+      pwgen = "echo $(date +%s)$(gpg --gen-random 30) | sha256sum | base64 | head -c 32 ; echo";
       dequarantine = "sudo xattr -r -d com.apple.quarantine";
 
       # docker helpers

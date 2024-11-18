@@ -14,6 +14,7 @@
     mise
     pgcli
     rustup
+    valkey # for redis-cli
 
     # git[hub]
     gh

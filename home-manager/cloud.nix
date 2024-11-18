@@ -8,6 +8,7 @@
     # encryption / secrets
     git-crypt
     keybase
+    libargon2
     sops
 
     # providers
