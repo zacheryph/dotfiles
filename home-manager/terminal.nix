@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    atuin
     direnv
   ];
 
@@ -212,10 +213,11 @@
         docker run --rm -it --user $(id -u):$(id -g) -v $PWD:/data --workdir /data "$@"
       }
 
+      source <(atuin init zsh)
       source <(direnv hook zsh)
-      source <(mise activate zsh)
-      source <(kubectl completion zsh)
       source <(flux completion zsh)
+      source <(kubectl completion zsh)
+      source <(mise activate zsh)
       source <(/opt/homebrew/bin/brew shellenv)
 
       bindkey "^[[1;2C" forward-word
