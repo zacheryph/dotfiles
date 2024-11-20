@@ -11,9 +11,12 @@
 
     settings = {
       cursor.style = "Beam";
-      shell = {
-        program = "/bin/zsh";
-        args = [ "-c" "tmux -2 attach" ];
+
+      terminal = {
+        shell = {
+          program = "/bin/zsh";
+          args = [ "-c" "tmux -2 attach" ];
+        };
       };
 
       window = {
