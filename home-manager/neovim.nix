@@ -13,7 +13,7 @@
     deadnix # nix
   ];
 
-  xdg.configFile."nvim/lua/user" = {
+  xdg.configFile."nvim" = {
     source = ../astro.nvim;
     recursive = true;
   };
