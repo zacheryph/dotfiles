@@ -30,10 +30,15 @@
       };
 
       font = {
-        size = 20;
-        normal.family = "VictorMono Nerd Font Mono";
-        bold = { family = "VictorMono Nerd Font Mono"; style = "Regular"; };
-        italic.family = "VictorMono Nerd Font Mono";
+        size = 22;
+        normal.family = "Cascadia Code NF Light";
+        bold = { family = "Cascadia Code NF Light"; style = "Regular"; };
+        italic.family = "Cascadia Code NF Light";
+
+        # size = 20;
+        # normal.family = "VictorMono Nerd Font Mono";
+        # bold = { family = "VictorMono Nerd Font Mono"; style = "Regular"; };
+        # italic.family = "VictorMono Nerd Font Mono";
 
         # size = 22;
         # normal.family = "DankMono Nerd Font Mono";
@@ -77,31 +82,59 @@
       #   };
       # };
 
-      # tokyonight-storm
+      # # tokyonight-storm
+      # colors = {
+      #   primary = {
+      #     background = "0x24283b";
+      #     foreground = "0xa9b1d6";
+      #   };
+      #   normal = {
+      #     black = "0x32344a";
+      #     red = "0xf7768e";
+      #     green = "0x9ece6a";
+      #     yellow = "0xe0af68";
+      #     blue = "0x7aa2f7";
+      #     magenta = "0xad8ee6";
+      #     cyan = "0x449dab";
+      #     white = "0x9699a8";
+      #   };
+      #   bright = {
+      #     black = "0x444b6a";
+      #     red = "0xff7a93";
+      #     green = "0xb9f27c";
+      #     yellow = "0xff9e64";
+      #     blue = "0x7da6ff";
+      #     magenta = "0xbb9af7";
+      #     cyan = "0x0db9d7";
+      #     white = "0xacb0d0";
+      #   };
+      # };
+
+      # one dark
       colors = {
         primary = {
-          background = "0x24283b";
-          foreground = "0xa9b1d6";
+          background = "0x282c34";
+          foreground = "0xabb2bf";
         };
         normal = {
-          black = "0x32344a";
-          red = "0xf7768e";
-          green = "0x9ece6a";
-          yellow = "0xe0af68";
-          blue = "0x7aa2f7";
-          magenta = "0xad8ee6";
-          cyan = "0x449dab";
-          white = "0x9699a8";
+          black   = "0x1e2127";
+          red     = "0xe06c75";
+          green   = "0x98c379";
+          yellow  = "0xd19a66";
+          blue    = "0x61afef";
+          magenta = "0xc678dd";
+          cyan    = "0x56b6c2";
+          white   = "0xabb2bf";
         };
         bright = {
-          black = "0x444b6a";
-          red = "0xff7a93";
-          green = "0xb9f27c";
-          yellow = "0xff9e64";
-          blue = "0x7da6ff";
-          magenta = "0xbb9af7";
-          cyan = "0x0db9d7";
-          white = "0xacb0d0";
+          black   = "0x5c6370";
+          red     = "0xe06c75";
+          green   = "0x98c379";
+          yellow  = "0xd19a66";
+          blue    = "0x61afef";
+          magenta = "0xc678dd";
+          cyan    = "0x56b6c2";
+          white   = "0xffffff";
         };
       };
     };
