@@ -31,9 +31,9 @@
 
       font = {
         size = 22;
-        normal.family = "Cascadia Code NF Light";
-        bold = { family = "Cascadia Code NF Light"; style = "Regular"; };
-        italic.family = "Cascadia Code NF Light";
+        normal = { family = "Cascadia Code NF"; style = "Light"; };
+        bold = { family = "Cascadia Code NF"; style = "Light"; };
+        italic = { family = "Cascadia Code NF"; style = "Light"; };
 
         # size = 20;
         # normal.family = "VictorMono Nerd Font Mono";

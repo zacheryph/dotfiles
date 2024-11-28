@@ -14,7 +14,7 @@
   nix.settings.experimental-features = "nix-command flakes";
 
   # Create /etc/zshrc that loads the nix-darwin environment.
-  programs.zsh.enable = true;  # default shell on catalina
+  programs.zsh.enable = true; # default shell on catalina
   # programs.fish.enable = true;
 
   # Set Git commit hash for darwin-version.
@@ -25,12 +25,17 @@
   system.stateVersion = 4;
 
   # The platform the configuration will be used on.
-  nixpkgs.hostPlatform = { config = "aarch64-apple-darwin"; platform = "aarch64-darwin"; };
+  nixpkgs.hostPlatform = {
+    config = "aarch64-apple-darwin";
+    platform = "aarch64-darwin";
+  };
 
   homebrew = {
     enable = true;
     casks = [
       "alacritty"
+      "font-cascadia-code-nf"
+      "font-victor-mono-nerd-font"
       "slack"
       "visual-studio-code"
     ];
