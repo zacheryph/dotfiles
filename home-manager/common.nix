@@ -34,6 +34,7 @@
     wget
 
     # network
+    curl
     minio-client
     mtr
     nmap
