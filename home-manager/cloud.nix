@@ -18,15 +18,12 @@
 
     # kubernetes
     fluxcd
-    istioctl
-    kn
     krew
+    kluctl
     kubectl
     kubectx
     kubernetes-helm
     kustomize
-    talosctl
-    telepresence2
 
     # # cloud
     # buildpack
