@@ -6,6 +6,9 @@
     home-manager
   ];
 
+  # Determinate runs its own nixd now
+  nix.enable = false;
+
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
 
@@ -15,13 +18,9 @@
   # Set Git commit hash for darwin-version.
   system.configurationRevision = self.rev or self.dirtyRev or null;
 
-  # nix-darwin aborts cause the gid is what it wants it to be...
-  # https://github.com/LnL7/nix-darwin/issues/1339
-  ids.gids.nixbld = 350;
-
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
-  system.stateVersion = 4;
+  system.stateVersion = 5;
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = {
