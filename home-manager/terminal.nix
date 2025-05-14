@@ -244,7 +244,7 @@
       kseal = "kubeseal --format=yaml";
     };
 
-    initExtra = ''
+    initContent = ''
       function drun() {
         docker run --rm -it --user $(id -u):$(id -g) -v $PWD:/data --workdir /data "$@"
       }
