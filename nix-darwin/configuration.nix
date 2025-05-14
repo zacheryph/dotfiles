@@ -23,10 +23,7 @@
   system.stateVersion = 5;
 
   # The platform the configuration will be used on.
-  nixpkgs.hostPlatform = {
-    config = "aarch64-apple-darwin";
-    platform = "aarch64-darwin";
-  };
+  nixpkgs.hostPlatform = "aarch64-darwin";
 
   homebrew = {
     enable = true;
