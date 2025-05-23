@@ -22,6 +22,10 @@
   # $ darwin-rebuild changelog
   system.stateVersion = 5;
 
+  # We must tell darwin the primary user. this is ugly
+  # and should pull from username within flake.nix.
+  system.primaryUser = "context";
+
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
 
