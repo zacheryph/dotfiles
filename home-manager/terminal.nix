@@ -249,12 +249,12 @@
         docker run --rm -it --user $(id -u):$(id -g) -v $PWD:/data --workdir /data "$@"
       }
 
+      source <(/opt/homebrew/bin/brew shellenv)
       source <(atuin init zsh)
       source <(direnv hook zsh)
       source <(flux completion zsh)
       source <(kubectl completion zsh)
       source <(mise activate zsh)
-      source <(/opt/homebrew/bin/brew shellenv)
 
       bindkey "^[[1;2C" forward-word
       bindkey "^[[1;2D" backward-word
