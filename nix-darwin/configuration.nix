@@ -9,6 +9,13 @@
   # Determinate runs its own nixd now
   nix.enable = false;
 
+  # allow touchid for sudo commands
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    watchIdAuth = true;
+    reattach = true;
+  };
+
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
 
