@@ -16,6 +16,11 @@
     reattach = true;
   };
 
+  # allow the following commands without a password
+  security.sudo.extraConfig = ''
+    context ALL=(root) NOPASSWD: /run/current-system/sw/bin/darwin-rebuild switch --flake *
+  '';
+
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
 
