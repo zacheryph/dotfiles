@@ -18,6 +18,8 @@
 
   # allow the following commands without a password
   security.sudo.extraConfig = ''
+    context ALL=(root) NOPASSWD: /usr/bin/dscacheutil -flushcache
+    context ALL=(root) NOPASSWD: /usr/bin/killall -HUP mDNSResponder
     context ALL=(root) NOPASSWD: /run/current-system/sw/bin/darwin-rebuild switch --flake *
   '';
 

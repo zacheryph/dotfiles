@@ -215,6 +215,7 @@
       batn = "bat -l json";
       pwgen = "echo $(date +%s)$(gpg --gen-random 30) | sha256sum | base64 | head -c 32 ; echo";
       dequarantine = "sudo xattr -r -d com.apple.quarantine";
+      flush-dns = "sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder";
 
       # docker helpers
       up = "docker-compose up -d";
