@@ -49,6 +49,7 @@
       "alacritty"
       "font-cascadia-code-nf"
       "font-victor-mono-nerd-font"
+      "fork"
       "slack"
       "visual-studio-code"
     ];
