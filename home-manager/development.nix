@@ -1,5 +1,8 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
+    # general
+    shared-mime-info
+
     # utility
     fd
     go-task
