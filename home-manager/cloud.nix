@@ -24,6 +24,7 @@
     kubectx
     kubernetes-helm
     kustomize
+    lens
 
     # # cloud
     # buildpack
