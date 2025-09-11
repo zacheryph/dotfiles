@@ -48,6 +48,7 @@
     casks = [
       "alacritty"
       "font-cascadia-code-nf"
+      "font-monaspace-nf"
       "font-victor-mono-nerd-font"
       "fork"
       "slack"
