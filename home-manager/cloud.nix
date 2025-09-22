@@ -26,8 +26,8 @@
     kustomize
     lens
 
-    # # cloud
-    # buildpack
-    # stern
+    # cloud
+    terraform
+    terraform-ls
   ];
 }
