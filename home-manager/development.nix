@@ -44,26 +44,8 @@
         ru = "remote update --prune";
         lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative";
       };
-    };
 
-    ignores = [
-      "*~"
-      "*.swp"
-      "._*"
-      "*.example"
-      "*.sample"
-
-      # Apple Specific
-      ".DS_Store"
-      ".AppleDouble"
-      ".LSOverride"
-      "Icon"
-      ".Spotlight-V100"
-      ".Trashes"
-    ];
-
-    extraConfig = {
-      # git settings
+            # git settings
       help.autocorrect = 2;
       init.defaultBranch = "main";
       log.date = "iso";
@@ -139,6 +121,22 @@
         };
       };
     };
+
+    ignores = [
+      "*~"
+      "*.swp"
+      "._*"
+      "*.example"
+      "*.sample"
+
+      # Apple Specific
+      ".DS_Store"
+      ".AppleDouble"
+      ".LSOverride"
+      "Icon"
+      ".Spotlight-V100"
+      ".Trashes"
+    ];
   };
 
   programs.gh-dash = {
