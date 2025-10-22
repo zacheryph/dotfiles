@@ -29,19 +29,21 @@
 
   programs.git = {
     enable = true;
-    userName = "Zachery Hostens";
 
-    aliases = {
-      co = "checkout";
-      st = "status";
-      ci = "commit -s";
-      b = "branch -v -a";
-      lb = "branch -v";
-      mb = "merge-base";
-      cp = "cherry-pick";
-      l = "log --graph --decorate";
-      ru = "remote update --prune";
-      lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative";
+    settings = {
+      user.name = "Zachery Hostens";
+      alias = {
+        co = "checkout";
+        st = "status";
+        ci = "commit -s";
+        b = "branch -v -a";
+        lb = "branch -v";
+        mb = "merge-base";
+        cp = "cherry-pick";
+        l = "log --graph --decorate";
+        ru = "remote update --prune";
+        lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative";
+      };
     };
 
     ignores = [
