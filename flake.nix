@@ -32,14 +32,6 @@
       ];
     };
 
-    darwinConfigurations.shogun = nix-darwin.lib.darwinSystem {
-      specialArgs = { inherit self inputs; };
-      modules = [
-        nix-darwin/configuration.nix
-        hosts/shogun/darwin.nix
-      ];
-    };
-
     # Expose the package set, including overlays, for convenience.
     darwinPackages = self.darwinConfigurations.fourteen.pkgs;
 
@@ -48,18 +40,6 @@
       modules = [
         ./home.nix
         hosts/fourteen/home.nix
-        {
-          home.username = username;
-          home.homeDirectory = "/Users/context";
-        }
-      ];
-    };
-
-    homeConfigurations."context@shogun" = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs { inherit system; };
-      modules = [
-        ./home.nix
-        hosts/shogun/home.nix
         {
           home.username = username;
           home.homeDirectory = "/Users/context";
