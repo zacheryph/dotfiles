@@ -8,6 +8,7 @@
 
   programs.alacritty = {
     enable = true;
+    theme = "catppuccin_macchiato";
 
     settings = {
       cursor.style = "Beam";
@@ -49,94 +50,6 @@
       selection = {
         save_to_clipboard = true;
       };
-
-      # # nord
-      # colors = {
-      #   primary = {
-      #     background = "0x2E3440";
-      #     foreground = "0xD8DEE9";
-      #   };
-      #   cursor = {
-      #     text = "0x2E3440";
-      #     cursor = "0xD8DEE9";
-      #   };
-      #   normal = {
-      #     black = "0x3B4252";
-      #     red = "0xBF616A";
-      #     green = "0xA3BE8C";
-      #     yellow = "0xEBCB8B";
-      #     blue = "0x81A1C1";
-      #     magenta = "0xB48EAD";
-      #     cyan = "0x88C0D0";
-      #     white = "0xE5E9F0";
-      #   };
-      #   bright = {
-      #     black = "0x4C566A";
-      #     red = "0xBF616A";
-      #     green = "0xA3BE8C";
-      #     yellow = "0xEBCB8B";
-      #     blue = "0x81A1C1";
-      #     magenta = "0xB48EAD";
-      #     cyan = "0x8FBCBB";
-      #     white = "0xECEFF4";
-      #   };
-      # };
-
-      # # tokyonight-storm
-      # colors = {
-      #   primary = {
-      #     background = "0x24283b";
-      #     foreground = "0xa9b1d6";
-      #   };
-      #   normal = {
-      #     black = "0x32344a";
-      #     red = "0xf7768e";
-      #     green = "0x9ece6a";
-      #     yellow = "0xe0af68";
-      #     blue = "0x7aa2f7";
-      #     magenta = "0xad8ee6";
-      #     cyan = "0x449dab";
-      #     white = "0x9699a8";
-      #   };
-      #   bright = {
-      #     black = "0x444b6a";
-      #     red = "0xff7a93";
-      #     green = "0xb9f27c";
-      #     yellow = "0xff9e64";
-      #     blue = "0x7da6ff";
-      #     magenta = "0xbb9af7";
-      #     cyan = "0x0db9d7";
-      #     white = "0xacb0d0";
-      #   };
-      # };
-
-      # one dark
-      colors = {
-        primary = {
-          background = "0x282c34";
-          foreground = "0xabb2bf";
-        };
-        normal = {
-          black   = "0x1e2127";
-          red     = "0xe06c75";
-          green   = "0x98c379";
-          yellow  = "0xd19a66";
-          blue    = "0x61afef";
-          magenta = "0xc678dd";
-          cyan    = "0x56b6c2";
-          white   = "0xabb2bf";
-        };
-        bright = {
-          black   = "0x5c6370";
-          red     = "0xe06c75";
-          green   = "0x98c379";
-          yellow  = "0xd19a66";
-          blue    = "0x61afef";
-          magenta = "0xc678dd";
-          cyan    = "0x56b6c2";
-          white   = "0xffffff";
-        };
-      };
     };
   };
 
@@ -153,7 +66,7 @@
     plugins = with pkgs; [
       tmuxPlugins.sensible
       tmuxPlugins.pain-control
-      tmuxPlugins.nord
+      tmuxPlugins.catppuccin
       {
         plugin = tmuxPlugins.resurrect;
         extraConfig = ''
@@ -164,6 +77,9 @@
     ];
 
     extraConfig = ''
+      # theme settings
+      set -g @catppuccin_flavor 'macchiato'
+
       # 24 bit true-color
       set -sa terminal-overrides ",alacritty:Tc,xterm-256color:Tc,tmux-256color:Tc"
 
