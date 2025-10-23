@@ -12,9 +12,4 @@
     alejandra # nix
     deadnix # nix
   ];
-
-  xdg.configFile."nvim" = {
-    source = ../astro.nvim;
-    recursive = true;
-  };
 }
