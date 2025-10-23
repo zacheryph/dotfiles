@@ -106,18 +106,14 @@
 
   programs.zsh = {
     enable = true;
+    enableCompletion = true;
     autocd = true;
-    autosuggestion = {
-      enable = true;
-    };
-    syntaxHighlighting = {
-      enable = true;
-    };
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
 
     envExtra = ''
       export DISABLE_UNTRACKED_FILES_DIRTY="true"
       export GPG_TTY=$(tty)
-      export HIST_STAMPS="yyyy-mm-dd"
       export SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=10
     '';
@@ -158,10 +154,16 @@
       kseal = "kubeseal --format=yaml";
     };
 
+    siteFunctions = {
+      drun = '' docker run --rm -it --user $(id -u):$(id -g) -v $PWD:/data --workdir /data "$@" '';
+    };
+
     initContent = ''
-      function drun() {
-        docker run --rm -it --user $(id -u):$(id -g) -v $PWD:/data --workdir /data "$@"
-      }
+      # force system paths to the back of the bus
+      SYSTEM_PATH=$(eval $(env PATH= /usr/libexec/path_helper -s); echo $PATH)
+      PATH=''${PATH//''${SYSTEM_PATH}:/}:''${SYSTEM_PATH}
+
+      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
       source <(/opt/homebrew/bin/brew shellenv)
       source <(atuin init zsh)
@@ -172,10 +174,6 @@
 
       bindkey "^[[1;2C" forward-word
       bindkey "^[[1;2D" backward-word
-
-      # force system paths to the back of the bus
-      SYSTEM_PATH=$(eval $(env PATH= /usr/libexec/path_helper -s); echo $PATH)
-      PATH=''${PATH//''${SYSTEM_PATH}:/}:''${SYSTEM_PATH}
     '';
 
     plugins = [
