@@ -42,6 +42,7 @@
 
     homeConfigurations."context@fourteen" = home-manager.lib.homeManagerConfiguration {
       pkgs = import nixpkgs { inherit system; };
+      extraSpecialArgs = { inherit inputs; };
       modules = [
         ./home.nix
         hosts/fourteen/home.nix

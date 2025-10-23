@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ config, inputs, lib, ... }:
 {
   home.stateVersion = "24.11";
 
