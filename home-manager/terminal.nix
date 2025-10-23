@@ -199,7 +199,6 @@
     };
 
     envExtra = ''
-      export BAT_THEME=Nord
       export CASE_SENSITIVE="true"
       export COMPLETION_WAITING_DOTS="true"
       export DISABLE_UNTRACKED_FILES_DIRTY="true"

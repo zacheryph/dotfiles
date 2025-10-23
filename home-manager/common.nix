@@ -20,7 +20,6 @@
 
   home.packages = with pkgs; [
     # general
-    bat
     cloc
     d2
     dos2unix
@@ -40,6 +39,12 @@
     nmap
     wget
   ];
+
+  programs.bat = {
+    enable = true;
+    config.theme = "Catppuccin Macchiato";
+    extraPackages = with pkgs.bat-extras; [ batdiff batman ];
+  };
 
   programs.gpg = {
     enable = true;
