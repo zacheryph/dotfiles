@@ -1,5 +1,17 @@
 { config, pkgs, ... }:
-
+let
+  tmux-tokyo-night = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "tmux-tokyo-night";
+    version = "v1.11.0";
+    rtpFilePath = "tmux-tokyo-night.tmux";
+    src = pkgs.fetchFromGitHub {
+      owner = "fabioluciano";
+      repo = "tmux-tokyo-night";
+      rev = "v1.11.0";
+      sha256 = "sha256-WjDbunWmxbw/jjvc34ujOWif18POC3WVO1s+hk9SLg4=";
+    };
+  };
+in
 {
   home.packages = with pkgs; [
     atuin
@@ -66,7 +78,12 @@
     plugins = with pkgs; [
       tmuxPlugins.sensible
       tmuxPlugins.pain-control
-      tmuxPlugins.catppuccin
+      {
+        plugin = tmux-tokyo-night;
+        extraConfig = ''
+          set -g @theme_variation 'storm'
+        '';
+      }
       {
         plugin = tmuxPlugins.resurrect;
         extraConfig = ''
@@ -77,9 +94,6 @@
     ];
 
     extraConfig = ''
-      # theme settings
-      set -g @catppuccin_flavor 'macchiato'
-
       # 24 bit true-color
       set -sa terminal-overrides ",alacritty:Tc,xterm-256color:Tc,tmux-256color:Tc"
 
