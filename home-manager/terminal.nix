@@ -199,8 +199,6 @@
     };
 
     envExtra = ''
-      export CASE_SENSITIVE="true"
-      export COMPLETION_WAITING_DOTS="true"
       export DISABLE_UNTRACKED_FILES_DIRTY="true"
       export GPG_TTY=$(tty)
       export HIST_STAMPS="yyyy-mm-dd"
@@ -266,6 +264,11 @@
 
     plugins = [
       {
+        name = "zsh-powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+      {
         name = "zsh-syntax-highlighting";
         src = pkgs.fetchFromGitHub {
           owner = "zsh-users";
@@ -274,32 +277,6 @@
           sha256 = "03r6hpb5fy4yaakqm3lbf4xcvd408r44jgpv4lnzl9asp4sb9qc0";
         };
       }
-      {
-        name = "gitster-theme";
-        file = "gitster.zsh-theme";
-        src = pkgs.fetchFromGitHub {
-          owner = "malnick";
-          repo = "zsh-gitster-theme";
-          rev = "d670b53a11977ea07583ab5b21bd0a84ccb909d4";
-          sha256 = "0c49zkqhjz0a3xn5s1jn4c5qkxs7givs6ddjlyn8ijf8h2qcd3ig";
-        };
-      }
     ];
-
-    oh-my-zsh = {
-      enable = true;
-      plugins = [
-        "aws"
-        "colored-man-pages"
-        "docker"
-        "doctl"
-        "helm"
-        "macos"
-        "systemadmin"
-        # "gcloud" # error looking for homebrews /usr/local/Caskroom
-        "git-extras"
-        "gpg-agent"
-      ];
-    };
   };
 }
