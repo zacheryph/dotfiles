@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  # programs.home-manager.enable = true;
+  programs.home-manager.enable = true;
   programs.man.enable = true;
 
   # home.username = builtins.getEnv "USER";
