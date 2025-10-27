@@ -4,9 +4,6 @@
   programs.home-manager.enable = true;
   programs.man.enable = true;
 
-  # home.username = builtins.getEnv "USER";
-  # home.homeDirectory = builtins.getEnv "HOME";
-
   home.sessionVariables = {
     EDITOR = "nvim";
     GOPATH = "$HOME/.go";
@@ -20,15 +17,15 @@
 
   home.packages = with pkgs; [
     # general
-    nix
     cloc
     d2
     dos2unix
     envsubst
     htop
+    nix
     nix-zsh-completions
-    pinentry_mac
     pwgen-secure
+    reattach-to-user-namespace
     silver-searcher
     unixtools.watch
     wget
