@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
     # git[hub]
@@ -12,7 +12,7 @@
     enable = true;
 
     settings = {
-      user.name = "Zachery Hostens";
+      user.name = lib.mkDefault "Zachery Hostens";
       alias = {
         co = "checkout";
         st = "status";
