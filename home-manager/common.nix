@@ -20,6 +20,7 @@
 
   home.packages = with pkgs; [
     # general
+    nix
     cloc
     d2
     dos2unix
