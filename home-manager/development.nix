@@ -13,7 +13,6 @@
     yq-go
 
     # dev
-    devenv
     mise
     pgcli
     rustup
@@ -57,7 +56,7 @@
       rerere.enabled = true;
 
       core = {
-        packedGitLimit = "50m";
+        packedGitLimit = "1g";
         quotePath = false;
         whitespace = "space-before-tab,-indent-with-non-tab,trailing-space";
       };
