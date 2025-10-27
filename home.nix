@@ -9,6 +9,7 @@
       home-manager/development.nix
       home-manager/terminal.nix
       home-manager/macos.nix
+      home-manager/nix.nix
       home-manager/neovim.nix
     ];
 }

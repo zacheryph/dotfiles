@@ -22,8 +22,6 @@
     dos2unix
     envsubst
     htop
-    nix
-    nix-zsh-completions
     pwgen-secure
     reattach-to-user-namespace
     silver-searcher
