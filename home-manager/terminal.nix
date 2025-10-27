@@ -203,4 +203,24 @@ in
       }
     ];
   };
+
+  programs.bat = {
+    enable = true;
+    config.theme = "Catppuccin Macchiato";
+    extraPackages = with pkgs.bat-extras; [ batdiff batman ];
+  };
+
+  programs.eza = {
+    enable = true;
+    enableZshIntegration = true;
+    colors = "auto";
+    git = true;
+    icons = "auto";
+    theme = "catppuccin";
+
+    extraOptions = [
+      "--group-directories-first"
+      "--header"
+    ];
+  };
 }
