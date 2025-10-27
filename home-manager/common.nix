@@ -23,7 +23,6 @@
     envsubst
     htop
     pwgen-secure
-    reattach-to-user-namespace
     silver-searcher
     unixtools.watch
     wget
