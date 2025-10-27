@@ -96,11 +96,6 @@
           insteadOf = "lab:";
           pushInsteadOf = "lab:";
         };
-
-        "https://git.zro.io/" = {
-          insteadOf = "zro:";
-          pushInsteadOf = "zro:";
-        };
       };
 
       lfs = {
