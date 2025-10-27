@@ -1,6 +1,6 @@
 # nix run nix-darwin -- --flake .
 {
-  description = "My Personal Operational Environment";
+  description = "Personal Operating Environment";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -24,7 +24,20 @@
   outputs = inputs@{ self, home-manager, nix-darwin, nixvim, nixpkgs }:
   let
     system = "aarch64-darwin";
-    username = "context";
+    lib = nixpkgs.lib;
+
+    importNixFiles = dir:
+      let
+        files = builtins.readDir dir;
+        nixFiles = lib.filterAttrs (name: type:
+          type == "regular" && lib.hasSuffix ".nix" name
+        ) files;
+      in
+        lib.mapAttrs' (name: _:
+          lib.nameValuePair
+            (lib.removeSuffix ".nix" name)
+            (import (dir + "/${name}"))
+        ) nixFiles;
   in
   {
     # Build darwin flake using:
@@ -40,14 +53,17 @@
     # Expose the package set, including overlays, for convenience.
     darwinPackages = self.darwinConfigurations.fourteen.pkgs;
 
-    homeConfigurations."context@fourteen" = home-manager.lib.homeManagerConfiguration {
+    homeModules = importNixFiles ./home-manager;
+
+    # personal
+    homeConfigurations."context" = home-manager.lib.homeManagerConfiguration {
       pkgs = import nixpkgs { inherit system; };
       extraSpecialArgs = { inherit inputs; };
       modules = [
         ./home.nix
         hosts/fourteen/home.nix
         {
-          home.username = username;
+          home.username = "context";
           home.homeDirectory = "/Users/context";
         }
       ];
