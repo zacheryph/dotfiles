@@ -18,7 +18,7 @@
     };
   };
 
-    home.file.".gnupg/gpg-agent.conf".text = ''
+  home.file.".gnupg/gpg-agent.conf".text = ''
     enable-ssh-support
     default-cache-ttl 300
     default-cache-ttl-ssh 300
@@ -27,4 +27,8 @@
     pinentry-program ${pkgs.pinentry_mac}/Applications/pinentry-mac.app/Contents/MacOS/pinentry-mac
   '';
 
+  programs.zsh.envExtra = ''
+    export GPG_TTY=$(tty)
+    export SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)
+  '';
 }

@@ -127,8 +127,6 @@ in
 
     envExtra = ''
       export DISABLE_UNTRACKED_FILES_DIRTY="true"
-      export GPG_TTY=$(tty)
-      export SSH_AUTH_SOCK=$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=10
     '';
 
