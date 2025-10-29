@@ -13,9 +13,10 @@ let
   };
 in
 {
-  home.packages = with pkgs; [
-    atuin
-  ];
+  programs.atuin = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   programs.alacritty = {
     enable = true;
