@@ -28,7 +28,7 @@ in
       terminal = {
         shell = {
           program = "/bin/zsh";
-          args = [ "-c" "tmux -2 attach" ];
+          args = [ "-c" "tmux -2 attach -t console" ];
         };
       };
 
@@ -111,10 +111,10 @@ in
       set-option -g status-position top
 
       new-session -d -s console
-      new-window -d
-      new-window -d
-      new-window -d
-      new-window -d
+      new-window -d -t console:2
+      new-window -d -t console:3
+      new-window -d -t console:4
+      new-window -d -t console:5
     '';
   };
 
