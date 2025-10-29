@@ -4,8 +4,8 @@
     # git[hub]
     gh
     git-lfs
-    gitAndTools.git-extras
-    gitAndTools.gitflow
+    git-extras
+    gitflow
   ];
 
   programs.git = {
