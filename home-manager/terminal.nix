@@ -122,11 +122,9 @@ in
     enableCompletion = true;
     autocd = true;
     autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
+    autosuggestion.highlight = "fg-10";
 
-    envExtra = ''
-      export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=10
-    '';
+    syntaxHighlighting.enable = true;
 
     shellAliases = {
       # misc
