@@ -28,7 +28,7 @@ in
       terminal = {
         shell = {
           program = "/bin/zsh";
-          args = [ "-c" "tmux -2 attach -t console" ];
+          args = [ "-l" "-c" "tmux -2 attach -t console" ];
         };
       };
 
