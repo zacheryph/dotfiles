@@ -182,6 +182,10 @@ in
 
       bindkey "^[[1;2C" forward-word
       bindkey "^[[1;2D" backward-word
+
+      # allow fn+up to do quick previous history
+      bindkey '^[[5~' up-line-or-history
+      bindkey '^[[6~' down-line-or-history
     '';
 
     plugins = [
