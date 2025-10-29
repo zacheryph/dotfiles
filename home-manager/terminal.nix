@@ -125,7 +125,6 @@ in
     syntaxHighlighting.enable = true;
 
     envExtra = ''
-      export DISABLE_UNTRACKED_FILES_DIRTY="true"
       export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE=fg=10
     '';
 
