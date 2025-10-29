@@ -15,7 +15,6 @@ in
 {
   home.packages = with pkgs; [
     atuin
-    direnv
   ];
 
   programs.alacritty = {
@@ -179,7 +178,6 @@ in
 
       source <(/opt/homebrew/bin/brew shellenv)
       source <(atuin init zsh)
-      source <(direnv hook zsh)
       source <(flux completion zsh)
       source <(kubectl completion zsh)
       source <(mise activate zsh)
