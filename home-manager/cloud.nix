@@ -21,7 +21,7 @@
     krew
     kluctl
     kubectl
-    kubectx
+    kubeswitch
     kubernetes-helm
     kustomize
     lens
@@ -29,4 +29,9 @@
     # tofu (use mise for opentofu versioning)
     tofu-ls
   ];
+
+  # we want "kubectx"
+  programs.zsh.shellAliases = {
+    kubectx = "switcher";
+  };
 }
