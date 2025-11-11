@@ -26,8 +26,7 @@
     kustomize
     lens
 
-    # cloud
-    terraform
-    terraform-ls
+    # tofu (use mise for opentofu versioning)
+    tofu-ls
   ];
 }
