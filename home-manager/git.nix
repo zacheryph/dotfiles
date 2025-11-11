@@ -16,7 +16,7 @@
       alias = {
         co = "checkout";
         st = "status";
-        ci = "commit -s";
+        ci = "commit .";
         b = "branch -v -a";
         lb = "branch -v";
         mb = "merge-base";
@@ -26,7 +26,8 @@
         lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative";
       };
 
-            # git settings
+      # git settings
+      commit.cleanup = "strip";
       help.autocorrect = 2;
       init.defaultBranch = "main";
       log.date = "iso";
