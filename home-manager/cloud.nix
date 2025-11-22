@@ -31,7 +31,20 @@
   ];
 
   # we want "kubectx"
-  programs.zsh.shellAliases = {
-    kubectx = "switcher";
+  programs.zsh = {
+    initContent = ''
+      source <(switcher init zsh)
+      source <(switch completion zsh)
+    '';
+
+    shellAliases = {
+      kubectx = "switch";
+      helm-search = "helm search repo";
+    };
+
+    siteFunctions = {
+      helm-chart = ''helm show chart $@ | bat --language yaml'';
+      helm-values = ''helm show values $@ | bat --language yaml'';
+    };
   };
 }
