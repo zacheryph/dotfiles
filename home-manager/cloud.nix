@@ -17,6 +17,7 @@
     google-cloud-sdk
 
     # kubernetes
+    helmfile
     fluxcd
     krew
     kluctl
