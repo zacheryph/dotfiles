@@ -16,7 +16,7 @@
       alias = {
         co = "checkout";
         st = "status";
-        ci = "commit .";
+        ci = "commit";
         b = "branch -v -a";
         lb = "branch -v";
         mb = "merge-base";
