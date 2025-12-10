@@ -19,8 +19,8 @@
     # kubernetes
     helmfile
     fluxcd
+    kcl
     krew
-    kluctl
     kubectl
     kubeswitch
     kubernetes-helm
