@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+  xdg.enable = true;
   programs.home-manager.enable = true;
   programs.man.enable = true;
 
