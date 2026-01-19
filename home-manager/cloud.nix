@@ -39,6 +39,7 @@
     '';
 
     shellAliases = {
+      ksel = "switch";
       kubectx = "switch";
       helm-search = "helm search repo";
     };
