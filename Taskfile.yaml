@@ -1,0 +1,75 @@
+version: "3"
+
+output: interleaved
+silent: true
+
+tasks:
+  update-brew:
+    desc: "Update Homebrew packages"
+    silent: true
+    cmds:
+      - brew update && brew upgrade
+
+  update-flakes:
+    desc: "Update Nix Flake inputs"
+    run: once
+    silent: true
+    cmds:
+      - nix flake update
+
+  check-cache:
+    desc: Check if nix-darwin is NOT building packages
+    run: once
+    preconditions:
+      - sh: "!(darwin-rebuild build --flake . --dry-run 2>&1 | grep -q 'will be built')"
+        msg: Darwin is going to build packages from scratch
+    cmds:
+      - echo "Nix-Darwin looks good!"
+
+  rebuild-darwin:
+    desc: "Apply nix-darwin configuration"
+    silent: true
+    deps: [update-flakes]
+    preconditions:
+      - sh: "!(darwin-rebuild build --flake . --dry-run 2>&1 | grep -q 'will be built')"
+        msg: Darwin is going to build packages from scratch
+    cmds:
+      - sudo darwin-rebuild switch --flake .
+
+  update-darwin:
+    desc: "update and upgrade nix-darwin"
+    silent: true
+    cmds:
+      - task: update-flakes
+      - task: rebuild-darwin
+
+  update-home-manager:
+    desc: "Run Home-Manager"
+    silent: true
+    deps: [update-flakes]
+    cmds:
+      - home-manager switch --flake .
+
+  update-all:
+    desc: "Update everything"
+    deps: [update-brew, update-darwin, update-home-manager]
+
+  clean-brew:
+    desc: Cleanup Homebrew
+    cmds:
+      - brew cleanup
+
+  clean-nix:
+    desc: Collect garbage from nix
+    cmds:
+      - nix-collect-garbage --delete-older-than 7d
+
+  clean-all:
+    desc: clean everything
+    deps: [clean-brew, clean-nix]
+
+  refresh-all:
+    desc: updates everything and then cleans everything
+    cmds:
+      - task: update-all
+      - task: clean-all
