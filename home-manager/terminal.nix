@@ -32,6 +32,15 @@ in
         };
       };
 
+      keyboard.bindings =   [
+        # Support Shift+Enter within Claude Code
+        {
+          key = "Return";
+          mods = "Shift";
+          chars = "\\u001b\\r";
+        }
+      ];
+
       window = {
         padding.x = 2;
         padding.y = 2;
