@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "docker": {
+      "command": "docker",
+      "args": ["run", "--rm", "-i", "ghcr.io/utensils/mcp-nixos"]
+    }
+  }
+}
