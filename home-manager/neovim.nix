@@ -118,6 +118,61 @@
           highlight.enable = true;
           indent.enable = true;
         };
+        grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+          awk
+          bash
+          c
+          capnp
+          cmake
+          comment
+          cpp
+          css
+          csv
+          diff
+          dockerfile
+          embedded_template
+          git_config
+          git_rebase
+          gitattributes
+          gitcommit
+          gitignore
+          go
+          gomod
+          gosum
+          gotmpl
+          gpg
+          hcl
+          helm
+          html
+          http
+          javascript
+          jq
+          jsdoc
+          json
+          json5
+          jsonnet
+          just
+          kcl
+          markdown
+          markdown_inline
+          nginx
+          nix
+          passwd
+          properties
+          proto
+          rbs
+          regex
+          ruby
+          rust
+          sql
+          terraform
+          tmux
+          toml
+          typescript
+          vim
+          yaml
+          zsh
+        ];
       };
 
       # LSP
