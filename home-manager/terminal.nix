@@ -93,6 +93,7 @@ in
           set -g @powerkit_theme "tokyo-night"
           set -g @powerkit_theme_variant "storm"
           set -g @powerkit_plugins "cloud,kubernetes"
+          set -g @powerkit_plugin_kubernetes_show_namespace "false"
         '';
       }
       {
