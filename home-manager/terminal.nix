@@ -1,14 +1,14 @@
 { config, pkgs, ... }:
 let
-  tmux-tokyo-night = pkgs.tmuxPlugins.mkTmuxPlugin {
-    pluginName = "tmux-tokyo-night";
-    version = "v1.11.0";
-    rtpFilePath = "tmux-tokyo-night.tmux";
+  tmux-powerkit = pkgs.tmuxPlugins.mkTmuxPlugin {
+    pluginName = "tmux-powerkit";
+    version = "v5.23.0";
+    rtpFilePath = "tmux-powerkit.tmux";
     src = pkgs.fetchFromGitHub {
       owner = "fabioluciano";
-      repo = "tmux-tokyo-night";
-      rev = "v1.11.0";
-      sha256 = "sha256-WjDbunWmxbw/jjvc34ujOWif18POC3WVO1s+hk9SLg4=";
+      repo = "tmux-powerkit";
+      rev = "v5.23.0";
+      sha256 = "sha256-u4CygpWtwZXOCJI4uhN9qvj2jSsjWsxQBG+0ty8M4iY=";
     };
   };
 in
@@ -88,9 +88,11 @@ in
       tmuxPlugins.sensible
       tmuxPlugins.pain-control
       {
-        plugin = tmux-tokyo-night;
+        plugin = tmux-powerkit;
         extraConfig = ''
-          set -g @theme_variation 'storm'
+          set -g @powerkit_theme "tokyo-night"
+          set -g @powerkit_theme_variant "storm"
+          set -g @powerkit_plugins "cloud,kubernetes"
         '';
       }
       {
