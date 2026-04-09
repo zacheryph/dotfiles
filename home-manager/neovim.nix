@@ -414,7 +414,7 @@
       # Formatters
       stylua
       nixfmt-rfc-style
-      nodePackages.prettier
+      prettier
 
       # Tools
       ripgrep
