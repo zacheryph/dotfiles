@@ -28,11 +28,15 @@ in
       terminal = {
         shell = {
           program = "/bin/zsh";
-          args = [ "-l" "-c" "tmux -2 attach -t console" ];
+          args = [
+            "-l"
+            "-c"
+            "tmux -2 attach -t console"
+          ];
         };
       };
 
-      keyboard.bindings =   [
+      keyboard.bindings = [
         # Support Shift+Enter within Claude Code
         {
           key = "Return";
@@ -53,9 +57,18 @@ in
 
       font = {
         size = 22;
-        normal = { family = "Cascadia Code NF"; style = "Light"; };
-        bold = { family = "Cascadia Code NF"; style = "Light"; };
-        italic = { family = "Cascadia Code NF"; style = "Light"; };
+        normal = {
+          family = "Cascadia Code NF";
+          style = "Light";
+        };
+        bold = {
+          family = "Cascadia Code NF";
+          style = "Light";
+        };
+        italic = {
+          family = "Cascadia Code NF";
+          style = "Light";
+        };
 
         # size = 20;
         # normal.family = "VictorMono Nerd Font Mono";
@@ -94,6 +107,8 @@ in
           set -g @powerkit_theme_variant "storm"
           set -g @powerkit_plugins "cloud,kubernetes"
           set -g @powerkit_plugin_kubernetes_show_namespace "false"
+          set -g @powerkit_plugin_kubernetes_keybinding_context "C-c"
+          set -g @powerkit_plugin_kubernetes_keybinding_namespace "C-n"
         '';
       }
       {
@@ -176,7 +191,7 @@ in
     };
 
     siteFunctions = {
-      drun = '' docker run --rm -it --user $(id -u):$(id -g) -v $PWD:/data --workdir /data "$@" '';
+      drun = ''docker run --rm -it --user $(id -u):$(id -g) -v $PWD:/data --workdir /data "$@" '';
     };
 
     initContent = ''
@@ -217,7 +232,10 @@ in
   programs.bat = {
     enable = true;
     config.theme = "Catppuccin Macchiato";
-    extraPackages = with pkgs.bat-extras; [ batdiff batman ];
+    extraPackages = with pkgs.bat-extras; [
+      batdiff
+      batman
+    ];
   };
 
   programs.eza = {
