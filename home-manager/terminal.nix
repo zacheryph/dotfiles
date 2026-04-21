@@ -116,17 +116,18 @@ in
       set -sa terminal-overrides ",alacritty:Tc,xterm-256color:Tc,tmux-256color:Tc"
 
       # window titles
-      setw -g automatic-rename on
+      set -gw automatic-rename on
       set -g set-titles on
 
       # copy/pasta
       set -g default-command 'reattach-to-user-namespace $SHELL --login'
 
-      set-option -g focus-events on
+      set -g focus-events on
+      set -g extended-keys on
 
       bind -n C-k send-keys "C-l"\; run "tmux clear-history"
 
-      set-option -g status-position top
+      set -g status-position top
 
       new-session -d -s console
       new-window -d -t console:2
@@ -191,6 +192,9 @@ in
       PATH=''${PATH//''${SYSTEM_PATH}:/}:''${SYSTEM_PATH}
 
       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+      # environment variables mounted from 1password
+      [[ ! -f ~/.secrets.env ]] || source ~/.secrets.env
 
       source <(/opt/homebrew/bin/brew shellenv)
       source <(atuin init zsh)
