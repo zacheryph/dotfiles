@@ -25,7 +25,6 @@
     kubeswitch
     kubernetes-helm
     kustomize
-    lens
 
     # tofu (use mise for opentofu versioning)
     tofu-ls
