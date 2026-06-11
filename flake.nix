@@ -57,7 +57,18 @@
 
     # personal
     homeConfigurations."context" = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs {
+        inherit system;
+        overlays = [
+          (final: prev: {
+            bat-extras = prev.bat-extras.overrideScope (bfinal: bprev:
+              builtins.mapAttrs (name: pkg:
+                if pkg ? overrideAttrs then pkg.overrideAttrs { doCheck = false; } else pkg
+              ) bprev
+            );
+          })
+        ];
+      };
       extraSpecialArgs = { inherit inputs; };
       modules = [
         ./home.nix
