@@ -9,6 +9,7 @@
 
     scdaemonSettings = {
       disable-ccid = true;
+      card-timeout = "14400";
     };
 
     settings = {
