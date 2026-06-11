@@ -18,11 +18,35 @@ in
     enableZshIntegration = true;
   };
 
+  # Alacritty uses the Kitty keyboard protocol, not xterm modifyOtherKeys.
+  # tmux's terminal-features 'alacritty:extkeys' sends \x1b[>4;1m which Alacritty
+  # ignores, so Shift+Enter arrives at tmux as bare \r (indistinguishable from Enter).
+  # Explicitly binding Shift+Enter to the CSI-u sequence bypasses protocol
+  # negotiation entirely: Alacritty always sends ESC+[13;2u, tmux's extended-keys
+  # recognises it and forwards it to pi correctly.
+  #
+  # The home-manager TOML generator always emits single-quoted TOML literals for
+  # plain strings, where \u001b would be literal text (not an ESC). We need a
+  # double-quoted TOML basic string so the parser converts \u001b -> ESC before
+  # Alacritty reads it. Write a raw TOML fragment via xdg.configFile instead:
+  # Nix ''...'' strings do NOT process escape sequences, so \u001b stays as the
+  # six literal characters in the file -> valid double-quoted TOML -> ESC byte.
+  xdg.configFile."alacritty/keyboard.toml".text = ''
+    [[keyboard.bindings]]
+    key = "Return"
+    mods = "Shift"
+    chars = "\u001b[13;2u"
+  '';
+
   programs.alacritty = {
     enable = true;
     theme = "catppuccin_macchiato";
 
     settings = {
+      general.import = [
+        "${config.xdg.configHome}/alacritty/keyboard.toml"
+      ];
+
       cursor.style = "Beam";
 
       terminal = {
@@ -122,8 +146,10 @@ in
       # copy/pasta
       set -g default-command 'reattach-to-user-namespace $SHELL --login'
 
+      # extended key support for agent harnesses
       set -g focus-events on
       set -g extended-keys on
+      set -g extended-keys-format csi-u
 
       bind -n C-k send-keys "C-l"\; run "tmux clear-history"
 
