@@ -25,7 +25,6 @@
     envsubst
     htop
     pwgen-secure
-    silver-searcher
     unixtools.watch
     wget
 
