@@ -6,6 +6,10 @@
     enable = true;
     defaultEditor = true;
 
+    # Silences nixvim's "affected by follows" warning: we intentionally
+    # follow the flake's nixpkgs (see flake.nix) instead of nixvim's pin.
+    nixpkgs.source = pkgs.path;
+
     # Color scheme
     colorschemes.catppuccin = {
       enable = true;
