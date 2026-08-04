@@ -618,7 +618,7 @@
 
       # Formatters
       stylua
-      nixfmt-rfc-style
+      nixfmt
       prettier
 
       # Tools
