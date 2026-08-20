@@ -73,3 +73,8 @@ tasks:
     cmds:
       - task: update-all
       - task: clean-all
+
+  backup-src:
+    desc: "Back up ~/src to a compressed tarball (excluding regenerable dependencies, build artifacts, and caches)"
+    cmds:
+      - ./scripts/backup-src.sh {{.CLI_ARGS}}

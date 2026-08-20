@@ -18,6 +18,7 @@ task update-all           # Update brew, nix flakes, darwin, and home-manager
 task rebuild-darwin       # Apply nix-darwin config (runs update-flakes first)
 task update-home-manager  # Apply home-manager config
 task clean-all            # Run brew cleanup and nix garbage collection
+task backup-src           # Create compressed tarball of ~/src excluding build/dep junk
 ```
 
 Manual equivalents:
