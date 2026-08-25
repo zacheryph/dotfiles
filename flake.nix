@@ -42,16 +42,16 @@
   {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .
-    darwinConfigurations.fourteen = nix-darwin.lib.darwinSystem {
+    darwinConfigurations.maxine = nix-darwin.lib.darwinSystem {
       specialArgs = { inherit self inputs; };
       modules = [
         nix-darwin/configuration.nix
-        hosts/fourteen/darwin.nix
+        hosts/maxine/darwin.nix
       ];
     };
 
     # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations.fourteen.pkgs;
+    darwinPackages = self.darwinConfigurations.maxine.pkgs;
 
     homeModules = importNixFiles ./home-manager;
 
@@ -72,7 +72,7 @@
       extraSpecialArgs = { inherit inputs; };
       modules = [
         ./home.nix
-        hosts/fourteen/home.nix
+        hosts/maxine/home.nix
         {
           home.username = "context";
           home.homeDirectory = "/Users/context";

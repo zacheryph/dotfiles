@@ -3,8 +3,10 @@
   home.packages = with pkgs; [
     # git[hub]
     gh
+    git-filter-repo
     git-lfs
     git-extras
+    git-who
     gitflow
   ];
 
