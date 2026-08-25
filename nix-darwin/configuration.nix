@@ -47,10 +47,12 @@
     enable = true;
     casks = [
       "alacritty"
+      "codeburn"
       "font-cascadia-code-nf"
       "font-monaspace-nf"
       "font-victor-mono-nerd-font"
       "fork"
+      "handy"
       "slack"
       "visual-studio-code"
     ];
