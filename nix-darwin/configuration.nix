@@ -45,9 +45,13 @@
 
   homebrew = {
     enable = true;
+    brews = [
+      "codeburn"
+    ];
+
     casks = [
       "alacritty"
-      "codeburn"
+      "cleanupbuddy"
       "font-cascadia-code-nf"
       "font-monaspace-nf"
       "font-victor-mono-nerd-font"
