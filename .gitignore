@@ -1,2 +1,6 @@
-local.nix
+# harness
 .claude/*.local.*
+
+# nix
+flake.lock
+local.nix
