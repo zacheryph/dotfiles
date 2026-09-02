@@ -1,0 +1,16 @@
+{
+  "name": "no-gpg-sign",
+  "version": "0.1.0",
+  "description": "Disables GPG signing for commits created by Codex.",
+  "author": {
+    "name": "Zachery Hostens"
+  },
+  "interface": {
+    "displayName": "No GPG Sign",
+    "shortDescription": "Skip GPG signing for Codex Git operations.",
+    "longDescription": "Rewrites Git commit, merge, and rebase commands run by Codex so they do not wait for GPG hardware signing.",
+    "developerName": "Zachery Hostens",
+    "category": "Productivity",
+    "capabilities": []
+  }
+}

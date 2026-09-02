@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${PLUGIN_ROOT}/scripts/no-gpg-sign-commit.sh",
+            "statusMessage": "Skipping GPG signing for Git operation"
+          }
+        ]
+      }
+    ]
+  }
+}

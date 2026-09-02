@@ -15,6 +15,13 @@
     gitCredentialHelper.enable = true;
   };
 
+  home.file.".agents/plugins/marketplace.json".source = ./files/agents-plugins/marketplace.json;
+
+  home.file.".local/share/codex/plugins/no-gpg-sign" = {
+    source = ./files/agents-plugins/plugins/no-gpg-sign;
+    recursive = true;
+  };
+
   programs.git = {
     enable = true;
 
