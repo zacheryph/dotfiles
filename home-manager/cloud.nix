@@ -30,6 +30,12 @@
     tofu-ls
   ];
 
+  # tofu CLI config: share a plugin cache across working directories
+  home.file.".tofurc".source = ./files/tofurc;
+
+  # tofu won't create the cache dir itself
+  home.file.".terraform.d/plugin-cache/.keep".text = "";
+
   # we want "kubectx"
   programs.zsh = {
     initContent = ''

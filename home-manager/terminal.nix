@@ -28,15 +28,9 @@ in
   # The home-manager TOML generator always emits single-quoted TOML literals for
   # plain strings, where \u001b would be literal text (not an ESC). We need a
   # double-quoted TOML basic string so the parser converts \u001b -> ESC before
-  # Alacritty reads it. Write a raw TOML fragment via xdg.configFile instead:
-  # Nix ''...'' strings do NOT process escape sequences, so \u001b stays as the
-  # six literal characters in the file -> valid double-quoted TOML -> ESC byte.
-  xdg.configFile."alacritty/keyboard.toml".text = ''
-    [[keyboard.bindings]]
-    key = "Return"
-    mods = "Shift"
-    chars = "\u001b[13;2u"
-  '';
+  # Alacritty reads it, so ship a raw TOML fragment via xdg.configFile instead.
+  # (files/alacritty-keyboard.toml keeps \u001b as the six literal characters.)
+  xdg.configFile."alacritty/keyboard.toml".source = ./files/alacritty-keyboard.toml;
 
   programs.alacritty = {
     enable = true;
