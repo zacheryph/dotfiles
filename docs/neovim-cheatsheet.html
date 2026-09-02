@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neovim field guide</title>
+  <style>
+    @page { size: Letter portrait; margin: 0; }
+    * { box-sizing: border-box; }
+    :root {
+      --ink: #24273a; --muted: #6e738d; --paper: #f5f1e8;
+      --rose: #ed8796; --mauve: #c6a0f6; --blue: #8aadf4;
+      --teal: #8bd5ca; --yellow: #eed49f; --line: #d8d1c4;
+    }
+    html, body { margin: 0; background: #d8d1c4; color: var(--ink); }
+    body { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .page {
+      width: 8.5in; height: 11in; margin: .25in auto; padding: .46in .5in .4in;
+      background: var(--paper); position: relative; overflow: hidden;
+      box-shadow: 0 8px 32px #24273a30; page-break-after: always;
+    }
+    .page:last-child { page-break-after: auto; }
+    .eyebrow { font: 700 9px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; text-transform: uppercase; color: #8c5e75; }
+    h1 { margin: .08in 0 .02in; font-size: 31px; line-height: 1; letter-spacing: -.035em; }
+    .dek { margin: .07in 0 .22in; max-width: 6.5in; color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .legend { position: absolute; right: .5in; top: .48in; text-align: right; font-size: 9px; color: var(--muted); }
+    .legend kbd { margin-left: 4px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: .18in; align-items: start; }
+    .card { border-top: 3px solid var(--accent); padding-top: .09in; break-inside: avoid; }
+    .card + .card { margin-top: .16in; }
+    h2 { margin: 0 0 .06in; font-size: 13px; letter-spacing: .01em; }
+    .context { float: right; font: 700 7.5px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--muted); letter-spacing: .07em; text-transform: uppercase; }
+    .row { display: grid; grid-template-columns: 1.22in 1fr; min-height: .27in; padding: .045in 0; border-bottom: 1px solid var(--line); align-items: baseline; }
+    .row:last-child { border-bottom: 0; }
+    .keys { white-space: nowrap; }
+    kbd {
+      display: inline-block; min-width: .2in; padding: 2px 5px; border: 1px solid #bcb3a5;
+      border-bottom-width: 2px; border-radius: 4px; background: #fffaf0;
+      font: 700 9px/1.25 ui-monospace, SFMono-Regular, Menlo, monospace; text-align: center;
+    }
+    .then { margin: 0 3px; color: var(--muted); font-size: 9px; }
+    .what { font-size: 10px; line-height: 1.25; }
+    .what small { display: block; color: var(--muted); font-size: 8.5px; margin-top: 1px; }
+    .note { margin-top: .1in; padding: .09in .11in; background: #fffaf0; border-left: 3px solid var(--accent); font-size: 9px; line-height: 1.35; color: #555b75; }
+    .footer { position: absolute; left: .5in; right: .5in; bottom: .23in; display: flex; justify-content: space-between; color: var(--muted); font: 8px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .rose { --accent: var(--rose); } .mauve { --accent: var(--mauve); }
+    .blue { --accent: var(--blue); } .teal { --accent: var(--teal); } .yellow { --accent: var(--yellow); }
+    .flow { display: flex; gap: .05in; align-items: center; margin-top: .08in; flex-wrap: wrap; }
+    .flow span { color: var(--muted); font-size: 9px; }
+    @media print {
+      html, body { background: none; }
+      .page { margin: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <section class="page">
+    <div class="eyebrow">Neovim field guide · 01</div>
+    <h1>Find &amp; move</h1>
+    <p class="dek">Reach the thing, then move through the workspace. Leader is <kbd>Space</kbd>. These are the custom mappings in this Nixvim configuration—not basic Vim motion.</p>
+    <div class="legend">modes: <kbd>N</kbd> normal &nbsp; <kbd>V</kbd> visual</div>
+
+    <div class="grid">
+      <div>
+        <div class="card mauve">
+          <h2>Find anything <span class="context">N · Telescope</span></h2>
+          <div class="row"><div class="keys"><kbd>Space</kbd><span class="then">→</span><kbd>f f</kbd></div><div class="what">Find files<small>fuzzy filename search</small></div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><span class="then">→</span><kbd>f g</kbd></div><div class="what">Search text<small>live grep across the project</small></div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><span class="then">→</span><kbd>f b</kbd></div><div class="what">Find open buffers</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><span class="then">→</span><kbd>f o</kbd></div><div class="what">Recent files<small>previously opened paths</small></div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><span class="then">→</span><kbd>f h</kbd></div><div class="what">Search help tags</div></div>
+          <div class="note">Inside a Telescope picker, use <kbd>C-n</kbd>/<kbd>C-p</kbd> to move, <kbd>Enter</kbd> to open, and <kbd>Esc</kbd> to close.</div>
+        </div>
+
+        <div class="card blue">
+          <h2>Windows <span class="context">N</span></h2>
+          <div class="row"><div class="keys"><kbd>C-h</kbd> <kbd>C-j</kbd></div><div class="what">Focus left / below</div></div>
+          <div class="row"><div class="keys"><kbd>C-k</kbd> <kbd>C-l</kbd></div><div class="what">Focus above / right</div></div>
+          <div class="row"><div class="keys"><kbd>C-↑</kbd> <kbd>C-↓</kbd></div><div class="what">Shorter / taller<small>resize by 2 rows</small></div></div>
+          <div class="row"><div class="keys"><kbd>C-←</kbd> <kbd>C-→</kbd></div><div class="what">Narrower / wider<small>resize by 2 columns</small></div></div>
+        </div>
+
+        <div class="card yellow">
+          <h2>Buffers <span class="context">N</span></h2>
+          <div class="row"><div class="keys"><kbd>Shift-h</kbd></div><div class="what">Previous buffer</div></div>
+          <div class="row"><div class="keys"><kbd>Shift-l</kbd></div><div class="what">Next buffer</div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><span class="then">→</span><kbd>b d</kbd></div><div class="what">Delete current buffer</div></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card teal">
+          <h2>Browse the tree <span class="context">N · Neo-tree</span></h2>
+          <div class="row"><div class="keys"><kbd>Space</kbd><span class="then">→</span><kbd>e</kbd></div><div class="what">Toggle file explorer</div></div>
+          <div class="row"><div class="keys"><kbd>Enter</kbd></div><div class="what">Open file / expand folder</div></div>
+          <div class="row"><div class="keys"><kbd>a</kbd> <kbd>d</kbd> <kbd>r</kbd></div><div class="what">Add / delete / rename</div></div>
+          <div class="row"><div class="keys"><kbd>c</kbd> <kbd>m</kbd></div><div class="what">Copy / move<small>choose destination afterward</small></div></div>
+          <div class="row"><div class="keys"><kbd>R</kbd></div><div class="what">Refresh tree</div></div>
+          <div class="row"><div class="keys"><kbd>?</kbd></div><div class="what">Show Neo-tree help<small>authoritative list for this view</small></div></div>
+        </div>
+
+        <div class="card rose">
+          <h2>Jump through code <span class="context">N · LSP</span></h2>
+          <div class="row"><div class="keys"><kbd>g d</kbd></div><div class="what">Go to definition</div></div>
+          <div class="row"><div class="keys"><kbd>g r</kbd></div><div class="what">Find references</div></div>
+          <div class="row"><div class="keys"><kbd>g I</kbd></div><div class="what">Go to implementation<small>capital I</small></div></div>
+          <div class="row"><div class="keys"><kbd>K</kbd></div><div class="what">Hover documentation</div></div>
+          <div class="note">LSP actions only work when a configured server is attached: Lua, Nix, or Rust in this setup.</div>
+        </div>
+
+        <div class="card mauve">
+          <h2>Recall, don’t memorize <span class="context">N</span></h2>
+          <div class="row"><div class="keys"><kbd>Space</kbd><span class="then">→</span><kbd>…</kbd></div><div class="what">Pause for Which-key<small>shows available leader continuations</small></div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><span class="then">→</span><kbd>h</kbd></div><div class="what">Clear search highlight</div></div>
+          <div class="flow"><kbd>Space</kbd><span>then choose:</span><kbd>f</kbd><span>find</span><kbd>b</kbd><span>buffer</span><kbd>c</kbd><span>code</span><kbd>g</kbd><span>git</span><kbd>x</kbd><span>diagnostics</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>source · home-manager/neovim.nix</span><span>leader = Space · sheet 1/2</span></div>
+  </section>
+
+  <section class="page">
+    <div class="eyebrow">Neovim field guide · 02</div>
+    <h1>Code &amp; review</h1>
+    <p class="dek">Act on code, triage problems, and keep editing flow. Context matters: completion mappings apply only while the popup menu is active.</p>
+    <div class="legend">modes: <kbd>N</kbd> normal &nbsp; <kbd>V</kbd> visual &nbsp; <kbd>I</kbd> insert</div>
+
+    <div class="grid">
+      <div>
+        <div class="card rose">
+          <h2>Language actions <span class="context">N · LSP</span></h2>
+          <div class="row"><div class="keys"><kbd>Space</kbd><span class="then">→</span><kbd>c a</kbd></div><div class="what">Code action<small>fix, import, refactor when offered</small></div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><span class="then">→</span><kbd>r n</kbd></div><div class="what">Rename symbol<small>project-aware rename</small></div></div>
+          <div class="row"><div class="keys"><kbd>K</kbd></div><div class="what">Hover docs / type info</div></div>
+          <div class="note">Formatting is automatic on save. Lua uses Stylua; Nix uses nixfmt; JS/TS/JSON/YAML/Markdown use Prettier. LSP formatting is the fallback.</div>
+        </div>
+
+        <div class="card teal">
+          <h2>Completion popup <span class="context">I · nvim-cmp</span></h2>
+          <div class="row"><div class="keys"><kbd>C-Space</kbd></div><div class="what">Open completion menu</div></div>
+          <div class="row"><div class="keys"><kbd>Tab</kbd></div><div class="what">Select next item</div></div>
+          <div class="row"><div class="keys"><kbd>S-Tab</kbd></div><div class="what">Select previous item</div></div>
+          <div class="row"><div class="keys"><kbd>Enter</kbd></div><div class="what">Accept selection<small>also selects the first item</small></div></div>
+          <div class="row"><div class="keys"><kbd>C-d</kbd> <kbd>C-f</kbd></div><div class="what">Scroll docs up / down</div></div>
+          <div class="row"><div class="keys"><kbd>C-e</kbd></div><div class="what">Close completion menu</div></div>
+        </div>
+
+        <div class="card blue">
+          <h2>Shape selected text <span class="context">V</span></h2>
+          <div class="row"><div class="keys"><kbd>&lt;</kbd> <kbd>&gt;</kbd></div><div class="what">Indent left / right<small>selection stays active</small></div></div>
+          <div class="row"><div class="keys"><kbd>J</kbd></div><div class="what">Move selection down<small>then reindent</small></div></div>
+          <div class="row"><div class="keys"><kbd>K</kbd></div><div class="what">Move selection up<small>then reindent</small></div></div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card yellow">
+          <h2>Triage diagnostics <span class="context">N · Trouble</span></h2>
+          <div class="row"><div class="keys"><kbd>Space</kbd><span class="then">→</span><kbd>x x</kbd></div><div class="what">All diagnostics<small>toggle project-wide Trouble list</small></div></div>
+          <div class="row"><div class="keys"><kbd>Space</kbd><span class="then">→</span><kbd>x d</kbd></div><div class="what">Current-buffer diagnostics</div></div>
+          <div class="row"><div class="keys"><kbd>Enter</kbd></div><div class="what">Jump to selected item<small>inside the Trouble window</small></div></div>
+          <div class="row"><div class="keys"><kbd>q</kbd></div><div class="what">Close Trouble window</div></div>
+          <div class="note">A useful loop: open buffer diagnostics → jump to an item → ask for a code action → save to format.</div>
+        </div>
+
+        <div class="card mauve">
+          <h2>Git work <span class="context">N</span></h2>
+          <div class="row"><div class="keys"><kbd>Space</kbd><span class="then">→</span><kbd>g g</kbd></div><div class="what">Open Lazygit<small>full repository UI</small></div></div>
+          <div class="row"><div class="keys"><kbd>q</kbd></div><div class="what">Return to Neovim<small>from Lazygit</small></div></div>
+          <div class="note">Gitsigns is always on: changed lines appear in the sign column, and current-line blame is shown automatically. No custom hunk keys are defined.</div>
+        </div>
+
+        <div class="card rose">
+          <h2>Comment quickly <span class="context">N / V · Comment.nvim</span></h2>
+          <div class="row"><div class="keys"><kbd>g c c</kbd></div><div class="what">Toggle current line</div></div>
+          <div class="row"><div class="keys"><kbd>g c</kbd><span class="then">+</span><kbd>motion</kbd></div><div class="what">Toggle by motion<small>for example, gc}</small></div></div>
+          <div class="row"><div class="keys"><kbd>g c</kbd></div><div class="what">Toggle selection<small>from visual mode</small></div></div>
+          <div class="note">These are Comment.nvim’s default mappings; unlike the leader shortcuts, they aren’t written explicitly in the Nix keymap list.</div>
+        </div>
+
+        <div class="card blue">
+          <h2>Fast working loops</h2>
+          <div class="what"><strong>Locate:</strong> grep → open hit → definition/references</div>
+          <div class="flow"><kbd>Sp fg</kbd><span>→</span><kbd>Enter</kbd><span>→</span><kbd>g d</kbd><span>/</span><kbd>g r</kbd></div>
+          <div class="what" style="margin-top:.08in"><strong>Repair:</strong> buffer problems → jump → action → save</div>
+          <div class="flow"><kbd>Sp xd</kbd><span>→</span><kbd>Enter</kbd><span>→</span><kbd>Sp ca</kbd><span>→</span><kbd>:w</kbd></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"><span>Catppuccin Macchiato · print at 100%</span><span>context beats memorization · sheet 2/2</span></div>
+  </section>
+</body>
+</html>
