@@ -19,7 +19,6 @@
 
   home.file.".local/share/codex/plugins/no-gpg-sign" = {
     source = ./files/agents-plugins/plugins/no-gpg-sign;
-    recursive = true;
   };
 
   programs.git = {
