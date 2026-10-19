@@ -6,6 +6,7 @@
     git-filter-repo
     git-lfs
     git-extras
+    git-trim
     git-who
     gitflow
   ];
@@ -35,12 +36,14 @@
         mb = "merge-base";
         cp = "cherry-pick";
         l = "log --graph --decorate";
+        merged = "trim --dry-run";
         ru = "remote update --prune";
         lg = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative";
       };
 
       # git settings
       commit.cleanup = "strip";
+      fetch.prune = true;
       help.autocorrect = 2;
       init.defaultBranch = "main";
       log.date = "iso";
@@ -50,6 +53,18 @@
       push.default = "current";
       rebase.autostash = true;
       rerere.enabled = true;
+
+      # git-trim: find local branches whose upstream was merged (including
+      # rebase and squash merges) or is gone, and offer to delete them.
+      #   git merged  -> list candidates only (alias for `git trim --dry-run`)
+      #   git trim    -> list candidates, then confirm before deleting
+      trim = {
+        bases = "main,master,develop";
+        protected = "main,master,develop,release-*,hotfix/*";
+        delete = "merged:origin,stray";
+        confirm = true;
+        detach = true;
+      };
 
       core = {
         packedGitLimit = "1g";
