@@ -50,8 +50,8 @@
     ];
 
     casks = [
-      "alacritty"
       "cleanupbuddy"
+      "cmux"
       "font-cascadia-code-nf"
       "font-monaspace-nf"
       "font-victor-mono-nerd-font"
